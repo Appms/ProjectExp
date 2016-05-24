@@ -10,7 +10,7 @@ public abstract class ConditionObject : MonoBehaviour
 
 	private bool _state;
 
-	private bool _animationPlaying;
+	protected bool _animationPlaying;
 
 	public bool State
 	{

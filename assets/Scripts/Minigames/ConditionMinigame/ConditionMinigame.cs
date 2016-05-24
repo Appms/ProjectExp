@@ -40,23 +40,22 @@ public class ConditionMinigame : AbstractMinigame
 	{
 		if (_active)
 		{
-			if (animationsFinished())
+			//TODO Only Execute this part when all parent are finished animating
+			if (Input.GetMouseButtonDown(0))
 			{
-				if (Input.GetMouseButtonDown(0))
+				foreach (ConditionObject co in _currentConditionObjects)
 				{
-					foreach (ConditionObject co in _currentConditionObjects)
-					{
-						co.SwitchState();
-					}
+					co.SwitchState();
+				}
 
-					evaluate();
-					newElement();
-				}
-				else if (Input.GetMouseButtonDown(1))
-				{
-					evaluate();
-					newElement();
-				}
+				evaluate();
+				newElement();
+			}
+			else if (Input.GetMouseButtonDown(1))
+			{
+				//TODO Execute newElement only if all objects are finished animating
+				evaluate();
+				newElement();
 			}
 
 			if (_feedbackEndTime <= Time.time)
@@ -79,14 +78,12 @@ public class ConditionMinigame : AbstractMinigame
 			result = _currentConditionObjects.ToArray().All(x => x.State == false);
 		}
 
-		Debug.Log("Result = " + result);
-
 		//TODO Show animation indication if right or wrong
 		if (result)
 		{
 			_rightFeedback.gameObject.SetActive(true);
 			_feedbackEndTime = Time.time + _showFeedbackTime;
-			UseCombo();
+			AddCombo();
 		}
 		else
 		{
@@ -96,21 +93,21 @@ public class ConditionMinigame : AbstractMinigame
 		}
 	}
 
-	private bool animationsFinished()
+	private bool objectAnimationsFinished()
 	{
-		bool result = FindObjectsOfType<ConditionParent>().All(x => x.AnimationPlaying == false);
-		result = result && FindObjectsOfType<ConditionObject>().All(x => x.AnimationPlaying == false);
-		return result;
+		return FindObjectsOfType<ConditionObject>().All(x => x.AnimationPlaying == false);
+	}
+
+	private bool parentAnimationsFinished()
+	{
+		return FindObjectsOfType<ConditionParent>().All(x => x.AnimationPlaying == false);
 	}
 
 	public void newElement()
 	{
 		//TODO Play a fancy animation of some sort
-		Debug.Log("Destroy current prefab");
 		GameObject.Destroy(_currentConditionPrefab);
-		Debug.Log("Instantiate new prefab");
 		_currentConditionPrefab = (GameObject)GameObject.Instantiate(_conditionPrefab, Vector3.zero, Quaternion.identity);
-		Debug.Log("Get list with objects");
 		_currentConditionObjects = new List<ConditionObject>(_currentConditionPrefab.GetComponentsInChildren<ConditionObject>());
 	}
 }

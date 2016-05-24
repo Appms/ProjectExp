@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public abstract class AbstractMinigame : MonoBehaviour
 {
@@ -31,7 +32,8 @@ public abstract class AbstractMinigame : MonoBehaviour
 	[Tooltip("The layer Raycasts will hit")]
 	protected LayerMask _layer;
 
-	protected Camera _camera;
+	[HideInInspector]
+	public Camera MinigameCamera;
 
 	protected bool _active = false;
 
@@ -45,7 +47,7 @@ public abstract class AbstractMinigame : MonoBehaviour
 	private int _combo;
 
 	protected virtual void Start()
-    {
+	{
 		if (GetComponent<Camera>() == null)
 		{
 			throw new MissingComponentException("Missing Camera component");
@@ -53,11 +55,11 @@ public abstract class AbstractMinigame : MonoBehaviour
 
 		_endTime = Time.time + _tutorialTime;
 
-		_camera = GetComponent<Camera>();
-    }
+		MinigameCamera = GetComponent<Camera>();
+	}
 
-    protected virtual void Update()
-    {
+	protected virtual void Update()
+	{
 		//TODO Replace with touch input
 		if (_endTime <= Time.time || !_active && Input.GetMouseButtonDown(0))
 		{
@@ -73,15 +75,18 @@ public abstract class AbstractMinigame : MonoBehaviour
 				_endTime = Time.time + _playTime;
 			}
 		}
-    }
+	}
 
-    protected virtual void OnDrawGUI()
-    {
+	protected virtual void OnDrawGUI()
+	{
 
-    }
+	}
 
 
-
+	public bool GetActive()
+	{
+		return _active;
+	}
 
 	/// <summary>
 	/// Calculates the current score.
@@ -90,7 +95,7 @@ public abstract class AbstractMinigame : MonoBehaviour
 	/// <returns>The current score</returns>
 	protected int GetScore(bool pIncludeCombo)
 	{
-		return pIncludeCombo ? (int)_score + GetComboScore(true)  : (int)_score ;
+		return pIncludeCombo ? (int)_score + GetComboScore(true) : (int)_score;
 	}
 
 	/// <summary>
@@ -98,7 +103,7 @@ public abstract class AbstractMinigame : MonoBehaviour
 	/// </summary>
 	/// <param name="pUseMultiplier">Determines if the score is muiltiplied by the combo multiplier</param>
 	/// <returns>The current combo score</returns>
-	protected int GetComboScore(bool pUseMultiplier)
+	public int GetComboScore(bool pUseMultiplier)
 	{
 		return pUseMultiplier ? (int)(_combo * _scorePerUnit * _combo * _multiplierPerCombo) : (int)(_combo * _scorePerUnit);
 	}
@@ -107,31 +112,49 @@ public abstract class AbstractMinigame : MonoBehaviour
 	/// Adds to the combo counter
 	/// </summary>
 	/// <param name="pAmount">The amount added to the combo counter</param>
-	protected void UseCombo(int pAmount = 1)
+	public void AddCombo(int pAmount = 1)
 	{
-        _combo += pAmount;
-    }
+		_combo += pAmount;
+	}
 
-    /// <summary>
-    /// Sets the combo counter to zero and adds the combo score to the total score
-    /// </summary>
-    /// <param name="pUseMultiplier">Determines if the comco score is multiplied with the comco multiplier</param>
-    protected void EndCombo(bool pUseMultiplier = true)
-    {
-        _score += GetComboScore(pUseMultiplier);
-        _combo = 0;
-    }
+	/// <summary>
+	/// Removes from the combo counter
+	/// </summary>
+	/// <param name="pAmount">The amount removed from the combo counter</param>
+	public void RemoveCombo(int pAmount = 1)
+	{
+		_combo -= pAmount;
+	}
 
-    /// <summary>
-    /// Ends the current minigame
-    /// </summary>
-    public void EndMinigame()
-    {
-        EndCombo();
+	/// <summary>
+	/// Sets the combo counter to zero and adds the combo score to the total score
+	/// </summary>
+	/// <param name="pUseMultiplier">Determines if the comco score is multiplied with the comco multiplier</param>
+	public void EndCombo(bool pUseMultiplier = true)
+	{
+		_score += GetComboScore(pUseMultiplier);
+		_combo = 0;
+	}
+
+	/// <summary>
+	/// Ends the current minigame
+	/// </summary>
+	public void EndMinigame()
+	{
+		_active = false;
+
+		EndCombo();
 
 		DestroyDynamicObjects();
 
-        MaingameManager.Instance.EndMinigame((int)_score);
+		try
+		{
+			MaingameManager.Instance.EndMinigame((int)_score);
+		}
+		catch(NullReferenceException)
+		{
+			Debug.LogError("No Maingamemanager was found!");
+		}
     }
 
 	protected virtual void DestroyDynamicObjects() { }
