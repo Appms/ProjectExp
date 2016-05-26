@@ -30,7 +30,6 @@ public class TestConditionWindow : ConditionObject
 
 	protected override void TurnTrue()
 	{
-		Debug.Log("Animation Started");
 		transform.localPosition = new Vector3(0.0f, 0.75f, 0.0f);
 		_animationPlaying = true;
 	}
@@ -53,7 +52,7 @@ public class TestConditionWindow : ConditionObject
 			}
 
 			float perc = _currentLerpTime / _lerpTime;
-			transform.position = State ? Vector3.Lerp(_openPosition, _closedPosition, perc) : Vector3.Lerp(_closedPosition, _openPosition, perc);
+			transform.localPosition = State ? Vector3.Lerp(_openPosition, _closedPosition, perc) : Vector3.Lerp(_closedPosition, _openPosition, perc);
 		}
 	}
 }

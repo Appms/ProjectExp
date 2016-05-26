@@ -39,36 +39,16 @@ public class ConditionMinigame : AbstractMinigame
 
 	protected override void Update()
 	{
+		if (_feedbackEndTime <= Time.time)
+		{
+			_rightFeedback.gameObject.SetActive(false);
+			_wrongFeedback.gameObject.SetActive(false);
+			_feedbackEndTime = Mathf.Infinity;
+		}
+
 		if (_active)
 		{
-			if (!_evaluated)
-			{
-				//TODO Only Execute this part when all parent are finished animating
-				if (Input.GetMouseButtonDown(0))
-				{
-					foreach (ConditionObject co in _currentConditionObjects)
-					{
-						co.SwitchState();
-					}
-
-					evaluate();
-					//newElement();
-				}
-				else if (Input.GetMouseButtonDown(1))
-				{
-					//TODO Execute newElement only if all objects are finished animating
-					evaluate();
-					//newElement();
-				}
-
-				if (_feedbackEndTime <= Time.time)
-				{
-					_rightFeedback.gameObject.SetActive(false);
-					_wrongFeedback.gameObject.SetActive(false);
-					_feedbackEndTime = Mathf.Infinity;
-				}
-			}
-			else if(objectAnimationsFinished())
+			if(_evaluated && objectAnimationsFinished())
 			{
 				newElement();
 
@@ -93,7 +73,6 @@ public class ConditionMinigame : AbstractMinigame
 			result = _currentConditionObjects.ToArray().All(x => x.State == false);
 		}
 
-		//TODO Show animation indication if right or wrong
 		if (result)
 		{
 			_rightFeedback.gameObject.SetActive(true);
@@ -120,8 +99,6 @@ public class ConditionMinigame : AbstractMinigame
 
 	public void newElement()
 	{
-		Debug.Log("New Element initiated");
-
 		if (_currentConditionPrefab != null)
 		{
 			_currentConditionPrefab.GetComponent<ConditionParent>().Despawn();
@@ -134,11 +111,22 @@ public class ConditionMinigame : AbstractMinigame
 
 	public void RightButtonPressed()
 	{
-		Debug.Log("Right Button");
+		if (_active && !_evaluated && parentAnimationsFinished() && objectAnimationsFinished())
+		{
+			evaluate();
+		}
 	}
 
 	public void WrongButtonPressed()
 	{
-		Debug.Log("Wrong Button");
+		if (_active && !_evaluated && parentAnimationsFinished() && objectAnimationsFinished())
+		{
+			foreach (ConditionObject co in _currentConditionObjects)
+			{
+				co.SwitchState();
+			}
+
+			evaluate();
+		}
 	}
 }
