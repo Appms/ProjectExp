@@ -36,8 +36,6 @@ public abstract class C_CatchObject : MonoBehaviour
 
 			transform.position = Vector2.Lerp(transform.position, _manager.MinigameCamera.ScreenToWorldPoint(Input.mousePosition + new Vector3(0.0f, 0.0f, Mathf.Abs((transform.position - _manager.transform.position).z))), _followSpeed);
 		}
-
-		_prevMousePos = Input.mousePosition;
 	}
 
 	protected virtual void LateUpdate()
@@ -45,8 +43,10 @@ public abstract class C_CatchObject : MonoBehaviour
 		for (int i = 0; i < _catchedObjects.Count; i++)
 		{
 			//TODO Make this values availible to change
-			_catchedObjects[i].transform.position = transform.position + new Vector3(0.0f, i * 0.2f + 0.2f, 0.0f);
+			_catchedObjects[i].transform.position = transform.position + new Vector3(0.0f, i * 0.16f + 0.16f, 0.0f);
 		}
+
+		_prevMousePos = Input.mousePosition;
 	}
 
 	protected virtual void Catch() { }
@@ -68,9 +68,20 @@ public abstract class C_CatchObject : MonoBehaviour
 		else if (_usesDumpObject && pOther.GetComponent<C_DumpObject>() != null)
 		{
 			_manager.EndCombo();
+
+			foreach (C_DropObject obj in _catchedObjects)
+			{
+				obj.Dump();
+			}
+
 			_catchedObjects.Clear();
 			Dump();
 			pOther.GetComponent<C_DumpObject>().Dump();
 		}
+	}
+
+	public void ClearObjectList()
+	{
+		_catchedObjects.Clear();
 	}
 }

@@ -12,7 +12,6 @@ public abstract class C_DropObject : MonoBehaviour
 	private float _lifeTime;
 	private float _destroyTime;
 
-
 	protected virtual void Start()
 	{
 		if (_destroyTime == 0.0f)
@@ -27,8 +26,10 @@ public abstract class C_DropObject : MonoBehaviour
 		{
 			_manager.DestroyObject(this.gameObject, true);
 
-			//TODO Maybe only whem no dump is used?
-			_manager.EndCombo();
+			if (FindObjectOfType<C_DumpObject>()== null)
+			{
+				_manager.EndCombo();
+			}
 		}
 	}
 

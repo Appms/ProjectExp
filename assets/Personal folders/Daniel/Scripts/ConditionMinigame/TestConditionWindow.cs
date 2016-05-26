@@ -20,23 +20,23 @@ public class TestConditionWindow : ConditionObject
 
 	protected override void InitTrue()
 	{
-		transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+		transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
 	}
 
 	protected override void InitFalse()
 	{
-		transform.position = new Vector3(0.0f, 0.75f, 0.0f);
+		transform.localPosition = new Vector3(0.0f, 0.75f, 0.0f);
 	}
 
 	protected override void TurnTrue()
 	{
-		transform.position = new Vector3(0.0f, 0.75f, 0.0f);
+		transform.localPosition = new Vector3(0.0f, 0.75f, 0.0f);
 		_animationPlaying = true;
 	}
 
 	protected override void TurnFalse()
 	{
-		transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+		transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
 		_animationPlaying = true;
 	}
 
@@ -52,7 +52,7 @@ public class TestConditionWindow : ConditionObject
 			}
 
 			float perc = _currentLerpTime / _lerpTime;
-			transform.position = State ? Vector3.Lerp(_closedPosition, _openPosition, perc) : Vector3.Lerp(_openPosition, _closedPosition, perc);
+			transform.localPosition = State ? Vector3.Lerp(_openPosition, _closedPosition, perc) : Vector3.Lerp(_closedPosition, _openPosition, perc);
 		}
 	}
 }

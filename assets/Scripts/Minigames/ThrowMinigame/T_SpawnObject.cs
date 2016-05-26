@@ -3,6 +3,9 @@ using System.Collections;
 
 public class T_SpawnObject : MonoBehaviour
 {
+	[SerializeField]
+	private float _maxMouseDistance;
+
 	protected ThrowMinigame _manager;
 	protected T_ThrowObject _grabbedObject;
 	private Vector3 _oldMousePos;
@@ -22,7 +25,6 @@ public class T_SpawnObject : MonoBehaviour
 	{
 		if (_manager.GetActive())
 		{
-			//Ray ray = _manager.MinigameCamera.ScreenPointToRay(Input.mousePosition + new Vector3(0.0f, 0.0f, Mathf.Abs((transform.position - _manager.transform.position).z)));
 			Vector3 worldMousePos = _manager.MinigameCamera.ScreenToWorldPoint(Input.mousePosition + new Vector3(0.0f, 0.0f, Mathf.Abs((transform.position - _manager.transform.position).z)));
 
 			//TODO Replace by Touchinput
@@ -57,9 +59,18 @@ public class T_SpawnObject : MonoBehaviour
 			if (_grabbedObject != null)
 			{
 				_grabbedObject.transform.position = worldMousePos;
+
 				_currentVelocity = Vector3.Lerp(_currentVelocity, (worldMousePos - _oldMousePos) * (_throwingPower/Time.deltaTime), Time.deltaTime*4);
 				_grabbedObject.GetComponent<Rigidbody>().velocity = _currentVelocity;
+
+
+				if (Vector3.Distance(_grabbedObject.transform.position, transform.position) >= _maxMouseDistance)
+				{
+					_grabbedObject.GetComponent<Rigidbody>().useGravity = true;
+					_grabbedObject = null;
+				}
 			}
+
 
 			/*
 			if (worldMousePos.x < -5f || worldMousePos.x > 0 || worldMousePos.y < -1 || worldMousePos.y > 3f)
