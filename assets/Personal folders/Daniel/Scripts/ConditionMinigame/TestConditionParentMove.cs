@@ -23,9 +23,7 @@ public class TestConditionParentMove : ConditionParent
 	{
 		base.Despawn();
 		_startPosition = transform.localPosition;
-		Debug.Log("D " + _startPosition);
 		_targetPosition = transform.localPosition + _endPositionOffset;
-		Debug.Log("D " + _targetPosition);
 		_despawning = true;
 		_currentLerpTime = 0.0f;
 		_animationPlaying = true;
@@ -33,13 +31,14 @@ public class TestConditionParentMove : ConditionParent
 
 	protected override void Start()
 	{
-		base.Start();
-		_startPosition = transform.localPosition + _startPositionOffset;
-		Debug.Log("S " + _startPosition);
-		_targetPosition = transform.localPosition;
-		Debug.Log("S " + _targetPosition);
-		transform.localPosition = _startPosition;
-		_animationPlaying = true;
+		if (FindObjectsOfType<TestConditionParentMove>().Length > 1)
+		{
+			_startPosition = transform.localPosition + _startPositionOffset;
+			_targetPosition = transform.localPosition;
+			transform.localPosition = _startPosition;
+			_animationPlaying = true;
+		}
+
 		_currentLerpTime = 0.0f;
 	}
 

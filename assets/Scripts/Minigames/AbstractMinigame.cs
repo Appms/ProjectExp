@@ -33,9 +33,24 @@ public abstract class AbstractMinigame : MonoBehaviour
 	protected LayerMask _layer;
 
 	[HideInInspector]
-	public Camera MinigameCamera;
+	private Camera _minigameCamera;
+
+	public Camera MinigameCamera
+	{
+		get
+		{
+			if (_minigameCamera == null)
+			{
+				_minigameCamera = GetComponent<Camera>();
+			}
+
+			return _minigameCamera;
+		}
+	}
 
 	protected bool _active = false;
+
+	protected bool _ended = false;
 
 	//The time the minigame ends
 	private float _endTime;
@@ -45,6 +60,10 @@ public abstract class AbstractMinigame : MonoBehaviour
 
 	//The current combo count
 	private int _combo;
+
+
+	[SerializeField]
+	private Text _timeHUD;
 
 	[SerializeField]
 	private Text _scoreHUD;
@@ -61,12 +80,10 @@ public abstract class AbstractMinigame : MonoBehaviour
 	{
 		if (GetComponent<Camera>() == null)
 		{
-			throw new MissingComponentException("Missing Camera component");
+			throw new MissingComponentException("Missing Camera component on Minigame Manager!");
 		}
 
 		_endTime = Time.time + _tutorialTime;
-
-		MinigameCamera = GetComponent<Camera>();
 	}
 
 	protected virtual void Update()
@@ -79,10 +96,17 @@ public abstract class AbstractMinigame : MonoBehaviour
 				//TODO Display an endscreen
 				EndMinigame();
 			}
-			else
+			else if(!_ended)
 			{
 				_active = true;
-				GameObject.Find("TutorialImage").SetActive(false);
+
+				try
+				{
+					GameObject.Find("TutorialImage").SetActive(false);
+				}
+				catch (NullReferenceException) { }
+
+
 				_endTime = Time.time + _playTime;
 			}
 		}
@@ -90,8 +114,29 @@ public abstract class AbstractMinigame : MonoBehaviour
 
 	protected virtual void OnGUI()
 	{
+		if (_active)
+		{
+			_timeHUD.text = Mathf.Round(_endTime - Time.time).ToString();
+		}
+		else if (!_ended)
+		{
+			_timeHUD.text = _playTime.ToString();
+		}
+		else
+		{
+			_timeHUD.text = "0";
+		}
+
 		_scoreHUD.text = GetScore(false).ToString();
-		_comboHUD.text = GetComboScore(false).ToString() + " x " + GetMultiplier() + " = " + GetComboScore(true).ToString();
+
+		if (_combo == 0)
+		{
+			_comboHUD.text = "0";
+		}
+		else
+		{
+			_comboHUD.text = GetComboScore(false).ToString() + " x " + GetMultiplier() + " = " + GetComboScore(true).ToString();
+		}
 	}
 
 
@@ -158,6 +203,7 @@ public abstract class AbstractMinigame : MonoBehaviour
 	/// </summary>
 	public void EndMinigame()
 	{
+		_ended = true;
 		_active = false;
 
 		EndCombo();
