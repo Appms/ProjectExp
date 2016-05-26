@@ -20,6 +20,7 @@ public class ConditionMinigame : AbstractMinigame
 	private GameObject _currentConditionPrefab;
 	private List<ConditionObject> _currentConditionObjects;
 	private float _feedbackEndTime;
+	private bool _evaluated;
 
 	protected override void Start()
 	{
@@ -40,29 +41,41 @@ public class ConditionMinigame : AbstractMinigame
 	{
 		if (_active)
 		{
-			//TODO Only Execute this part when all parent are finished animating
-			if (Input.GetMouseButtonDown(0))
+			if (!_evaluated)
 			{
-				foreach (ConditionObject co in _currentConditionObjects)
+				//TODO Only Execute this part when all parent are finished animating
+				if (Input.GetMouseButtonDown(0))
 				{
-					co.SwitchState();
+					foreach (ConditionObject co in _currentConditionObjects)
+					{
+						co.SwitchState();
+					}
+
+					evaluate();
+					//newElement();
+				}
+				else if (Input.GetMouseButtonDown(1))
+				{
+					//TODO Execute newElement only if all objects are finished animating
+					evaluate();
+					//newElement();
 				}
 
-				evaluate();
-				newElement();
+				if (_feedbackEndTime <= Time.time)
+				{
+					_rightFeedback.gameObject.SetActive(false);
+					_wrongFeedback.gameObject.SetActive(false);
+					_feedbackEndTime = Mathf.Infinity;
+				}
 			}
-			else if (Input.GetMouseButtonDown(1))
+			else if(objectAnimationsFinished())
 			{
-				//TODO Execute newElement only if all objects are finished animating
-				evaluate();
 				newElement();
-			}
 
-			if (_feedbackEndTime <= Time.time)
-			{
-				_rightFeedback.gameObject.SetActive(false);
-				_wrongFeedback.gameObject.SetActive(false);
-				_feedbackEndTime = Mathf.Infinity;
+				if (parentAnimationsFinished())
+				{
+					_evaluated = false;
+				}
 			}
 		}
 
@@ -71,6 +84,8 @@ public class ConditionMinigame : AbstractMinigame
 
 	private void evaluate()
 	{
+		_evaluated = true;
+
 		bool result = _currentConditionObjects.ToArray().All(x => x.State == true);
 
 		if (!result)
@@ -105,9 +120,25 @@ public class ConditionMinigame : AbstractMinigame
 
 	public void newElement()
 	{
-		//TODO Play a fancy animation of some sort
-		GameObject.Destroy(_currentConditionPrefab);
+		Debug.Log("New Element initiated");
+
+		if (_currentConditionPrefab != null)
+		{
+			_currentConditionPrefab.GetComponent<ConditionParent>().Despawn();
+		}
+
+		_evaluated = false;
 		_currentConditionPrefab = (GameObject)GameObject.Instantiate(_conditionPrefab, Vector3.zero, Quaternion.identity);
 		_currentConditionObjects = new List<ConditionObject>(_currentConditionPrefab.GetComponentsInChildren<ConditionObject>());
+	}
+
+	public void RightButtonPressed()
+	{
+		Debug.Log("Right Button");
+	}
+
+	public void WrongButtonPressed()
+	{
+		Debug.Log("Wrong Button");
 	}
 }
