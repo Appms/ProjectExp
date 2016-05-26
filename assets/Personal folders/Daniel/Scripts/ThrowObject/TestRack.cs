@@ -46,5 +46,6 @@ public class TestRack : T_CatchObject
 	public override void Dump()
 	{
 		base.Dump();
+		GetComponent<Animator>().SetTrigger("SpawnObject");
 	}
 }
