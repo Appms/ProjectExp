@@ -13,6 +13,10 @@ public class MaingameManager : MonoBehaviour
     private GameObject _hud;
 
     [SerializeField]
+    [Tooltip("UI text that displays the time.")]
+    private Text _gameTimer;
+
+    [SerializeField]
 	[Tooltip("Determines the time until a help message is displayed.")]
 	private float _timeToHelpMessage;
 
@@ -50,6 +54,10 @@ public class MaingameManager : MonoBehaviour
 
 	//Safety bool to only upload score once
 	private bool _uploadedScore = false;
+
+    //Timer for the game
+    //TODO Read it from the server
+    private float _timer = 180;
 
 
     /// <summary>
@@ -102,8 +110,12 @@ public class MaingameManager : MonoBehaviour
 	
 	private void Update()
 	{
-		//TODO Replace with touch Input
-		if (Input.anyKey /*|| Input.GetTouch()*/)
+        _timer -= Time.unscaledDeltaTime;
+        if (Mathf.FloorToInt(_timer % 60) < 10) _gameTimer.text = Mathf.FloorToInt(_timer / 60) + ":0" + Mathf.FloorToInt(_timer % 60);
+        else _gameTimer.text = Mathf.FloorToInt(_timer / 60) + ":" + Mathf.FloorToInt(_timer % 60);
+
+        //TODO Replace with touch Input
+        if (Input.anyKey /*|| Input.GetTouch()*/)
 		{
 			_lastInputTime = Time.time;
 		}
@@ -178,6 +190,7 @@ public class MaingameManager : MonoBehaviour
         _score += pScore;
 
         _minigames[Mathf.Clamp(++_minigameUnlock, 0, _minigames.Length)].interactable = true;
+        FindObjectOfType<ScoreAnimation>().UpdateScore(_score);
     }
 
 	/// <summary>
