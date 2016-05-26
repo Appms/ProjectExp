@@ -17,10 +17,10 @@ public class CameraFollow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void LateUpdate () {
-		if(Input.GetKeyDown(KeyCode.Space)){
-			start = true;
-		}
-		if(!start){return;}
+		//if(Input.GetKeyDown(KeyCode.Space)){
+		//	start = true;
+		//}
+		//if(!start){return;}
 		Vector3 targetVector = new Vector3(this.transform.position.x, this.tTransform.position.y, this.transform.position.z);
 
 		this.transform.position = Vector3.Lerp(this.transform.position, targetVector, 0.9f);

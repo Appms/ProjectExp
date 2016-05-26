@@ -29,7 +29,7 @@ public class StoryTeller : MonoBehaviour {
 				mat.SetTexture("_MainTex", slides[page]);
 			}else{
 				gameObject.active = false;
-				Debug.Log("Exiting Story. Starting Game");
+				UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("HouseScene");
 			}
 		}
 
