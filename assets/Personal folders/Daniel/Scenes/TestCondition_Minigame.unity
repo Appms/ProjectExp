@@ -1387,11 +1387,10 @@ MonoBehaviour:
   _scorePerUnit: 10
   _multiplierPerCombo: 0.1
   _startMuliplier: 1
-  _playTime: 30
+  _playTime: 5
   _layer:
     serializedVersion: 2
     m_Bits: 256
-  MinigameCamera: {fileID: 0}
   _timeHUD: {fileID: 209588371}
   _scoreHUD: {fileID: 469686843}
   _comboHUD: {fileID: 546119317}
