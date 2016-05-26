@@ -3,9 +3,19 @@ using System.Collections;
 
 public class T_SpawnObject : MonoBehaviour
 {
+	[SerializeField]
+	private float _maxMouseDistance;
+
 	protected ThrowMinigame _manager;
 	protected T_ThrowObject _grabbedObject;
 	private Vector3 _oldMousePos;
+	private Vector3 _currentVelocity;
+
+	//Control tuneVariables
+	private float _throwingPower = 0.5f; 
+	private float _lerpMod = 4; //how fast the old velocity lerp toward the new velocity
+
+	protected virtual void Spawn() { }
 
 	protected virtual void Start()
 	{
@@ -17,7 +27,6 @@ public class T_SpawnObject : MonoBehaviour
 	{
 		if (_manager.GetActive())
 		{
-			//Ray ray = _manager.MinigameCamera.ScreenPointToRay(Input.mousePosition + new Vector3(0.0f, 0.0f, Mathf.Abs((transform.position - _manager.transform.position).z)));
 			Vector3 worldMousePos = _manager.MinigameCamera.ScreenToWorldPoint(Input.mousePosition + new Vector3(0.0f, 0.0f, Mathf.Abs((transform.position - _manager.transform.position).z)));
 
 			//TODO Replace by Touchinput
@@ -35,6 +44,7 @@ public class T_SpawnObject : MonoBehaviour
 						GameObject.Destroy(go, 10.0f);
 						_grabbedObject = go.GetComponent<T_ThrowObject>();
 						_grabbedObject.Grabbed = true;
+						Spawn();
 					}
 				}
 			}
@@ -52,8 +62,18 @@ public class T_SpawnObject : MonoBehaviour
 			if (_grabbedObject != null)
 			{
 				_grabbedObject.transform.position = worldMousePos;
-				_grabbedObject.GetComponent<Rigidbody>().velocity += (worldMousePos - _oldMousePos) * 2.0f;
+
+				_currentVelocity = Vector3.Lerp(_currentVelocity, (worldMousePos - _oldMousePos) * (_throwingPower/Time.deltaTime), Time.deltaTime*4);
+				_grabbedObject.GetComponent<Rigidbody>().velocity = _currentVelocity;
+
+
+				if (Vector3.Distance(_grabbedObject.transform.position, transform.position) >= _maxMouseDistance)
+				{
+					_grabbedObject.GetComponent<Rigidbody>().useGravity = true;
+					_grabbedObject = null;
+				}
 			}
+
 
 			/*
 			if (worldMousePos.x < -5f || worldMousePos.x > 0 || worldMousePos.y < -1 || worldMousePos.y > 3f)

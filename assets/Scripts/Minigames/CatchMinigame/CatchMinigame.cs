@@ -95,10 +95,14 @@ public class CatchMinigame : AbstractMinigame
 
 	protected override void DestroyDynamicObjects()
 	{
+		FindObjectOfType<C_CatchObject>().ClearObjectList();
+
 		foreach (GameObject go in _dropObjects)
 		{
-			DestroyObject(go);
+			GameObject.Destroy(go);
 		}
+
+		_dropObjects.Clear();
 	}
 
 	public bool EvaluateDrop(int pDropObjectCount, float pCatchObjectSpeed)
