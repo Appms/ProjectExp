@@ -109,7 +109,7 @@ public class WhackMinigame : AbstractMinigame
 
 					if (obj.State)
 					{
-						UseCombo();
+						AddCombo();
 					}
 					else
 					{
