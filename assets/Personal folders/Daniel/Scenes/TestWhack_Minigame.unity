@@ -1544,7 +1544,7 @@ MonoBehaviour:
   _scorePerUnit: 10
   _multiplierPerCombo: 0.1
   _startMuliplier: 1
-  _playTime: 30
+  _playTime: 5
   _layer:
     serializedVersion: 2
     m_Bits: 264
