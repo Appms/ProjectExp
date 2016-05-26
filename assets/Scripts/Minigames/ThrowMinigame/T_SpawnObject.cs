@@ -9,6 +9,11 @@ public class T_SpawnObject : MonoBehaviour
 	protected ThrowMinigame _manager;
 	protected T_ThrowObject _grabbedObject;
 	private Vector3 _oldMousePos;
+	private Vector3 _currentVelocity;
+
+	//Control tuneVariables
+	private float _throwingPower = 0.5f; 
+	private float _lerpMod = 4; //how fast the old velocity lerp toward the new velocity
 
 	protected virtual void Spawn() { }
 
@@ -57,7 +62,10 @@ public class T_SpawnObject : MonoBehaviour
 			if (_grabbedObject != null)
 			{
 				_grabbedObject.transform.position = worldMousePos;
-				_grabbedObject.GetComponent<Rigidbody>().velocity += (worldMousePos - _oldMousePos) * 2.0f;
+
+				_currentVelocity = Vector3.Lerp(_currentVelocity, (worldMousePos - _oldMousePos) * (_throwingPower/Time.deltaTime), Time.deltaTime*4);
+				_grabbedObject.GetComponent<Rigidbody>().velocity = _currentVelocity;
+
 
 				if (Vector3.Distance(_grabbedObject.transform.position, transform.position) >= _maxMouseDistance)
 				{

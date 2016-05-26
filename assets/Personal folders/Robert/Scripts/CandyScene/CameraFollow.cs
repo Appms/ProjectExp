@@ -9,6 +9,7 @@ public class CameraFollow : MonoBehaviour {
 	[Range(0.1f,20)]
 	public float smoothing = 1;
 
+	bool start = false;
 	// Use this for initialization
 	void Start () {
 	
@@ -16,6 +17,10 @@ public class CameraFollow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void LateUpdate () {
+		if(Input.GetKeyDown(KeyCode.Space)){
+			start = true;
+		}
+		if(!start){return;}
 		Vector3 targetVector = new Vector3(this.transform.position.x, this.tTransform.position.y, this.transform.position.z);
 
 		this.transform.position = Vector3.Lerp(this.transform.position, targetVector, 0.9f);
