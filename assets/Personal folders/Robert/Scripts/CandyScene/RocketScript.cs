@@ -19,14 +19,14 @@ public class RocketScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.Space)){
-			start = true;
-		}
-		if(!start){return;}
+		//if (Input.GetMouseButton(0)){
+		//	start = true;
+		//}
+		//if(!start){return;}
 		//reset when we press spacebar
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            currentLerpTime = 0f;
-        }
+        //if (Input.GetMouseButton(0)) {
+        //    currentLerpTime = 0f;
+        //}
  
         //increment timer once per frame
         currentLerpTime += Time.deltaTime;

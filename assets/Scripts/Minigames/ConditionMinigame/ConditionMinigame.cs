@@ -129,4 +129,10 @@ public class ConditionMinigame : AbstractMinigame
 			evaluate();
 		}
 	}
+
+	protected override void DestroyDynamicObjects()
+	{
+		base.DestroyDynamicObjects();
+		GameObject.Destroy(_currentConditionPrefab);
+	}
 }

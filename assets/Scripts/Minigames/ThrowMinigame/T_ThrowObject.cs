@@ -30,7 +30,10 @@ public abstract class T_ThrowObject : MonoBehaviour
 
 	protected virtual void OnCollisionEnter(Collision pColl)
 	{
-		_manager.EndCombo();
-		GameObject.Destroy(this.gameObject);
+		//if (_manager.MinigameLayers == 1 << pColl.gameObject.layer)
+		//{
+			_manager.EndCombo();
+			GameObject.Destroy(this.gameObject);
+		//}
 	}
 }
