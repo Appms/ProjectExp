@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TestCatchObject : CatchObject
+public class TestCatchObject : C_CatchObject
 {
 	protected override void Start()
 	{

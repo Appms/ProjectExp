@@ -54,11 +54,11 @@ public class CatchMinigame : AbstractMinigame
 
 		_dropObjects = new List<GameObject>();
 
-		_usesDumpObject = FindObjectOfType<DumpObject>() != null;
+		_usesDumpObject = FindObjectOfType<C_DumpObject>() != null;
 
 		try
 		{
-			FindObjectOfType<CatchObject>().SetValues(this, _catchObjectFollowSpeed, _usesDumpObject);
+			FindObjectOfType<C_CatchObject>().SetValues(this, _catchObjectFollowSpeed, _usesDumpObject);
 		}
 		catch (NullReferenceException)
 		{
@@ -74,7 +74,7 @@ public class CatchMinigame : AbstractMinigame
 			{
 				_nextSpawnTime = Time.time + UnityEngine.Random.Range(_minSpawnTime, _maxSpawnTime);
 				GameObject obj = (GameObject)GameObject.Instantiate(_dropObjectPrefab, Vector3.Lerp(_minDropPosition, _maxDropPosition, UnityEngine.Random.Range(0.0f, 1000.0f) / 1000.0f), Quaternion.identity);
-				obj.GetComponent<DropObject>().SetValues(this, UnityEngine.Random.Range(_minDropSpeed, _maxDropSpeed), _objectLifetime);
+				obj.GetComponent<C_DropObject>().SetValues(this, UnityEngine.Random.Range(_minDropSpeed, _maxDropSpeed), _objectLifetime);
 				_dropObjects.Add(obj);
 			}
 		}

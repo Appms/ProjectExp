@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class DropObject : MonoBehaviour
+public abstract class C_DropObject : MonoBehaviour
 {
 	protected CatchMinigame _manager;
 	protected float _speed;
@@ -57,5 +57,10 @@ public abstract class DropObject : MonoBehaviour
 	{
 		_droped = true;
 		_destroyTime = Time.time + _lifeTime;
+	}
+
+	public virtual void Dump()
+	{
+
 	}
 }

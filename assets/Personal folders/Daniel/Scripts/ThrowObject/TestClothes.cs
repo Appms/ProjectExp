@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TestDumpObject : C_DumpObject
+public class TestClothes : T_ThrowObject
 {
 
 }

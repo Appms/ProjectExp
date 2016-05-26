@@ -46,6 +46,11 @@ public abstract class AbstractMinigame : MonoBehaviour
 	//The current combo count
 	private int _combo;
 
+	public LayerMask MinigameLayers
+	{
+		get { return _layer; }
+	}
+
 	protected virtual void Start()
 	{
 		if (GetComponent<Camera>() == null)
