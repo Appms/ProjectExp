@@ -15,6 +15,8 @@ public class T_SpawnObject : MonoBehaviour
 	private float _throwingPower = 0.5f; 
 	private float _lerpMod = 4; //how fast the old velocity lerp toward the new velocity
 
+	protected virtual void Spawn() { }
+
 	protected virtual void Start()
 	{
 		_manager = FindObjectOfType<ThrowMinigame>();
@@ -42,6 +44,7 @@ public class T_SpawnObject : MonoBehaviour
 						GameObject.Destroy(go, 10.0f);
 						_grabbedObject = go.GetComponent<T_ThrowObject>();
 						_grabbedObject.Grabbed = true;
+						Spawn();
 					}
 				}
 			}
