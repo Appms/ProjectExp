@@ -46,6 +46,12 @@ public abstract class AbstractMinigame : MonoBehaviour
 	//The current combo count
 	private int _combo;
 
+	[SerializeField]
+	private Text _scoreHUD;
+
+	[SerializeField]
+	private Text _comboHUD;
+
 	public LayerMask MinigameLayers
 	{
 		get { return _layer; }
@@ -82,9 +88,10 @@ public abstract class AbstractMinigame : MonoBehaviour
 		}
 	}
 
-	protected virtual void OnDrawGUI()
+	protected virtual void OnGUI()
 	{
-
+		_scoreHUD.text = GetScore(false).ToString();
+		_comboHUD.text = GetComboScore(false).ToString() + " x " + GetMultiplier() + " = " + GetComboScore(true).ToString();
 	}
 
 
@@ -110,7 +117,12 @@ public abstract class AbstractMinigame : MonoBehaviour
 	/// <returns>The current combo score</returns>
 	public int GetComboScore(bool pUseMultiplier)
 	{
-		return pUseMultiplier ? (int)(_combo * _scorePerUnit * _combo * _multiplierPerCombo) : (int)(_combo * _scorePerUnit);
+		return pUseMultiplier ? (int)(_combo * _scorePerUnit * (_combo * _multiplierPerCombo + _startMuliplier)) : (int)(_combo * _scorePerUnit);
+	}
+
+	public float GetMultiplier()
+	{
+		return _combo * _multiplierPerCombo + _startMuliplier;
 	}
 
 	/// <summary>

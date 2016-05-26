@@ -9,4 +9,19 @@ public abstract class ConditionParent : MonoBehaviour
 	{
 		get { return _animationPlaying; }
 	}
+
+	public virtual void Despawn()
+	{
+		
+	}
+
+	protected virtual void Start()
+	{
+		
+	}
+
+	protected virtual void Update()
+	{
+
+	}
 }
