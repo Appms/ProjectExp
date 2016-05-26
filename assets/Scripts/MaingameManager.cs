@@ -1,9 +1,18 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class MaingameManager : MonoBehaviour
 {
-	[SerializeField]
+    [SerializeField]
+    [Tooltip("Camera that renders the house scene.")]
+    private Camera _camera;
+
+    [SerializeField]
+    [Tooltip("Main House Scene HUD.")]
+    private GameObject _hud;
+
+    [SerializeField]
 	[Tooltip("Determines the time until a help message is displayed.")]
 	private float _timeToHelpMessage;
 
@@ -14,6 +23,12 @@ public class MaingameManager : MonoBehaviour
 	[SerializeField]
 	[Tooltip("Dtermines the time until the game quits.")]
 	private float _timeToExit;
+
+    [SerializeField]
+    [Tooltip("Minigames displayed in the order they are supposed to be unlocked.")]
+    private Button[] _minigames;
+
+    private int _minigameUnlock;
 
 	//Instance of this Singleton
     private static MaingameManager _instance = null;
@@ -144,6 +159,8 @@ public class MaingameManager : MonoBehaviour
     /// <param name="pName">The name of the minigame scene</param>
     public void StartMinigame(string pName)
     {
+        _camera.enabled = false;
+        _hud.SetActive(false);
         UnityEngine.SceneManagement.SceneManager.LoadScene(pName, UnityEngine.SceneManagement.LoadSceneMode.Additive);
         _currentMinigameName = pName;
     }
@@ -154,9 +171,13 @@ public class MaingameManager : MonoBehaviour
     /// <param name="pScore">The score from the Minigame</param>
     public void EndMinigame(int pScore)
     {
+        _camera.enabled = true;
+        _hud.SetActive(true);
         UnityEngine.SceneManagement.SceneManager.UnloadScene(_currentMinigameName);
         _currentMinigameName = "";
         _score += pScore;
+
+        _minigames[Mathf.Clamp(++_minigameUnlock, 0, _minigames.Length)].interactable = true;
     }
 
 	/// <summary>
