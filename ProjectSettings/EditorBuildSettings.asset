@@ -6,7 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: assets/HouseScene.unity
+    path: assets/Personal folders/Robert/Scenes/Beginning.unity
+  - enabled: 1
+    path: assets/Scenes/HouseScene.unity
   - enabled: 1
     path: assets/Personal folders/Daniel/Scenes/TestCatch_Minigame.unity
   - enabled: 1
@@ -15,3 +17,5 @@ EditorBuildSettings:
     path: assets/Personal folders/Daniel/Scenes/TestThrow_Minigame.unity
   - enabled: 1
     path: assets/Personal folders/Daniel/Scenes/TestWhack_Minigame.unity
+  - enabled: 1
+    path: assets/Scenes/RocketScene.unity

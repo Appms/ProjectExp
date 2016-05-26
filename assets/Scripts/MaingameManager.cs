@@ -149,12 +149,19 @@ public class MaingameManager : MonoBehaviour
 		} 
 
 
-		if (_endTime >= Time.time && !_uploadedScore)
+		/*if (_endTime >= Time.time && !_uploadedScore)
 		{
 			_uploadedScore = true;
-			//TODO Display Endscreen
-			StartCoroutine(uploadScore());
-		}
+			//TODO StartCoroutine(uploadScore());
+			UnityEngine.SceneManagement.SceneManager.LoadScene("RocketScene");
+		}*/
+
+        if(_timer <= 0 && !_uploadedScore)
+        {
+            _uploadedScore = true;
+            //TODO StartCoroutine(uploadScore());
+            UnityEngine.SceneManagement.SceneManager.LoadScene("RocketScene");
+        }
 	}
 	
 	private void OnDrawGUI()
@@ -189,7 +196,7 @@ public class MaingameManager : MonoBehaviour
         _currentMinigameName = "";
         _score += pScore;
 
-        _minigames[Mathf.Clamp(++_minigameUnlock, 0, _minigames.Length)].interactable = true;
+        _minigames[Mathf.Clamp(++_minigameUnlock, 0, _minigames.Length - 1)].interactable = true;
         FindObjectOfType<ScoreAnimation>().UpdateScore(_score);
     }
 

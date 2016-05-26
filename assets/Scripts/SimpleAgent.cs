@@ -20,7 +20,6 @@ public class SimpleAgent : MonoBehaviour {
         if (Physics.Raycast(ray, out hit))
         {
             Transform objectHit = hit.transform;
-
             NavMeshHit navHit;
             NavMesh.SamplePosition(objectHit.position, out navHit, 100, NavMesh.AllAreas);
             navAgent.SetDestination(navHit.position);
