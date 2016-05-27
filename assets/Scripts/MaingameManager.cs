@@ -134,8 +134,8 @@ public class MaingameManager : MonoBehaviour
 					}
 
 					_uploadedScore = true;
-					//TODO Display Endscreen
-					StartCoroutine(uploadScore());
+					//
+					//StartCoroutine(uploadScore());
 				}
 				else
 				{
@@ -156,7 +156,7 @@ public class MaingameManager : MonoBehaviour
 			UnityEngine.SceneManagement.SceneManager.LoadScene("RocketScene");
 		}*/
 
-        if(_timer <= 0 && !_uploadedScore)
+        if(_timer <= 0 )//&& !_uploadedScore)
         {
             _uploadedScore = true;
             //TODO StartCoroutine(uploadScore());
@@ -206,9 +206,10 @@ public class MaingameManager : MonoBehaviour
 	/// <returns>To be specified</returns>
 	private IEnumerator uploadScore()
     {
-        string full_url = _arguments.getConURL() + "insertScore.php?" + "userID=" + _arguments.getUserID() + "&gameID=" + _arguments.getGameID() + "&score=" + _score;
-        WWW post = new WWW(full_url);
-        yield return post;
+        //string full_url = _arguments.getConURL() + "insertScore.php?" + "userID=" + _arguments.getUserID() + "&gameID=" + _arguments.getGameID() + "&score=" + _score;
+        //WWW post = new WWW(full_url);
+        //yield return post;
+        yield return null;
         Application.Quit();
     }
 }
