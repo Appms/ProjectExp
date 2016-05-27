@@ -41,7 +41,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 6
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_LightmapsMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -66,7 +66,7 @@ LightmapSettings:
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
     m_ReflectionCompression: 2
-  m_LightingDataAsset: {fileID: 112000455, guid: cd95929a58fbc9a4c85d7ae6ca2b1f8d,
+  m_LightingDataAsset: {fileID: 112000455, guid: 86459d95cf0671b43925204d2b4f0769,
     type: 2}
   m_RuntimeCPUUsage: 25
 --- !u!196 &4
@@ -7725,6 +7725,8 @@ GameObject:
   - 124: {fileID: 560882827}
   - 92: {fileID: 560882826}
   - 81: {fileID: 560882825}
+  - 114: {fileID: 560882832}
+  - 114: {fileID: 560882831}
   - 114: {fileID: 560882830}
   m_Layer: 0
   m_Name: MainCamera
@@ -7812,6 +7814,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frequency: 1000
+--- !u!114 &560882831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 560882824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 730475ee64f9a894bbac0d9e6f22e813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mode: 1
+  sensitivityDepth: 4.81
+  sensitivityNormals: 0.34
+  lumThreshold: 0.2
+  edgeExp: 1
+  sampleDist: 0.9
+  edgesOnly: 0
+  edgesOnlyBgColor: {r: 1, g: 1, b: 1, a: 1}
+  edgeDetectShader: {fileID: 4800000, guid: 0d1644bdf064147baa97f235fc5b4903, type: 3}
+--- !u!114 &560882832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 560882824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0923359e9e352a4b9b11c7b7161ad67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Radius: 0.29
+  m_SampleCount: 2
+  m_OcclusionIntensity: 1.38
+  m_Blur: 2
+  m_Downsampling: 1
+  m_OcclusionAttenuation: 1
+  m_MinZ: 0.01
+  m_SSAOShader: {fileID: 4800000, guid: 43ca18288c424f645aaa1e9e07f04c50, type: 3}
+  m_RandomTexture: {fileID: 2800000, guid: a181ca8e3c62f3e4b8f183f6c586b032, type: 3}
 --- !u!1001 &564349500
 Prefab:
   m_ObjectHideFlags: 0
@@ -9301,7 +9343,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 749929f25de64114abb479997e55a534, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -11556,6 +11598,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ed6688a26b09eb541a8c8f856b12f8d9, type: 2}
+    - target: {fileID: 100004, guid: 2b3a22bc0c6c40949a0b247057330360, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b3a22bc0c6c40949a0b247057330360, type: 3}
   m_IsPrefabParent: 0
@@ -12703,8 +12749,6 @@ MonoBehaviour:
   - {fileID: 1707379709}
   - {fileID: 1275323219}
   - {fileID: 1194643128}
-  - {fileID: 164232589}
-  - {fileID: 349681463}
 --- !u!4 &998360354
 Transform:
   m_ObjectHideFlags: 0
