@@ -21,7 +21,7 @@ public class SimpleAgent : MonoBehaviour {
         {
             Transform objectHit = hit.transform;
             NavMeshHit navHit;
-            NavMesh.SamplePosition(objectHit.position, out navHit, 100, NavMesh.AllAreas);
+            NavMesh.SamplePosition(objectHit.position, out navHit, 50, NavMesh.AllAreas);
             navAgent.SetDestination(navHit.position);
         }
 	}
