@@ -22,7 +22,7 @@ public class Arguments {
         _userID = 2;
         _gameID = 6;
         _username = "YVONNE";
-        _gametime = 10;
+        _gametime = 120;
         _conURL = "http://www.serellyn.net/HEIM/php/";
     }
 
