@@ -3,7 +3,7 @@ using System.Collections;
 
 public class TestDropObject : C_DropObject
 {
-	private float _rotationSpeed = 145.0f;
+	private float _rotationSpeed = 180.0f;
 
 	protected override void Start()
 	{
@@ -16,7 +16,7 @@ public class TestDropObject : C_DropObject
 
 		if (!_catched || _droped)
 		{
-			transform.Translate(0, -_speed * Time.deltaTime, 0, Space.World);
+			transform.Translate(0, (_droped ? -_speed * 2 : -_speed) * Time.deltaTime, 0, Space.World);
 			transform.Rotate(new Vector3(1, 0, 0), _rotationSpeed * Time.deltaTime);
 		}
 	}
@@ -29,6 +29,7 @@ public class TestDropObject : C_DropObject
 	public override void Drop()
 	{
 		base.Drop();
+		GetComponent<Renderer>().material.SetColor("_Color", Color.red);
 	}
 
 	public override void Dump()

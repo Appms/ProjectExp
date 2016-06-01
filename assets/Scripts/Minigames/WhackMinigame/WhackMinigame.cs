@@ -105,7 +105,6 @@ public class WhackMinigame : AbstractMinigame
 					WhackObject obj = hit.collider.GetComponent<WhackObject>();
 
 					obj.SwitchTime = Mathf.Infinity;
-					obj.Interact();
 
 					if (obj.State)
 					{
@@ -115,6 +114,8 @@ public class WhackMinigame : AbstractMinigame
 					{
 						EndCombo();
 					}
+
+					obj.Interact();
 				}
 			}
 		}

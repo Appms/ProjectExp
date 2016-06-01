@@ -147,6 +147,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 432800}
+  - 114: {fileID: 11483544}
   m_Layer: 8
   m_Name: TestWindowConditionSet
   m_TagString: Untagged
@@ -1246,7 +1247,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 0642fa2b3d28b334a93db1bfaeaa5920, type: 2}
+  - {fileID: 2100000, guid: 04bedb9daeaeb53449ec59898adab70a, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1402,7 +1403,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 0642fa2b3d28b334a93db1bfaeaa5920, type: 2}
+  - {fileID: 2100000, guid: 04bedb9daeaeb53449ec59898adab70a, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1558,7 +1559,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 0642fa2b3d28b334a93db1bfaeaa5920, type: 2}
+  - {fileID: 2100000, guid: 04bedb9daeaeb53449ec59898adab70a, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1584,7 +1585,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 0642fa2b3d28b334a93db1bfaeaa5920, type: 2}
+  - {fileID: 2100000, guid: 04bedb9daeaeb53449ec59898adab70a, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -2031,7 +2032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _changeable: 1
-  _lerpTime: 0.35
+  _lerpTime: 0.3
   _openPosition: {x: 0, y: 0.75, z: 0}
   _closedPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &11466418
@@ -2046,6 +2047,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _changeable: 0
+--- !u!114 &11483544
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3daaea2e0b8a1384b84f6f51dec0a105, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startPositionOffset: {x: 10, y: 0, z: 0}
+  _endPositionOffset: {x: -10, y: 0, z: 0}
+  _lerpTime: 0.9
 --- !u!136 &13605032
 CapsuleCollider:
   m_ObjectHideFlags: 1

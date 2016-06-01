@@ -1,9 +1,22 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class MaingameManager : MonoBehaviour
 {
-	[SerializeField]
+    [SerializeField]
+    [Tooltip("Camera that renders the house scene.")]
+    private Camera _camera;
+
+    [SerializeField]
+    [Tooltip("Main House Scene HUD.")]
+    private GameObject _hud;
+
+    [SerializeField]
+    [Tooltip("UI text that displays the time.")]
+    private Text _gameTimer;
+
+    [SerializeField]
 	[Tooltip("Determines the time until a help message is displayed.")]
 	private float _timeToHelpMessage;
 
@@ -14,6 +27,12 @@ public class MaingameManager : MonoBehaviour
 	[SerializeField]
 	[Tooltip("Dtermines the time until the game quits.")]
 	private float _timeToExit;
+
+    [SerializeField]
+    [Tooltip("Minigames displayed in the order they are supposed to be unlocked.")]
+    private Button[] _minigames;
+
+    private int _minigameUnlock;
 
 	//Instance of this Singleton
     private static MaingameManager _instance = null;
@@ -35,6 +54,10 @@ public class MaingameManager : MonoBehaviour
 
 	//Safety bool to only upload score once
 	private bool _uploadedScore = false;
+
+    //Timer for the game
+    //TODO Read it from the server
+    private float _timer = 180;
 
 
     /// <summary>
@@ -87,8 +110,12 @@ public class MaingameManager : MonoBehaviour
 	
 	private void Update()
 	{
-		//TODO Replace with touch Input
-		if (Input.anyKey /*|| Input.GetTouch()*/)
+        _timer -= Time.unscaledDeltaTime;
+        if (Mathf.FloorToInt(_timer % 60) < 10) _gameTimer.text = Mathf.FloorToInt(_timer / 60) + ":0" + Mathf.FloorToInt(_timer % 60);
+        else _gameTimer.text = Mathf.FloorToInt(_timer / 60) + ":" + Mathf.FloorToInt(_timer % 60);
+
+        //TODO Replace with touch Input
+        if (Input.anyKey /*|| Input.GetTouch()*/)
 		{
 			_lastInputTime = Time.time;
 		}
@@ -107,8 +134,8 @@ public class MaingameManager : MonoBehaviour
 					}
 
 					_uploadedScore = true;
-					//TODO Display Endscreen
-					StartCoroutine(uploadScore());
+					//
+					//StartCoroutine(uploadScore());
 				}
 				else
 				{
@@ -122,12 +149,19 @@ public class MaingameManager : MonoBehaviour
 		} 
 
 
-		if (_endTime >= Time.time && !_uploadedScore)
+		/*if (_endTime >= Time.time && !_uploadedScore)
 		{
 			_uploadedScore = true;
-			//TODO Display Endscreen
-			StartCoroutine(uploadScore());
-		}
+			//TODO StartCoroutine(uploadScore());
+			UnityEngine.SceneManagement.SceneManager.LoadScene("RocketScene");
+		}*/
+
+        if(_timer <= 0 )//&& !_uploadedScore)
+        {
+            _uploadedScore = true;
+            //TODO StartCoroutine(uploadScore());
+            UnityEngine.SceneManagement.SceneManager.LoadScene("RocketScene");
+        }
 	}
 	
 	private void OnDrawGUI()
@@ -144,6 +178,8 @@ public class MaingameManager : MonoBehaviour
     /// <param name="pName">The name of the minigame scene</param>
     public void StartMinigame(string pName)
     {
+        _camera.enabled = false;
+        _hud.SetActive(false);
         UnityEngine.SceneManagement.SceneManager.LoadScene(pName, UnityEngine.SceneManagement.LoadSceneMode.Additive);
         _currentMinigameName = pName;
     }
@@ -154,9 +190,14 @@ public class MaingameManager : MonoBehaviour
     /// <param name="pScore">The score from the Minigame</param>
     public void EndMinigame(int pScore)
     {
+        _camera.enabled = true;
+        _hud.SetActive(true);
         UnityEngine.SceneManagement.SceneManager.UnloadScene(_currentMinigameName);
         _currentMinigameName = "";
         _score += pScore;
+
+        _minigames[Mathf.Clamp(++_minigameUnlock, 0, _minigames.Length - 1)].interactable = true;
+        FindObjectOfType<ScoreAnimation>().UpdateScore(_score);
     }
 
 	/// <summary>
@@ -165,9 +206,10 @@ public class MaingameManager : MonoBehaviour
 	/// <returns>To be specified</returns>
 	private IEnumerator uploadScore()
     {
-        string full_url = _arguments.getConURL() + "insertScore.php?" + "userID=" + _arguments.getUserID() + "&gameID=" + _arguments.getGameID() + "&score=" + _score;
-        WWW post = new WWW(full_url);
-        yield return post;
+        //string full_url = _arguments.getConURL() + "insertScore.php?" + "userID=" + _arguments.getUserID() + "&gameID=" + _arguments.getGameID() + "&score=" + _score;
+        //WWW post = new WWW(full_url);
+        //yield return post;
+        yield return null;
         Application.Quit();
     }
 }
