@@ -9,6 +9,78 @@ public class ConditionMinigame : AbstractMinigame
 	[Tooltip("The prefab that is shown to the player")]
 	private GameObject _conditionPrefab;
 
+	private GameObject _currentConditionPrefab;
+	private List<ConditionObject> _currentConditionObjects;
+	private float _feedbackEndTime;
+	private bool _evaluated;
+
+	protected override void Start()
+	{
+		base.Start();
+		newElement();
+	}
+
+	protected override void Update()
+	{
+		if (_active)
+		{
+			if (_evaluated && objectAnimationsFinished())
+			{
+				newElement();
+
+				if (parentAnimationsFinished())
+				{
+					_evaluated = false;
+				}
+			}
+		}
+
+		base.Update();
+	}
+
+	public void Evaluate()
+	{
+		bool result = _currentConditionObjects.ToArray().All(x => x.State == true) || _currentConditionObjects.ToArray().All(x => x.State == false);
+
+		if (result)
+		{
+			AddCombo();
+		}
+		else
+		{
+			EndCombo();
+		}
+	}
+
+	private bool objectAnimationsFinished()
+	{
+		return FindObjectsOfType<ConditionObject>().All(x => x.AnimationPlaying == false);
+	}
+
+	private bool parentAnimationsFinished()
+	{
+		return FindObjectsOfType<ConditionParent>().All(x => x.AnimationPlaying == false);
+	}
+
+	public void newElement()
+	{
+		if (_currentConditionPrefab != null)
+		{
+			_currentConditionPrefab.GetComponent<ConditionParent>().Despawn();
+		}
+
+		_evaluated = false;
+		_currentConditionPrefab = (GameObject)GameObject.Instantiate(_conditionPrefab, Vector3.zero, Quaternion.identity);
+		_currentConditionObjects = new List<ConditionObject>(_currentConditionPrefab.GetComponentsInChildren<ConditionObject>());
+	}
+
+	protected override void DestroyDynamicObjects()
+	{
+		base.DestroyDynamicObjects();
+		GameObject.Destroy(_currentConditionPrefab);
+	}
+
+	/*
 	[SerializeField]
 	[Tooltip("The amount of time action feedback is shown")]
 	private float _showFeedbackTime;
@@ -16,11 +88,6 @@ public class ConditionMinigame : AbstractMinigame
 	//TODO Maybe find a way to do this more elegant
 	private Image _rightFeedback;
 	private Image _wrongFeedback;
-
-	private GameObject _currentConditionPrefab;
-	private List<ConditionObject> _currentConditionObjects;
-	private float _feedbackEndTime;
-	private bool _evaluated;
 
 	protected override void Start()
 	{
@@ -87,28 +154,6 @@ public class ConditionMinigame : AbstractMinigame
 		}
 	}
 
-	private bool objectAnimationsFinished()
-	{
-		return FindObjectsOfType<ConditionObject>().All(x => x.AnimationPlaying == false);
-	}
-
-	private bool parentAnimationsFinished()
-	{
-		return FindObjectsOfType<ConditionParent>().All(x => x.AnimationPlaying == false);
-	}
-
-	public void newElement()
-	{
-		if (_currentConditionPrefab != null)
-		{
-			_currentConditionPrefab.GetComponent<ConditionParent>().Despawn();
-		}
-
-		_evaluated = false;
-		_currentConditionPrefab = (GameObject)GameObject.Instantiate(_conditionPrefab, Vector3.zero, Quaternion.identity);
-		_currentConditionObjects = new List<ConditionObject>(_currentConditionPrefab.GetComponentsInChildren<ConditionObject>());
-	}
-
 	public void RightButtonPressed()
 	{
 		if (_active && !_evaluated && parentAnimationsFinished() && objectAnimationsFinished())
@@ -129,10 +174,5 @@ public class ConditionMinigame : AbstractMinigame
 			evaluate();
 		}
 	}
-
-	protected override void DestroyDynamicObjects()
-	{
-		base.DestroyDynamicObjects();
-		GameObject.Destroy(_currentConditionPrefab);
-	}
+	*/
 }

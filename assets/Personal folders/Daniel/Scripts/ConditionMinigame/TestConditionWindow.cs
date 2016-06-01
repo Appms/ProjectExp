@@ -18,6 +18,11 @@ public class TestConditionWindow : ConditionObject
 
 	private float _currentLerpTime;
 
+	private Vector3 _startPosition;
+	private Vector3 _targetPosition;
+
+	private float _realLerpTime;
+
 	protected override void InitTrue()
 	{
 		transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
@@ -30,13 +35,19 @@ public class TestConditionWindow : ConditionObject
 
 	protected override void TurnTrue()
 	{
-		transform.localPosition = new Vector3(0.0f, 0.75f, 0.0f);
+		_currentLerpTime = 0.0f;
+		_startPosition = transform.localPosition;
+		_targetPosition = _openPosition;
+		_realLerpTime = Vector3.Distance(_startPosition, _targetPosition) / Vector3.Distance(_openPosition, _closedPosition) * _lerpTime;
 		_animationPlaying = true;
 	}
 
 	protected override void TurnFalse()
 	{
-		transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
+		_currentLerpTime = 0.0f;
+		_startPosition = transform.localPosition;
+		_targetPosition = _closedPosition;
+		_realLerpTime = Vector3.Distance(_startPosition, _targetPosition) / Vector3.Distance(_openPosition, _closedPosition) * _lerpTime;
 		_animationPlaying = true;
 	}
 
@@ -45,14 +56,14 @@ public class TestConditionWindow : ConditionObject
 		if (_animationPlaying)
 		{
 			_currentLerpTime += Time.deltaTime;
-			if (_currentLerpTime > _lerpTime)
+			if (_currentLerpTime > _realLerpTime)
 			{
-				_currentLerpTime = _lerpTime;
+				_currentLerpTime = _realLerpTime;
 				_animationPlaying = false;
 			}
 
-			float perc = _currentLerpTime / _lerpTime;
-			transform.localPosition = State ? Vector3.Lerp(_openPosition, _closedPosition, perc) : Vector3.Lerp(_closedPosition, _openPosition, perc);
+			float perc = _currentLerpTime / _realLerpTime;
+			transform.localPosition = Vector3.Lerp(_startPosition, _targetPosition, perc);
 		}
 	}
 }
