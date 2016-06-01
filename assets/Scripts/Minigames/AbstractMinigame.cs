@@ -10,6 +10,10 @@ public abstract class AbstractMinigame : MonoBehaviour
 	protected float _tutorialTime = 4.0f;
 
 	[SerializeField]
+	[Tooltip("The time the endscreen will be shown")]
+	protected float _endScreenTime = 4.0f;
+
+	[SerializeField]
 	[Tooltip("The score you get per successfull action")]
 	protected int _scorePerUnit = 10;
 
@@ -61,15 +65,7 @@ public abstract class AbstractMinigame : MonoBehaviour
 	//The current combo count
 	private int _combo;
 
-
-	[SerializeField]
-	private Text _timeHUD;
-
-	[SerializeField]
-	private Text _scoreHUD;
-
-	[SerializeField]
-	private Text _comboHUD;
+	private MinigameHUD _hudManager;
 
 	public LayerMask MinigameLayers
 	{
@@ -84,59 +80,54 @@ public abstract class AbstractMinigame : MonoBehaviour
 		}
 
 		_endTime = Time.time + _tutorialTime;
+
+		_hudManager = FindObjectOfType<MinigameHUD>();
+
+		if (_hudManager == null)
+		{
+			throw new MissingComponentException("You have no minigame HUD manager in your scene!");
+		}
+
+		_hudManager.DisplayTutorial();
 	}
 
 	protected virtual void Update()
 	{
-		//TODO Replace with touch input
-		if (_endTime <= Time.time || !_active && Input.GetMouseButtonDown(0))
+		if (!_active && !_ended)
 		{
-			if (_active)
+			if (_endTime <= Time.time || Input.GetMouseButtonDown(0))
 			{
-				//TODO Display an endscreen
-				EndMinigame();
-			}
-			else if(!_ended)
-			{
-				_active = true;
-
-				try
-				{
-					GameObject.Find("TutorialImage").SetActive(false);
-				}
-				catch (NullReferenceException) { }
-
-
+				Debug.Log("Hide Tut");
+				_hudManager.HideTutorial();
 				_endTime = Time.time + _playTime;
+				_active = true;
+			}
+		}
+		else if (_active && !_ended)
+		{
+			if (_endTime <= Time.time)
+			{
+				Debug.Log("Show endscreen");
+				_hudManager.DisplayEndscreen();
+				_endTime = Time.time + _endScreenTime;
+				_active = false;
+				_ended = true;
+				EndCombo();
+			}
+		}
+		else if (!_active && _ended)
+		{
+			if (_endTime <= Time.time || Input.GetMouseButtonDown(0))
+			{
+				Debug.Log("End minigame");
+				EndMinigame();
 			}
 		}
 	}
 
 	protected virtual void OnGUI()
 	{
-		if (_active)
-		{
-			_timeHUD.text = Mathf.Round(_endTime - Time.time).ToString();
-		}
-		else if (!_ended)
-		{
-			_timeHUD.text = _playTime.ToString();
-		}
-		else
-		{
-			_timeHUD.text = "0";
-		}
-
-		_scoreHUD.text = GetScore(false).ToString();
-
-		if (_combo == 0)
-		{
-			_comboHUD.text = "0";
-		}
-		else
-		{
-			_comboHUD.text = GetComboScore(false).ToString() + " x " + GetMultiplier() + " = " + GetComboScore(true).ToString();
-		}
+		_hudManager.UpdateValues(Mathf.Round(_endTime - Time.time).ToString(), GetScore(false).ToString(), GetComboScore(false).ToString() + " x " + GetMultiplier() + " = " + GetComboScore(true).ToString());
 	}
 
 
@@ -203,11 +194,6 @@ public abstract class AbstractMinigame : MonoBehaviour
 	/// </summary>
 	public void EndMinigame()
 	{
-		_ended = true;
-		_active = false;
-
-		EndCombo();
-
 		DestroyDynamicObjects();
 
 		try
