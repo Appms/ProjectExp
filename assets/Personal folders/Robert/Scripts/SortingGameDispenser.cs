@@ -44,6 +44,7 @@ public class SortingGameDispenser : AbstractMinigame  {
 		worldMousePos = MinigameCamera.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, 0f, 10f));
 
 		if(!_timer.Run()){
+			Debug.Log("GO!");
 			SpawnRandomItem();
 			_timer.Interval = Random.Range(minTime, maxTime);
 		}

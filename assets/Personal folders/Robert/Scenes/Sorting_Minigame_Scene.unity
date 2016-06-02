@@ -610,7 +610,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   minTime: 0.1
-  maxTime: 1.65
+  maxTime: 0.1
   objects:
   - {fileID: 102476, guid: 3750607d2cc1651458e054011737ff0a, type: 2}
   - {fileID: 102476, guid: f04ad2589e7b76344952143b2b1ebb7d, type: 2}
