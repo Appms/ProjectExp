@@ -2,15 +2,14 @@
 using System.Collections;
 using System;
 
+[RequireComponent(typeof(Collider))]
 public abstract class ConditionObject : MonoBehaviour
 {
-	[SerializeField]
-	[Tooltip("Determines if the object is switched with a tap")]
-	private bool _changeable;
-
 	private bool _state;
 
 	protected bool _animationPlaying;
+
+	protected ConditionMinigame _manager;
 
 	public bool State
 	{
@@ -24,23 +23,22 @@ public abstract class ConditionObject : MonoBehaviour
 
 	public void SwitchState()
 	{
-		if (_changeable)
-		{ 
-			if (_state)
-			{
-				TurnTrue();
-			}
-			else
-			{
-				TurnFalse();
-			}
-
-			_state = !_state;
+		if (_state)
+		{
+			TurnTrue();
 		}
+		else
+		{
+			TurnFalse();
+		}
+
+		_state = !_state;
 	}
 
 	protected virtual void Start()
 	{
+		_manager = FindObjectOfType<ConditionMinigame>();
+
 		_state = Convert.ToBoolean(UnityEngine.Random.Range(0, 2));
 
 		if (_state)
@@ -58,4 +56,13 @@ public abstract class ConditionObject : MonoBehaviour
 
 	protected virtual void TurnTrue() { }
 	protected virtual void TurnFalse() { }
+
+	protected virtual void OnMouseDown()
+	{
+		if (_manager.GetActive())
+		{
+			SwitchState();
+			_manager.Evaluate();
+		}
+	}
 }

@@ -55,10 +55,6 @@ public class MaingameManager : MonoBehaviour
 	//Safety bool to only upload score once
 	private bool _uploadedScore = false;
 
-    //Timer for the game
-    //TODO Read it from the server
-    private float _timer = 180;
-
 
     /// <summary>
     /// Return the current instance of the Maingame Manager
@@ -110,6 +106,7 @@ public class MaingameManager : MonoBehaviour
 	
 	private void Update()
 	{
+		float _timer = _endTime - Time.time;
         _timer -= Time.unscaledDeltaTime;
         if (Mathf.FloorToInt(_timer % 60) < 10) _gameTimer.text = Mathf.FloorToInt(_timer / 60) + ":0" + Mathf.FloorToInt(_timer % 60);
         else _gameTimer.text = Mathf.FloorToInt(_timer / 60) + ":" + Mathf.FloorToInt(_timer % 60);
@@ -148,20 +145,12 @@ public class MaingameManager : MonoBehaviour
 			}
 		} 
 
-
-		/*if (_endTime >= Time.time && !_uploadedScore)
+		if (_endTime <= Time.time && !_uploadedScore)
 		{
 			_uploadedScore = true;
 			//TODO StartCoroutine(uploadScore());
 			UnityEngine.SceneManagement.SceneManager.LoadScene("RocketScene");
-		}*/
-
-        if(_timer <= 0 )//&& !_uploadedScore)
-        {
-            _uploadedScore = true;
-            //TODO StartCoroutine(uploadScore());
-            UnityEngine.SceneManagement.SceneManager.LoadScene("RocketScene");
-        }
+		}
 	}
 	
 	private void OnDrawGUI()
