@@ -42,11 +42,13 @@ public class SortingGameDispenser : AbstractMinigame  {
 		if(GetActive()){
 		
 		worldMousePos = MinigameCamera.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, 0f, 10f));
-
+		//Debug.Log(_timer.GetTime());
 		if(!_timer.Run()){
-			Debug.Log("GO!");
+			//Debug.Log("GO!");
 			SpawnRandomItem();
-			_timer.Interval = Random.Range(minTime, maxTime);
+			float rndNumber = Random.Range(minTime, maxTime);
+			Debug.Log(rndNumber);
+			_timer.Interval = rndNumber;
 		}
 		if(Input.GetMouseButtonDown(0)){
 			currentObject = GetClosestObject();
@@ -58,7 +60,6 @@ public class SortingGameDispenser : AbstractMinigame  {
 
 		if(Input.GetMouseButtonUp(0)){
 			if(dispenserObjects.Count != 0){
-			worldMousePos = MinigameCamera.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, 0f, 10f));
 			if(worldMousePos.x < leftDeadZone){
 				//Do stuff if mouse is on the left side
 					Rigidbody rb = currentObject.transform.GetComponent<Rigidbody>();
@@ -97,7 +98,7 @@ public class SortingGameDispenser : AbstractMinigame  {
 			return;
 		}
 		Vector3 tempPos = worldMousePos;
-		tempPos.y = Mathf.Clamp(tempPos.y,-2,10);
+		tempPos.y = Mathf.Clamp(tempPos.y,-1.5f,10);
 		currentObject.transform.position = Vector3.Lerp(currentObject.transform.position, tempPos, Time.deltaTime*20);
 	}
 
