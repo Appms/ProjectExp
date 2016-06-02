@@ -49,10 +49,10 @@ public class SortingGameDispenser : AbstractMinigame  {
 			Debug.Log(worldMousePos);
 			if(worldMousePos.x < leftDeadZone){
 				//Do stuff if mouse is on the left side
-				dispenserObjects[0].transform.GetComponent<Rigidbody>().AddForce(new Vector3(-400+dispenserObjects[0].transform.position.y*150f,400,0));
+				dispenserObjects[0].transform.GetComponent<Rigidbody>().AddForce(new Vector3(-600+(dispenserObjects[0].transform.position.y*100f,300,0));
 				}else if(worldMousePos.x > rightDeadZone){
 				//Do stuff if mouse is on the left side	
-				dispenserObjects[0].transform.GetComponent<Rigidbody>().AddForce(new Vector3(400-dispenserObjects[0].transform.position.y*150f,400,0));
+				dispenserObjects[0].transform.GetComponent<Rigidbody>().AddForce(new Vector3(600-dispenserObjects[0].transform.position.y*100f,300,0));
 				}
 				dispenserObjects.RemoveAt(0);
 			}
