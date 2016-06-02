@@ -195,7 +195,7 @@ public abstract class AbstractMinigame : MonoBehaviour
 
 		try
 		{
-			MaingameManager.Instance.EndMinigame((int)_score);
+		MaingameManager.Instance.EndMinigame((int)_score);
 		}
 		catch(NullReferenceException)
 		{
