@@ -5,6 +5,9 @@ using System;
 [RequireComponent(typeof(Collider))]
 public abstract class ConditionObject : MonoBehaviour
 {
+	[SerializeField]
+	private bool _changeable;
+
 	private bool _state;
 
 	protected bool _animationPlaying;
@@ -59,7 +62,7 @@ public abstract class ConditionObject : MonoBehaviour
 
 	protected virtual void OnMouseDown()
 	{
-		if (_manager.GetActive())
+		if (_changeable && _manager.GetActive())
 		{
 			SwitchState();
 			_manager.Evaluate();
