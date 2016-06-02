@@ -19,17 +19,20 @@ public class BertTimer {
 		}
 	}
 
+	public float GetTime(){
+		return (_endTime - _timer);
+	}
 	//check if timer expired if autoReset = true the method automatically calls reset if it is expired
 	public bool Run(bool autoReset = false){
 		_timer += Time.deltaTime;
 		if(_timer > _endTime){
-			//Timer passed
+			//Time passed
 			if(autoReset){
 				Reset();
 			}
 			return false;
 		}else{
-			//Timer not passed
+			//Time not passed
 			return true;
 		}
 	}
@@ -37,10 +40,11 @@ public class BertTimer {
 	//Reset timer to interval value
 	public void Reset(){
 		_endTime = Time.time + _interval;
+		_timer = Time.time;
 	}
-
 	//Reset timer to custom value
 	public void Reset(float interval){
 		_endTime = Time.time + interval;
+		_timer = Time.time;
 	}
 }

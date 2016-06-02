@@ -10,7 +10,9 @@ public class EndScreen : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+	Debug.Log("Yo replace score with real Score");
+	float score = 200;
+	this.transform.position = new Vector3(this.transform.position.x,Mathf.Clamp(score,0,200));
 	}
 	
 	// Update is called once per frame
