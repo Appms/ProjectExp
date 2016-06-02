@@ -9,10 +9,11 @@ public class DispenserObject : MonoBehaviour {
 	public float deadZone;
 	private bool _outOfGame = false;
 
-
+	//if the obejct has the same index as the box it lands in you get points
+	public int index;
 
 	void Update () {
-		if(this.transform.position.y < -1 && !_outOfGame){
+		if(this.transform.position.y < -2 && !_outOfGame){
 			//Object removes itself from the list
 			list.Remove(this);
 			_outOfGame = true;
@@ -22,5 +23,17 @@ public class DispenserObject : MonoBehaviour {
 			Destroy(this.gameObject);
 		}
 
+	}
+	void OnTriggerEnter(Collider other){
+		SortingBox box = other.GetComponent<SortingBox>();
+		if(box != null){
+			if(box.index == this.index){
+				//AddScore
+				Debug.Log("AddingScore");
+			}else{
+				//AbortCombo
+				Debug.Log("AbortCombo");
+			}
+		}
 	}
 }
