@@ -10,7 +10,7 @@ public class RocketScript : MonoBehaviour {
 	float lerpTime = 6f;
 	float currentLerpTime;
 
-	bool start = false;
+	//bool start = false;
 
 	// Use this for initialization
 	void Start () {

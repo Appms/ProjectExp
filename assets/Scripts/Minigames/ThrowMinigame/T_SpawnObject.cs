@@ -13,7 +13,7 @@ public class T_SpawnObject : MonoBehaviour
 
 	//Control tuneVariables
 	private float _throwingPower = 0.5f; 
-	private float _lerpMod = 4; //how fast the old velocity lerp toward the new velocity
+	//private float _lerpMod = 4; //how fast the old velocity lerp toward the new velocity
 
 	protected virtual void Spawn() { }
 

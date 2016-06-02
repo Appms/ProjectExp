@@ -95,7 +95,7 @@ public abstract class AbstractMinigame : MonoBehaviour
 	{
 		if (!_active && !_ended)
 		{
-			if (_endTime <= Time.time || Input.GetMouseButtonDown(0))
+			if (_endTime <= Time.time /*|| Input.GetMouseButtonDown(0)*/)
 			{
 				_hudManager.HideTutorial();
 				_endTime = Time.time + _playTime;
@@ -106,16 +106,16 @@ public abstract class AbstractMinigame : MonoBehaviour
 		{
 			if (_endTime <= Time.time)
 			{
-				_hudManager.DisplayEndscreen();
+				EndCombo();
+				_hudManager.DisplayEndscreen(GetScore(false).ToString());
 				_endTime = Time.time + _endScreenTime;
 				_active = false;
 				_ended = true;
-				EndCombo();
 			}
 		}
 		else if (!_active && _ended)
 		{
-			if (_endTime <= Time.time || Input.GetMouseButtonDown(0))
+			if (_endTime <= Time.time /*|| Input.GetMouseButtonDown(0)*/)
 			{
 				EndMinigame();
 			}

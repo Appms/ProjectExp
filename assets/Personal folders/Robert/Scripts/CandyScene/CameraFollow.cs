@@ -9,7 +9,7 @@ public class CameraFollow : MonoBehaviour {
 	[Range(0.1f,20)]
 	public float smoothing = 1;
 
-	bool start = false;
+	//bool start = false;
 	// Use this for initialization
 	void Start () {
 	

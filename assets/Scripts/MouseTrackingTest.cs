@@ -19,7 +19,7 @@ namespace DebuggingTools
         GameObject ball;
 
         [SerializeField]
-        Camera camera;
+        Camera _camera;
 
         void Awake()
         {
@@ -47,7 +47,7 @@ namespace DebuggingTools
                     //mousePos.x /= Screen.width;
                     //mousePos.y /= Screen.height;
                     mousePos.z = 5;
-                    mousePos = camera.ScreenToWorldPoint(mousePos);
+                    mousePos = _camera.ScreenToWorldPoint(mousePos);
 
                     _mouseLine.SetPosition(i, mousePos);
                     ball.transform.position = mousePos;

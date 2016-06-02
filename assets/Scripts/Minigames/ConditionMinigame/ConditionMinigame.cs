@@ -45,10 +45,11 @@ public class ConditionMinigame : AbstractMinigame
 		if (result)
 		{
 			AddCombo();
+			_evaluated = true;
 		}
 		else
 		{
-			EndCombo();
+			//EndCombo();
 		}
 	}
 
