@@ -45,8 +45,9 @@ public class MinigameHUD : MonoBehaviour
 		_comboText.text = pCombo;
 	}
 
-	public void DisplayEndscreen()
+	public void DisplayEndscreen(string pScore)
 	{
+		_endScreenScoreText.text = pScore;
 		_infoContainer.gameObject.SetActive(false);
 		_endScreenContainer.gameObject.SetActive(true);
 	}
