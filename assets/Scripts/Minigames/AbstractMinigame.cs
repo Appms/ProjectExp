@@ -97,7 +97,6 @@ public abstract class AbstractMinigame : MonoBehaviour
 		{
 			if (_endTime <= Time.time || Input.GetMouseButtonDown(0))
 			{
-				Debug.Log("Hide Tut");
 				_hudManager.HideTutorial();
 				_endTime = Time.time + _playTime;
 				_active = true;
@@ -107,7 +106,6 @@ public abstract class AbstractMinigame : MonoBehaviour
 		{
 			if (_endTime <= Time.time)
 			{
-				Debug.Log("Show endscreen");
 				_hudManager.DisplayEndscreen();
 				_endTime = Time.time + _endScreenTime;
 				_active = false;
@@ -119,7 +117,6 @@ public abstract class AbstractMinigame : MonoBehaviour
 		{
 			if (_endTime <= Time.time || Input.GetMouseButtonDown(0))
 			{
-				Debug.Log("End minigame");
 				EndMinigame();
 			}
 		}
