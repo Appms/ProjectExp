@@ -1811,8 +1811,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 998360353}
-        m_MethodName: StartMinigame
+      - m_Target: {fileID: 164232592}
+        m_MethodName: StartMiniGame
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1868,10 +1868,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58dfa152346dfe64f8feac18689b8ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firstStarScore: 0
-  _secondStartScore: 0
-  _thirdStarScore: 0
-  stars: []
+  stars:
+  - {fileID: 581475302}
+  - {fileID: 2069038264}
+  - {fileID: 666777945}
 --- !u!1001 &175667212
 Prefab:
   m_ObjectHideFlags: 0
@@ -4084,8 +4084,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 998360353}
-        m_MethodName: StartMinigame
+      - m_Target: {fileID: 349681466}
+        m_MethodName: StartMiniGame
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4141,10 +4141,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58dfa152346dfe64f8feac18689b8ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firstStarScore: 0
-  _secondStartScore: 0
-  _thirdStarScore: 0
-  stars: []
+  stars:
+  - {fileID: 1236402694}
+  - {fileID: 1467049998}
+  - {fileID: 1833972539}
 --- !u!1001 &351537347
 Prefab:
   m_ObjectHideFlags: 0
@@ -8742,8 +8742,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 998360353}
-        m_MethodName: StartMinigame
+      - m_Target: {fileID: 598148978}
+        m_MethodName: StartMiniGame
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8799,9 +8799,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58dfa152346dfe64f8feac18689b8ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firstStarScore: 100
-  _secondStartScore: 200
-  _thirdStarScore: 300
   stars:
   - {fileID: 1964326263}
   - {fileID: 194306210}
@@ -14765,8 +14762,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 998360353}
-        m_MethodName: StartMinigame
+      - m_Target: {fileID: 1194643131}
+        m_MethodName: StartMiniGame
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14822,10 +14819,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58dfa152346dfe64f8feac18689b8ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firstStarScore: 0
-  _secondStartScore: 0
-  _thirdStarScore: 0
-  stars: []
+  stars:
+  - {fileID: 1653715014}
+  - {fileID: 75525275}
+  - {fileID: 1729479173}
 --- !u!4 &1194974287 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 32f1f37b13e583c449deb689a385cd47, type: 3}
@@ -15864,8 +15861,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 998360353}
-        m_MethodName: StartMinigame
+      - m_Target: {fileID: 1275323222}
+        m_MethodName: StartMiniGame
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15921,10 +15918,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58dfa152346dfe64f8feac18689b8ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firstStarScore: 0
-  _secondStartScore: 0
-  _thirdStarScore: 0
-  stars: []
+  stars:
+  - {fileID: 1290692815}
+  - {fileID: 25806109}
+  - {fileID: 1437193842}
 --- !u!1001 &1283919399
 Prefab:
   m_ObjectHideFlags: 0
@@ -21465,8 +21462,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 998360353}
-        m_MethodName: StartMinigame
+      - m_Target: {fileID: 1707379712}
+        m_MethodName: StartMiniGame
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21522,10 +21519,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58dfa152346dfe64f8feac18689b8ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firstStarScore: 0
-  _secondStartScore: 0
-  _thirdStarScore: 0
-  stars: []
+  stars:
+  - {fileID: 1726153604}
+  - {fileID: 1500819573}
+  - {fileID: 379207318}
 --- !u!1001 &1710333603
 Prefab:
   m_ObjectHideFlags: 0
