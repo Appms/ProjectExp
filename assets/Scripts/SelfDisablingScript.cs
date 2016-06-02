@@ -11,7 +11,7 @@ public class SelfDisablingScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.Space)){
-			this.gameObject.active = false;
+			this.gameObject.SetActive(false);
 		}
 	}
 }

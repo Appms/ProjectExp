@@ -28,13 +28,13 @@ public class StoryTeller : MonoBehaviour {
 				page++;
 				mat.SetTexture("_MainTex", slides[page]);
 			}else{
-				gameObject.active = false;
+				gameObject.SetActive(false);
 				UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("HouseScene");
 			}
 		}
 
 		if(!_startTelling && Input.GetMouseButtonDown(0)){
-			startScreen.gameObject.active = false;
+			startScreen.gameObject.SetActive(false);
 			_startTelling = true;
 		}
 	}

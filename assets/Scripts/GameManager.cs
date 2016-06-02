@@ -8,8 +8,8 @@ public class GameManager : MonoBehaviour {
 	private string _currentMinigame;
 	private PlayerWalk _player;
 
-	[SerializeField]
-	private AnimationCurve _animCurve = new AnimationCurve(new Keyframe(1, 3), new Keyframe(99, 20));
+	//[SerializeField]
+	//private AnimationCurve _animCurve = new AnimationCurve(new Keyframe(1, 3), new Keyframe(99, 20));
 
 	[SerializeField] private float _helpTime = 5.0f;
 	[SerializeField] private float _exitMessageTime = 5.0f;
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour {
 	[SerializeField] private GameObject[] _doors;
 	[SerializeField] private GameObject cam;
 
-	int specificDoor = 0;
+	//int specificDoor = 0;
 
 	private void Start()
 	{
