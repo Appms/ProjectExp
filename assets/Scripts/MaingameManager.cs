@@ -55,6 +55,8 @@ public class MaingameManager : MonoBehaviour
 	//Safety bool to only upload score once
 	private bool _uploadedScore = false;
 
+	StarScore ss;
+	private string recentMiniGameName;
 
     /// <summary>
     /// Return the current instance of the Maingame Manager
@@ -102,6 +104,8 @@ public class MaingameManager : MonoBehaviour
 	{
 		//TODO Find out if getGameTime uses minutes or seconds
 		_endTime = _arguments.getGameTime() + Time.time;
+
+		ss = GetComponent<StarScore> ();
 	}
 	
 	private void Update()
@@ -125,10 +129,12 @@ public class MaingameManager : MonoBehaviour
 			{
 				if (timeWithoutInput >= _timeToExit && !_uploadedScore)
 				{
+					/*
 					if (_currentMinigameName != "")
 					{
 						FindObjectOfType<AbstractMinigame>().EndMinigame();
 					}
+					*/
 
 					_uploadedScore = true;
 					//
@@ -171,6 +177,7 @@ public class MaingameManager : MonoBehaviour
         _hud.SetActive(false);
         UnityEngine.SceneManagement.SceneManager.LoadScene(pName, UnityEngine.SceneManagement.LoadSceneMode.Additive);
         _currentMinigameName = pName;
+		recentMiniGameName = _currentMinigameName;
     }
 
     /// <summary>
@@ -179,6 +186,7 @@ public class MaingameManager : MonoBehaviour
     /// <param name="pScore">The score from the Minigame</param>
     public void EndMinigame(int pScore)
     {
+//		ss.score = pScore;
         _camera.enabled = true;
         _hud.SetActive(true);
         UnityEngine.SceneManagement.SceneManager.UnloadScene(_currentMinigameName);
@@ -201,4 +209,9 @@ public class MaingameManager : MonoBehaviour
         yield return null;
         Application.Quit();
     }
+
+	public string GetRecentlyPlayedMiniGameName(){
+
+		return recentMiniGameName;
+	}
 }

@@ -95,7 +95,7 @@ public abstract class AbstractMinigame : MonoBehaviour
 	{
 		if (!_active && !_ended)
 		{
-			if (_endTime <= Time.time || Input.GetMouseButtonDown(0))
+			if (_endTime <= Time.time /*|| Input.GetMouseButtonDown(0)*/)
 			{
 				_hudManager.HideTutorial();
 				_endTime = Time.time + _playTime;
@@ -115,7 +115,7 @@ public abstract class AbstractMinigame : MonoBehaviour
 		}
 		else if (!_active && _ended)
 		{
-			if (_endTime <= Time.time || Input.GetMouseButtonDown(0))
+			if (_endTime <= Time.time /*|| Input.GetMouseButtonDown(0)*/)
 			{
 				EndMinigame();
 			}
@@ -195,7 +195,7 @@ public abstract class AbstractMinigame : MonoBehaviour
 
 		try
 		{
-			MaingameManager.Instance.EndMinigame((int)_score);
+		MaingameManager.Instance.EndMinigame((int)_score);
 		}
 		catch(NullReferenceException)
 		{
