@@ -106,11 +106,11 @@ public abstract class AbstractMinigame : MonoBehaviour
 		{
 			if (_endTime <= Time.time)
 			{
-				_hudManager.DisplayEndscreen();
+				EndCombo();
+				_hudManager.DisplayEndscreen(GetScore(false).ToString());
 				_endTime = Time.time + _endScreenTime;
 				_active = false;
 				_ended = true;
-				EndCombo();
 			}
 		}
 		else if (!_active && _ended)

@@ -4,18 +4,18 @@ using System.Collections;
 public class SimpleAgent : MonoBehaviour {
 
     NavMeshAgent navAgent;
-    Camera camera;
+    Camera _camera;
 
 	// Use this for initialization
 	void Start () {
         navAgent = GetComponent<NavMeshAgent>();
-        camera = FindObjectOfType<Camera>();
+        _camera = FindObjectOfType<Camera>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
         RaycastHit hit;
-        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out hit))
         {
