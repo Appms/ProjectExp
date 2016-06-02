@@ -900,6 +900,9 @@ MonoBehaviour:
   _layer:
     serializedVersion: 2
     m_Bits: 264
+  _firstStarScore: 100
+  _secondStartScore: 200
+  _thirdStarScore: 300
   _minTurnOffTime: 1
   _maxTurnOffTime: 3
   _minTurnOnTime: 2
