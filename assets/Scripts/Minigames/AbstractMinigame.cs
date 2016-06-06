@@ -36,6 +36,18 @@ public abstract class AbstractMinigame : MonoBehaviour
 	[Tooltip("The layer Raycasts will hit")]
 	protected LayerMask _layer;
 
+	[SerializeField]
+	[Tooltip("The score for 1 star")]
+	protected int _firstStarScore;
+
+	[SerializeField]
+	[Tooltip("The score for 2 stars")]
+	protected int _secondStartScore;
+
+	[SerializeField]
+	[Tooltip("The score for 3 stars")]
+	protected int _thirdStarScore;
+
 	[HideInInspector]
 	private Camera _minigameCamera;
 
@@ -195,13 +207,27 @@ public abstract class AbstractMinigame : MonoBehaviour
 
 		try
 		{
-		MaingameManager.Instance.EndMinigame((int)_score);
+			MaingameManager.Instance.EndMinigame((int)_score, starCount());
 		}
 		catch(NullReferenceException)
 		{
 			Debug.LogError("No Maingamemanager was found!");
 		}
     }
+
+	private int starCount(){
+		if (_score >= _firstStarScore) {
+			if (_score >= _secondStartScore) {
+				if (_score >= _thirdStarScore) {
+					return 3;
+				}
+				return 2;
+			} 
+			return 1;
+		}
+
+		return 0;
+	}
 
 	protected virtual void DestroyDynamicObjects() { }
 
