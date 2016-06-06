@@ -432,6 +432,23 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 150530, guid: d2107f64a0d79ae4caaead43226f41e3, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427104, guid: d2107f64a0d79ae4caaead43226f41e3, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 674a8c315cff8784b99c6fbc22d37c02,
+        type: 3}
+    - target: {fileID: 22437658, guid: d2107f64a0d79ae4caaead43226f41e3, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.419599
+      objectReference: {fileID: 0}
+    - target: {fileID: 22437658, guid: d2107f64a0d79ae4caaead43226f41e3, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.42575967
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d2107f64a0d79ae4caaead43226f41e3, type: 2}
   m_IsPrefabParent: 0
@@ -473,10 +490,13 @@ MonoBehaviour:
   _scorePerUnit: 10
   _multiplierPerCombo: 0.1
   _startMuliplier: 1
-  _playTime: 15
+  _playTime: 20
   _layer:
     serializedVersion: 2
     m_Bits: 256
+  _firstStarScore: 120
+  _secondStartScore: 220
+  _thirdStarScore: 390
   _dropObjectPrefab: {fileID: 142688, guid: 342096ec4c5bc9a4dbd131aa295dfccc, type: 2}
   _minDropSpeed: 3
   _maxDropSpeed: 5
@@ -490,7 +510,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: 50
+      value: 75
       inSlope: -3.3338258
       outSlope: -3.3338258
       tangentMode: 0

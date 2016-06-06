@@ -248,7 +248,7 @@ Transform:
   m_LocalScale: {x: 3, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!1 &863218727
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,6 +506,23 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 150530, guid: d2107f64a0d79ae4caaead43226f41e3, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427104, guid: d2107f64a0d79ae4caaead43226f41e3, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fc3b6c9068406f542849dad6730439e0,
+        type: 3}
+    - target: {fileID: 22437658, guid: d2107f64a0d79ae4caaead43226f41e3, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.44488728
+      objectReference: {fileID: 0}
+    - target: {fileID: 22437658, guid: d2107f64a0d79ae4caaead43226f41e3, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.43707544
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d2107f64a0d79ae4caaead43226f41e3, type: 2}
   m_IsPrefabParent: 0
@@ -605,12 +622,15 @@ MonoBehaviour:
   _scorePerUnit: 10
   _multiplierPerCombo: 0.1
   _startMuliplier: 1
-  _playTime: 10
+  _playTime: 20
   _layer:
     serializedVersion: 2
     m_Bits: 256
-  minTime: 0.1
-  maxTime: 0.43
+  _firstStarScore: 150
+  _secondStartScore: 500
+  _thirdStarScore: 1000
+  minTime: 0.62
+  maxTime: 1.46
   objects:
   - {fileID: 102476, guid: 3750607d2cc1651458e054011737ff0a, type: 2}
   - {fileID: 102476, guid: f04ad2589e7b76344952143b2b1ebb7d, type: 2}

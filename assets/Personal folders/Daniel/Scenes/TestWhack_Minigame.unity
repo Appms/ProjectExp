@@ -173,6 +173,23 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11427104, guid: d2107f64a0d79ae4caaead43226f41e3, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a345b42718bb684f93d44a2ea1dce3b,
+        type: 3}
+    - target: {fileID: 150530, guid: d2107f64a0d79ae4caaead43226f41e3, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22437658, guid: d2107f64a0d79ae4caaead43226f41e3, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.43231013
+      objectReference: {fileID: 0}
+    - target: {fileID: 22437658, guid: d2107f64a0d79ae4caaead43226f41e3, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.42506546
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d2107f64a0d79ae4caaead43226f41e3, type: 2}
   m_IsPrefabParent: 0
@@ -891,18 +908,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9afa105e95721634f883b6cbdcea3db6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tutorialTime: 2
+  _tutorialTime: 4
   _endScreenTime: 4
   _scorePerUnit: 10
   _multiplierPerCombo: 0.1
   _startMuliplier: 1
-  _playTime: 15
+  _playTime: 20
   _layer:
     serializedVersion: 2
     m_Bits: 264
   _firstStarScore: 100
-  _secondStartScore: 200
-  _thirdStarScore: 300
+  _secondStartScore: 250
+  _thirdStarScore: 400
   _minTurnOffTime: 1
   _maxTurnOffTime: 3
   _minTurnOnTime: 2
