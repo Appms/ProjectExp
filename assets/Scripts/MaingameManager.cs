@@ -134,6 +134,7 @@ public class MaingameManager : MonoBehaviour
 					*/
 
 					_uploadedScore = true;
+					//Application.Quit();
 					//
 					//StartCoroutine(uploadScore());
 				}
@@ -148,11 +149,12 @@ public class MaingameManager : MonoBehaviour
 			}
 		} 
 
-		if (_endTime <= Time.time && !_uploadedScore)
+		if (_endTime <= Time.time/* && !_uploadedScore*/)
 		{
 			_uploadedScore = true;
 			//TODO StartCoroutine(uploadScore());
-			UnityEngine.SceneManagement.SceneManager.LoadScene("RocketScene");
+			UnityEngine.SceneManagement.SceneManager.LoadScene("CandyScene");
+			//Application.Quit();
 		}
 	}
 	
@@ -175,7 +177,6 @@ public class MaingameManager : MonoBehaviour
         _hud.SetActive(false);
         UnityEngine.SceneManagement.SceneManager.LoadScene(pName, UnityEngine.SceneManagement.LoadSceneMode.Additive);
         _currentMinigameName = pName;
-		Debug.Log (_currentMinigameName);
     }
 
     /// <summary>

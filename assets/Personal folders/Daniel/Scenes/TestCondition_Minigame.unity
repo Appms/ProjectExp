@@ -165,6 +165,23 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 150530, guid: d2107f64a0d79ae4caaead43226f41e3, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427104, guid: d2107f64a0d79ae4caaead43226f41e3, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c365f5e03d457a143b5958e53a572adb,
+        type: 3}
+    - target: {fileID: 22437658, guid: d2107f64a0d79ae4caaead43226f41e3, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.4243613
+      objectReference: {fileID: 0}
+    - target: {fileID: 22437658, guid: d2107f64a0d79ae4caaead43226f41e3, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.4448335
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d2107f64a0d79ae4caaead43226f41e3, type: 2}
   m_IsPrefabParent: 0
@@ -267,10 +284,13 @@ MonoBehaviour:
   _scorePerUnit: 10
   _multiplierPerCombo: 0.1
   _startMuliplier: 1
-  _playTime: 15
+  _playTime: 20
   _layer:
     serializedVersion: 2
     m_Bits: 256
+  _firstStarScore: 75
+  _secondStartScore: 200
+  _thirdStarScore: 300
   _conditionPrefab: {fileID: 110050, guid: 880e0f07328ccd746a1e6c5012997caf, type: 2}
 --- !u!124 &2110680216
 Behaviour:
