@@ -180,7 +180,7 @@ Prefab:
         type: 3}
     - target: {fileID: 150530, guid: d2107f64a0d79ae4caaead43226f41e3, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22437658, guid: d2107f64a0d79ae4caaead43226f41e3, type: 2}
       propertyPath: m_LocalScale.y

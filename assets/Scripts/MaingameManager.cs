@@ -153,8 +153,8 @@ public class MaingameManager : MonoBehaviour
 		{
 			_uploadedScore = true;
 			//TODO StartCoroutine(uploadScore());
-			//UnityEngine.SceneManagement.SceneManager.LoadScene("RocketScene");
-			Application.Quit();
+			UnityEngine.SceneManagement.SceneManager.LoadScene("CandyScene");
+			//Application.Quit();
 		}
 	}
 	
