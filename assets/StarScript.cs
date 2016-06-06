@@ -14,7 +14,6 @@ public class StarScript : MonoBehaviour {
 	}
 
 	public void StartMiniGame(string pName){
-		Debug.Log (pName);
 		MaingameManager.Instance.StartMinigame (pName, this);
 	}
 

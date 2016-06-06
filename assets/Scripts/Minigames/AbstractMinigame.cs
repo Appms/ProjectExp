@@ -84,6 +84,17 @@ public abstract class AbstractMinigame : MonoBehaviour
 		get { return _layer; }
 	}
 
+	public int GetStarScore(int pStarNo)
+	{
+		switch (pStarNo)
+		{
+			case 1: return _firstStarScore;
+			case 2: return _secondStartScore;
+			case 3: return _thirdStarScore;
+			default: return 0;
+		}
+	}
+
 	protected virtual void Start()
 	{
 		if (GetComponent<Camera>() == null)
@@ -107,7 +118,7 @@ public abstract class AbstractMinigame : MonoBehaviour
 	{
 		if (!_active && !_ended)
 		{
-			if (_endTime <= Time.time /*|| Input.GetMouseButtonDown(0)*/)
+			if (_endTime <= Time.time || Input.GetMouseButtonDown(0))
 			{
 				_hudManager.HideTutorial();
 				_endTime = Time.time + _playTime;
@@ -119,7 +130,7 @@ public abstract class AbstractMinigame : MonoBehaviour
 			if (_endTime <= Time.time)
 			{
 				EndCombo();
-				_hudManager.DisplayEndscreen(GetScore(false).ToString());
+				_hudManager.DisplayEndscreen(GetScore(false), _endScreenTime);
 				_endTime = Time.time + _endScreenTime;
 				_active = false;
 				_ended = true;
@@ -207,7 +218,7 @@ public abstract class AbstractMinigame : MonoBehaviour
 
 		try
 		{
-			MaingameManager.Instance.EndMinigame((int)_score, starCount());
+			MaingameManager.Instance.EndMinigame((int)_score, GetStarCount((int)_score));
 		}
 		catch(NullReferenceException)
 		{
@@ -215,10 +226,10 @@ public abstract class AbstractMinigame : MonoBehaviour
 		}
     }
 
-	private int starCount(){
-		if (_score >= _firstStarScore) {
-			if (_score >= _secondStartScore) {
-				if (_score >= _thirdStarScore) {
+	public int GetStarCount(int pScore){
+		if (pScore >= _firstStarScore) {
+			if (pScore >= _secondStartScore) {
+				if (pScore >= _thirdStarScore) {
 					return 3;
 				}
 				return 2;
