@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 447832}
   - 198: {fileID: 19803662}
   - 199: {fileID: 19982894}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GreenSparkleParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
