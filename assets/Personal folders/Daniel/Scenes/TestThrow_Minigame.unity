@@ -1059,7 +1059,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1283396344}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.95, y: -1.77, z: -0.029752254}
+  m_LocalPosition: {x: 8.05, y: -1.77, z: -0.029752254}
   m_LocalScale: {x: 0.5, y: 3, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1134,7 +1134,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1299207472}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.86, y: -2.5, z: 0}
+  m_LocalPosition: {x: 4.35, y: -2.5, z: 0}
   m_LocalScale: {x: 30, y: 0.2, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1213,6 +1213,7 @@ GameObject:
   - 114: {fileID: 1485595206}
   - 54: {fileID: 1485595205}
   - 95: {fileID: 1485595207}
+  - 120: {fileID: 1485595209}
   m_Layer: 8
   m_Name: TestBasket
   m_TagString: Untagged
@@ -1246,7 +1247,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be9ba69b8d88534ba4bddd910d58aac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxMouseDistance: 3.1
+  _maxMouseDistance: 5
+  Pos1: {x: 0, y: 0, z: 0}
+  Pos2: {x: 0, y: 0, z: 0}
 --- !u!95 &1485595207
 Animator:
   serializedVersion: 3
@@ -1276,6 +1279,45 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!120 &1485595209
+LineRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1485595204}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 366f24c2371fb8543a5f904de1cf67d5, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    startWidth: 0.5
+    endWidth: 0.5
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 4294967295
+  m_UseWorldSpace: 1
 --- !u!4 &1485595210
 Transform:
   m_ObjectHideFlags: 0
@@ -1283,7 +1325,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1485595204}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.852, y: -2.01, z: 0}
+  m_LocalPosition: {x: 0, y: -2.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2098227491}
@@ -1323,8 +1365,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d10948b1ac28ac4b9836264100b0262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lerpTime: 2.5
-  _targetPoint: {x: 7, y: -1.5, z: 0}
+  _lerpTime: 1
+  _targetPoint: {x: 16, y: -1.5, z: 0}
 --- !u!95 &1510763618
 Animator:
   serializedVersion: 3
@@ -1361,8 +1403,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1510763616}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.9, y: -1.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 14, y: -1.5, z: 0}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children:
   - {fileID: 349587818}
   - {fileID: 1262982001}
@@ -1736,16 +1778,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tutorialTime: 4
   _endScreenTime: 4
-  _scorePerUnit: 10
-  _multiplierPerCombo: 0.1
+  _scorePerUnit: 30
+  _multiplierPerCombo: 0.3
   _startMuliplier: 1
   _playTime: 20
   _layer:
     serializedVersion: 2
     m_Bits: 256
-  _firstStarScore: 10
-  _secondStartScore: 50
-  _thirdStarScore: 100
+  _firstStarScore: 30
+  _secondStartScore: 90
+  _thirdStarScore: 150
   _throwObjectPrefab: {fileID: 100444, guid: 1a0c6fb19e576d643812cb569d54bd25, type: 2}
 --- !u!124 &2110680216
 Behaviour:
@@ -1802,7 +1844,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2110680214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -8.68}
+  m_LocalPosition: {x: 8.37, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
