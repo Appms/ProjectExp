@@ -133,7 +133,7 @@ public class MaingameManager : MonoBehaviour
 					}
 					*/
 
-					_uploadedScore = true;
+					//_uploadedScore = true;
 					//Application.Quit();
 					//
 					//StartCoroutine(uploadScore());
@@ -147,14 +147,13 @@ public class MaingameManager : MonoBehaviour
 			{
 				//TODO Display Help Message
 			}
-		} 
+		}
 
-		if (_endTime <= Time.time/* && !_uploadedScore*/)
+		if (_endTime <= Time.time && _currentMinigameName == ""/* && !_uploadedScore*/)
 		{
 			_uploadedScore = true;
 			//TODO StartCoroutine(uploadScore());
 			UnityEngine.SceneManagement.SceneManager.LoadScene("CandyScene");
-			//Application.Quit();
 		}
 	}
 	

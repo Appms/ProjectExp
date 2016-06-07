@@ -42,7 +42,7 @@ public abstract class ConditionObject : MonoBehaviour
 	{
 		_manager = FindObjectOfType<ConditionMinigame>();
 
-		_state = Convert.ToBoolean(UnityEngine.Random.Range(0, 2));
+		_state = _manager.RequestState();
 
 		if (_state)
 		{
