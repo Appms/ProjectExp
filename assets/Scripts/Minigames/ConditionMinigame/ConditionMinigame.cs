@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 public class ConditionMinigame : AbstractMinigame
 {
@@ -65,6 +66,8 @@ public class ConditionMinigame : AbstractMinigame
 
 	public void newElement()
 	{
+		_tempStates.Clear();
+
 		if (_currentConditionPrefab != null)
 		{
 			_currentConditionPrefab.GetComponent<ConditionParent>().Despawn();
@@ -79,6 +82,27 @@ public class ConditionMinigame : AbstractMinigame
 	{
 		base.DestroyDynamicObjects();
 		GameObject.Destroy(_currentConditionPrefab);
+	}
+
+
+	private List<bool> _tempStates = new List<bool>();
+
+	public bool RequestState()
+	{
+		bool result;
+
+		if (_tempStates.Count > 0 && (_tempStates.All(x => x == false) || _tempStates.All(x => x == true)))
+		{
+			result = !_tempStates[0];
+		}
+		else
+		{
+			result = Convert.ToBoolean(UnityEngine.Random.Range(0, 2));
+		}
+
+		_tempStates.Add(result);
+
+		return result;
 	}
 
 	/*
