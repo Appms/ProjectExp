@@ -4,6 +4,7 @@ using System.Collections;
 
 public class ScoreAnimation : MonoBehaviour {
 
+	/*
     [SerializeField]
     private Color _normalColor;
 
@@ -22,23 +23,51 @@ public class ScoreAnimation : MonoBehaviour {
     private int _score;
 
     private int _originalFontSize;
-
-    private Text _scoreLabel;
-
+	*/
+	/*
     private float _acc;
 
     private AudioSource _audio;
+	*/
 
-    // Use this for initialization
-    void Start () {
+	[SerializeField]
+	private float _countUpTime = 2.5f;
+
+	private float _displayTime;
+	private int _displayScore;
+	private int _totalScore;
+
+	private Text _scoreLabel;
+	private bool _counting;
+
+	// Use this for initialization
+	void Start () {
         _scoreLabel = GetComponent<Text>();
-        _originalFontSize = _scoreLabel.fontSize;
+		//_originalFontSize = _scoreLabel.fontSize;
 
-        _audio = GetComponent<AudioSource>();
+		//TODO Change in scene
+		_countUpTime = 2.0f;
+
+        //_audio = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (_counting)
+		{
+			_displayTime += Time.deltaTime;
+			_displayScore = (int)(_totalScore * (_displayTime / _countUpTime));
+
+			if (_displayScore >= _totalScore)
+			{
+				_displayScore = _totalScore;
+				_counting = false;
+			}
+
+			_scoreLabel.text = _displayScore.ToString();
+		}
+
+		/*
 	    if(_scoreGame != _score && _animationDelta < 1)
         {
             _acc += Time.unscaledDeltaTime * 2;
@@ -59,10 +88,13 @@ public class ScoreAnimation : MonoBehaviour {
         {
             _acc = 0;
         }
-    }
+		*/
+	}
 
     public void UpdateScore(int newScore)
     {
-        _scoreGame = newScore;
+		_totalScore = newScore;
+		_displayTime = 0.0f;
+		_counting = true;
     }
 }
