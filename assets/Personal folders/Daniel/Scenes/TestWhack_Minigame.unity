@@ -910,8 +910,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tutorialTime: 4
   _endScreenTime: 4
-  _scorePerUnit: 10
-  _multiplierPerCombo: 0.1
+  _scorePerUnit: 23
+  _multiplierPerCombo: 0.01
   _startMuliplier: 1
   _playTime: 20
   _layer:
@@ -920,9 +920,9 @@ MonoBehaviour:
   _firstStarScore: 100
   _secondStartScore: 200
   _thirdStarScore: 300
-  _minTurnOffTime: 1
-  _maxTurnOffTime: 2.5
-  _minTurnOnTime: 2.5
+  _minTurnOffTime: 3.5
+  _maxTurnOffTime: 4
+  _minTurnOnTime: 3
   _maxTurnOnTime: 4
   _activeObjectAmount: 3
 --- !u!124 &2110680216

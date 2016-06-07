@@ -32,7 +32,7 @@ public class SortingGameDispenser : AbstractMinigame  {
 			//base must be first part in Start function
 			base.Start();
 			//
-
+			ParticleManager.InitParticles();
 			//setting the intveral calls Reset()
 			_timer.Interval = 1f;
 	}
