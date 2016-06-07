@@ -16,5 +16,11 @@ public class ParticleTestingScript : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.J)){
 			ParticleManager.CreateParticle(ParticleManager.Particles.PosFeedback, 2f, new Vector3(0,0,0));
 		}
+		if(Input.GetKeyDown(KeyCode.H)){
+			ParticleManager.CreateParticle(ParticleManager.Particles.GetPoints, 2f, new Vector3(0,0,0));
+		}
+		if(Input.GetKeyDown(KeyCode.I)){
+			ParticleManager.InitParticles();
+		}
 	}
 }

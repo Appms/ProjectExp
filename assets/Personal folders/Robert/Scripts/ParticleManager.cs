@@ -7,9 +7,9 @@ public class ParticleManager : MonoBehaviour {
 	public enum Particles {GetPoints, PosFeedback}
 
 
-	Dictionary<Particles, string> particleDic = new Dictionary<Particles, string>();
+	static Dictionary<Particles, string> particleDic = new Dictionary<Particles, string>();
 
-	void Start(){
+	static public void InitParticles(){
 		particleDic.Add(Particles.GetPoints, "Particles/GetPointsParticle");
 		particleDic.Add(Particles.PosFeedback, "Particles/GreenSparkleParticle");
 	}
