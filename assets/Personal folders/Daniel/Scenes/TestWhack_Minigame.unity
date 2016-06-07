@@ -918,13 +918,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 264
   _firstStarScore: 100
-  _secondStartScore: 250
-  _thirdStarScore: 400
+  _secondStartScore: 200
+  _thirdStarScore: 300
   _minTurnOffTime: 1
-  _maxTurnOffTime: 3
-  _minTurnOnTime: 2
-  _maxTurnOnTime: 4.5
-  _activeObjectAmount: 4
+  _maxTurnOffTime: 2.5
+  _minTurnOnTime: 2.5
+  _maxTurnOnTime: 4
+  _activeObjectAmount: 3
 --- !u!124 &2110680216
 Behaviour:
   m_ObjectHideFlags: 0
