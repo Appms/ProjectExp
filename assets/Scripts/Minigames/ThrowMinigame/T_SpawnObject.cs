@@ -5,25 +5,27 @@ public class T_SpawnObject : MonoBehaviour
 {
 	[SerializeField]
 	private float _maxMouseDistance;
-
+	[SerializeField]
+	protected float _throwingPower = 4f;
+	[SerializeField]
+	protected Vector3 _spawnOffset;
+	
 	protected ThrowMinigame _manager;
 	protected T_ThrowObject _grabbedObject;
+	protected Vector3 projectileVector;
 	private Vector3 _oldMousePos;
 	private Vector3 _currentVelocity;
 	private Vector3 worldMousePos;
-	private Vector3 projectileVector;
-	private Vector3 _spawnOffset;
 	private LineRenderer _lineRenderer;
 
 	//Control tuneVariables
-	private float _throwingPower = 3f; 
+	
 	//private float _lerpMod = 4; //how fast the old velocity lerp toward the new velocity
 
 	protected virtual void Spawn() { }
 
 	protected virtual void Start()
 	{
-		_spawnOffset = new Vector3(0,1,0);
 		_manager = FindObjectOfType<ThrowMinigame>();
 		_oldMousePos = _manager.MinigameCamera.ScreenToWorldPoint(Input.mousePosition + new Vector3(0.0f, 0.0f, Mathf.Abs((transform.position - _manager.transform.position).z)));
 		_lineRenderer = GetComponent<LineRenderer>();
@@ -70,11 +72,12 @@ public class T_SpawnObject : MonoBehaviour
 
 			if (_grabbedObject != null)
 			{
-				_grabbedObject.transform.position = this.transform.position + _spawnOffset;//projectileVector;
+				_grabbedObject.transform.position = (this.transform.position + _spawnOffset); //+ projectileVector;//projectileVector;
 				_lineRenderer.SetPosition(1, (this.transform.position + _spawnOffset) + projectileVector);
 				//_currentVelocity = Vector3.Lerp(_currentVelocity, (worldMousePos - _oldMousePos) * (_throwingPower/Time.deltaTime), Time.deltaTime*4);
 				//_grabbedObject.GetComponent<Rigidbody>().velocity = _currentVelocity;
 
+				OnHold();
 
 				if (Vector3.Distance(_grabbedObject.transform.position, transform.position) >= _maxMouseDistance)
 				{
@@ -108,8 +111,12 @@ public class T_SpawnObject : MonoBehaviour
 		_grabbedObject = null;
 		
 	}
+	protected virtual void OnHold(){
+
+	}
 	protected virtual void OnRelease(){
-		_currentVelocity = Vector3.Lerp(_currentVelocity, (worldMousePos - _oldMousePos) * (_throwingPower/Time.deltaTime), Time.deltaTime*4);
-		_grabbedObject.GetComponent<Rigidbody>().velocity = projectileVector * _throwingPower;
+		//_currentVelocity = Vector3.Lerp(_currentVelocity, (worldMousePos - _oldMousePos) * (_throwingPower/Time.deltaTime), Time.deltaTime*4);
+
+		_grabbedObject.GetComponent<Rigidbody>().velocity = -projectileVector * _throwingPower;
 	}
 }

@@ -10,9 +10,13 @@ public class SortingGameDispenser : AbstractMinigame  {
 	public float minTime;
 	[Range(0.1f,5f)]
 	public float maxTime;
+	[Range(0.0f,5f)]
+	public float fallingDrag;
 
 	List<DispenserObject> dispenserObjects = new List<DispenserObject>();
 
+	[SerializeField]
+	float distanceThreshold;
 	[SerializeField]
 	GameObject[] objects;
 	[SerializeField]
@@ -26,6 +30,7 @@ public class SortingGameDispenser : AbstractMinigame  {
 
 	Vector3 worldMousePos;
 	DispenserObject currentObject;
+	private bool _holding = false;
 
 	// Use this for initialization
 	override protected void Start () {
@@ -47,39 +52,26 @@ public class SortingGameDispenser : AbstractMinigame  {
 			//Debug.Log("GO!");
 			SpawnRandomItem();
 			float rndNumber = Random.Range(minTime, maxTime);
-			Debug.Log(rndNumber);
 			_timer.Interval = rndNumber;
 		}
 		if(Input.GetMouseButtonDown(0)){
 			currentObject = GetClosestObject();
+			if(currentObject != null){
 			currentObject.GetComponent<Rigidbody>().useGravity = false;
+			}
 		}
 
 		HandleGrabbedObject();
 
 
-		if(Input.GetMouseButtonUp(0)){
+		if(Input.GetMouseButtonUp(0) && currentObject != null){
 			if(dispenserObjects.Count != 0){
-			if(worldMousePos.x < leftDeadZone){
-				//Do stuff if mouse is on the left side
-					Rigidbody rb = currentObject.transform.GetComponent<Rigidbody>();
-					rb.drag = 0f;
-					rb.useGravity = true;
-					rb.AddForce(new Vector3(0,-500,0));
-					//rb.AddForce(new Vector3(-600+Mathf.Clamp(dispenserObjects[0].transform.position.y*100f,0f,250f),100-dispenserObjects[0].transform.position.y*10f,0));
-				}else if(worldMousePos.x > rightDeadZone){
-				//Do stuff if mouse is on the right side	
-					Rigidbody rb = currentObject.transform.GetComponent<Rigidbody>();
-					rb.drag = 0f;
-					rb.useGravity = true;
-					rb.AddForce(new Vector3(0,-500,0));
-					//rb.AddForce(new Vector3(600-Mathf.Clamp(dispenserObjects[0].transform.position.y*100f,0f,250f),100-dispenserObjects[0].transform.position.y*10f,0));
-				}else{
-					Rigidbody rb = currentObject.transform.GetComponent<Rigidbody>();
-					rb.drag = 0f;
-					rb.useGravity = true;
-					rb.AddForce(new Vector3(0,-500,0));
-				}
+			
+				Rigidbody rb = currentObject.transform.GetComponent<Rigidbody>();
+				rb.drag = 0f;
+				rb.useGravity = true;
+				rb.AddForce(new Vector3(0,-500,0));
+				
 				ReleaseGrabbedObject();
 			}
 		}
@@ -108,13 +100,16 @@ public class SortingGameDispenser : AbstractMinigame  {
 	}
 	private DispenserObject GetClosestObject(){
 		DispenserObject closestObjectSoFar = null;
+		float closestDistance = 100f;
 		foreach(DispenserObject o in dispenserObjects){
-			if(closestObjectSoFar == null){
-				closestObjectSoFar = o;
-			}else if(Vector3.Distance(o.transform.position, worldMousePos) < Vector3.Distance(closestObjectSoFar.transform.position, worldMousePos)){
-				closestObjectSoFar = o;
+		float newDistance = (Vector3.Distance(o.transform.position, worldMousePos));
+
+			if(newDistance < closestDistance && newDistance < distanceThreshold){
+					closestObjectSoFar = o;
+					closestDistance = newDistance;
 			}
 		}
+		
 		return closestObjectSoFar;
 	}
 
@@ -131,7 +126,7 @@ public class SortingGameDispenser : AbstractMinigame  {
 			GameObject gO = (GameObject)Instantiate(objects[0], spawnPosition.position, Quaternion.identity);
 			dispenserObjects.Add(gO.GetComponent<DispenserObject>());
 			Rigidbody rb = gO.GetComponent<Rigidbody>();
-			rb.drag = 5f;
+			rb.drag = fallingDrag;
 			gO.GetComponent<DispenserObject>().list = dispenserObjects;
 			gO.GetComponent<DispenserObject>().deadZone = lowerDeadZone;
 		}
@@ -140,7 +135,7 @@ public class SortingGameDispenser : AbstractMinigame  {
 			GameObject gO = (GameObject)Instantiate(objects[1], spawnPosition.position, Quaternion.identity);
 			dispenserObjects.Add(gO.GetComponent<DispenserObject>());
 			Rigidbody rb = gO.GetComponent<Rigidbody>();
-			rb.drag = 5f;
+			rb.drag = fallingDrag;
 			gO.GetComponent<DispenserObject>().list = dispenserObjects;
 			gO.GetComponent<DispenserObject>().deadZone = lowerDeadZone;
 		}
@@ -149,7 +144,7 @@ public class SortingGameDispenser : AbstractMinigame  {
 			GameObject gO = (GameObject)Instantiate(objects[2], spawnPosition.position, Quaternion.identity);
 			dispenserObjects.Add(gO.GetComponent<DispenserObject>());
 			Rigidbody rb = gO.GetComponent<Rigidbody>();
-			rb.drag = 5f;
+			rb.drag = fallingDrag;
 			gO.GetComponent<DispenserObject>().list = dispenserObjects;
 			gO.GetComponent<DispenserObject>().deadZone = lowerDeadZone;
 		}
