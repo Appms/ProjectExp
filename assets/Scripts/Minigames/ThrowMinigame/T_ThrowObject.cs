@@ -25,6 +25,7 @@ public abstract class T_ThrowObject : MonoBehaviour
 			_manager.AddCombo();
 			pOther.GetComponent<T_CatchObject>().Dump();
 			GameObject.Destroy(this.gameObject);
+			ParticleManager.CreateParticle(ParticleManager.Particles.PosFeedback,2f,this.transform.position);
 		}
 	}
 

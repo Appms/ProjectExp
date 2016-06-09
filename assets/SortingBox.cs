@@ -14,6 +14,7 @@ public class SortingBox : MonoBehaviour {
 			if(dObject.index == this.index){
 				//AddScore
 				_manager.AddCombo();
+				ParticleManager.CreateParticle(ParticleManager.Particles.PosFeedback,2f,this.transform.position);
 			}else{
 				//AbortCombo
 				_manager.EndCombo();
