@@ -4045,7 +4045,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &349681462
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8787,7 +8787,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 4
           m_FloatArgument: 0
-          m_StringArgument: TestWhack_Minigame
+          m_StringArgument: Wackamole
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -9811,30 +9811,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d2664ca4ac72c14b96bfd5493548067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _normalColor: {r: 1, g: 0.83921576, b: 0.45882356, a: 1}
-  _animationColor: {r: 1, g: 1, b: 1, a: 1}
-  _animationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0.99166864
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 0.584473
-      value: 1.2686757
-      inSlope: 0.632697
-      outSlope: 0.632697
-      tangentMode: 0
-    - time: 1.0033358
-      value: 1.0021759
-      inSlope: 0.8535765
-      outSlope: 0.8535765
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  _animationSpeed: 10
+  _countUpTime: 2.5
 --- !u!114 &680234636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14826,7 +14803,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 4
           m_FloatArgument: 0
-          m_StringArgument: TestCatch_Minigame
+          m_StringArgument: Dishwasher
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -15943,7 +15920,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 3
           m_FloatArgument: 0
-          m_StringArgument: TestThrow_Minigame
+          m_StringArgument: ClothingThrowing
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,

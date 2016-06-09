@@ -131,7 +131,7 @@ public class SortingGameDispenser : AbstractMinigame  {
 			GameObject gO = (GameObject)Instantiate(objects[0], spawnPosition.position, Quaternion.identity);
 			dispenserObjects.Add(gO.GetComponent<DispenserObject>());
 			Rigidbody rb = gO.GetComponent<Rigidbody>();
-			rb.drag = 5f;
+			rb.drag = 1f;
 			gO.GetComponent<DispenserObject>().list = dispenserObjects;
 			gO.GetComponent<DispenserObject>().deadZone = lowerDeadZone;
 		}
@@ -140,7 +140,7 @@ public class SortingGameDispenser : AbstractMinigame  {
 			GameObject gO = (GameObject)Instantiate(objects[1], spawnPosition.position, Quaternion.identity);
 			dispenserObjects.Add(gO.GetComponent<DispenserObject>());
 			Rigidbody rb = gO.GetComponent<Rigidbody>();
-			rb.drag = 5f;
+			rb.drag = 1f;
 			gO.GetComponent<DispenserObject>().list = dispenserObjects;
 			gO.GetComponent<DispenserObject>().deadZone = lowerDeadZone;
 		}
@@ -149,7 +149,7 @@ public class SortingGameDispenser : AbstractMinigame  {
 			GameObject gO = (GameObject)Instantiate(objects[2], spawnPosition.position, Quaternion.identity);
 			dispenserObjects.Add(gO.GetComponent<DispenserObject>());
 			Rigidbody rb = gO.GetComponent<Rigidbody>();
-			rb.drag = 5f;
+			rb.drag = 1f;
 			gO.GetComponent<DispenserObject>().list = dispenserObjects;
 			gO.GetComponent<DispenserObject>().deadZone = lowerDeadZone;
 		}
