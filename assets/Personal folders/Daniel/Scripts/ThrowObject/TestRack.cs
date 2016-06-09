@@ -7,22 +7,20 @@ public class TestRack : T_CatchObject
 	private float _lerpTime;
 
 	[SerializeField]
-	private Vector3 _targetPoint;
+	private Vector3 Pos1;
+	[SerializeField]
+	private Vector3 Pos2;
 
-	private Vector3 _startPosition;
-
-	private float _currentLerpTime;
-
-	private bool _reachedEnd;
+	private Vector3 _originPos;
 
 	private void Start()
 	{
-		_startPosition = transform.localPosition;
+		_originPos = transform.position;
 	}
 
 	private void Update()
 	{
-		_currentLerpTime += Time.deltaTime;
+		/*_currentLerpTime += Time.deltaTime;
 
 		if (_currentLerpTime > _lerpTime)
 		{
@@ -40,12 +38,19 @@ public class TestRack : T_CatchObject
 			_targetPoint = temp;
 			_currentLerpTime = 0.0f;
 			_reachedEnd = false;
-		}
+		}*/
 	}
 
 	public override void Dump()
 	{
 		base.Dump();
 		GetComponent<Animator>().SetTrigger("SpawnObject");
+		ResetPos();
+	}
+	private void ResetPos(){
+		Debug.Log("ResetSpawn");
+		this.transform.position = new Vector3(	_originPos.x + Random.Range(Pos1.x, Pos2.x), 
+												_originPos.y + Random.Range(Pos1.y, Pos2.y), 
+												_originPos.z + Random.Range(Pos1.z, Pos2.z));
 	}
 }
