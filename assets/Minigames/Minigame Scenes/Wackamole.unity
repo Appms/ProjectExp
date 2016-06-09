@@ -252,7 +252,7 @@ Transform:
   m_Children:
   - {fileID: 810279323}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!1001 &74974347
 Prefab:
   m_ObjectHideFlags: 0
@@ -470,11 +470,11 @@ MonoBehaviour:
   _firstStarScore: 100
   _secondStartScore: 200
   _thirdStarScore: 300
-  _minTurnOffTime: 3.5
-  _maxTurnOffTime: 4
-  _minTurnOnTime: 3
-  _maxTurnOnTime: 4
-  _activeObjectAmount: 3
+  _minTurnOffTime: 3
+  _maxTurnOffTime: 3.5
+  _minTurnOnTime: 2.8
+  _maxTurnOnTime: 4.2
+  _activeObjectAmount: 4
 --- !u!1001 &145947309
 Prefab:
   m_ObjectHideFlags: 0
@@ -1724,6 +1724,10 @@ Prefab:
     - target: {fileID: 2003358, guid: 45803e452bd41ea48b7494108ceeb9ce, type: 2}
       propertyPath: m_CullingMask.m_Bits
       value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195720, guid: 45803e452bd41ea48b7494108ceeb9ce, type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 45803e452bd41ea48b7494108ceeb9ce, type: 2}
@@ -3006,8 +3010,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 17.9, y: 22.2}
-  m_SizeDelta: {x: 146.6, y: 55.7}
+  m_AnchoredPosition: {x: 34.6, y: 22.2}
+  m_SizeDelta: {x: 179.9, y: 55.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2076475340
 MonoBehaviour:
