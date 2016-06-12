@@ -55,6 +55,7 @@ public class MaingameManager : MonoBehaviour
 	//Safety bool to only upload score once
 	private bool _uploadedScore = false;
 
+	private StarScript _starScript;
 
     /// <summary>
     /// Return the current instance of the Maingame Manager
@@ -125,12 +126,15 @@ public class MaingameManager : MonoBehaviour
 			{
 				if (timeWithoutInput >= _timeToExit && !_uploadedScore)
 				{
+					/*
 					if (_currentMinigameName != "")
 					{
 						FindObjectOfType<AbstractMinigame>().EndMinigame();
 					}
+					*/
 
-					_uploadedScore = true;
+					//_uploadedScore = true;
+					//Application.Quit();
 					//
 					//StartCoroutine(uploadScore());
 				}
@@ -143,13 +147,13 @@ public class MaingameManager : MonoBehaviour
 			{
 				//TODO Display Help Message
 			}
-		} 
+		}
 
-		if (_endTime <= Time.time && !_uploadedScore)
+		if (_endTime <= Time.time && _currentMinigameName == ""/* && !_uploadedScore*/)
 		{
 			_uploadedScore = true;
 			//TODO StartCoroutine(uploadScore());
-			UnityEngine.SceneManagement.SceneManager.LoadScene("RocketScene");
+			UnityEngine.SceneManagement.SceneManager.LoadScene("CandyScene");
 		}
 	}
 	
@@ -165,8 +169,9 @@ public class MaingameManager : MonoBehaviour
     /// Starts a Minigame
     /// </summary>
     /// <param name="pName">The name of the minigame scene</param>
-    public void StartMinigame(string pName)
+	public void StartMinigame(string pName, StarScript pStarScript)
     {
+		_starScript = pStarScript;
         _camera.enabled = false;
         _hud.SetActive(false);
         UnityEngine.SceneManagement.SceneManager.LoadScene(pName, UnityEngine.SceneManagement.LoadSceneMode.Additive);
@@ -177,13 +182,16 @@ public class MaingameManager : MonoBehaviour
     /// Ends the current Minigame
     /// </summary>
     /// <param name="pScore">The score from the Minigame</param>
-    public void EndMinigame(int pScore)
+	public void EndMinigame(int pScore, int pStarCount)
     {
         _camera.enabled = true;
         _hud.SetActive(true);
         UnityEngine.SceneManagement.SceneManager.UnloadScene(_currentMinigameName);
         _currentMinigameName = "";
         _score += pScore;
+
+		_starScript.DisplayStars (pStarCount);
+		_starScript = null;
 
         _minigames[Mathf.Clamp(++_minigameUnlock, 0, _minigames.Length - 1)].interactable = true;
         FindObjectOfType<ScoreAnimation>().UpdateScore(_score);

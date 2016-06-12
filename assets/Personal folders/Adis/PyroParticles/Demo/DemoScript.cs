@@ -60,7 +60,7 @@ namespace DigitalRuby.PyroParticles
             }
             else if (Input.GetKeyDown(KeyCode.R))
             {
-                Application.LoadLevel(Application.loadedLevel);
+				UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
             }
             else if (Input.GetKeyDown(KeyCode.O))
             {

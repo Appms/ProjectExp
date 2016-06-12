@@ -36,6 +36,18 @@ public abstract class AbstractMinigame : MonoBehaviour
 	[Tooltip("The layer Raycasts will hit")]
 	protected LayerMask _layer;
 
+	[SerializeField]
+	[Tooltip("The score for 1 star")]
+	protected int _firstStarScore;
+
+	[SerializeField]
+	[Tooltip("The score for 2 stars")]
+	protected int _secondStartScore;
+
+	[SerializeField]
+	[Tooltip("The score for 3 stars")]
+	protected int _thirdStarScore;
+
 	[HideInInspector]
 	private Camera _minigameCamera;
 
@@ -72,6 +84,17 @@ public abstract class AbstractMinigame : MonoBehaviour
 		get { return _layer; }
 	}
 
+	public int GetStarScore(int pStarNo)
+	{
+		switch (pStarNo)
+		{
+			case 1: return _firstStarScore;
+			case 2: return _secondStartScore;
+			case 3: return _thirdStarScore;
+			default: return 0;
+		}
+	}
+
 	protected virtual void Start()
 	{
 		if (GetComponent<Camera>() == null)
@@ -97,7 +120,6 @@ public abstract class AbstractMinigame : MonoBehaviour
 		{
 			if (_endTime <= Time.time || Input.GetMouseButtonDown(0))
 			{
-				Debug.Log("Hide Tut");
 				_hudManager.HideTutorial();
 				_endTime = Time.time + _playTime;
 				_active = true;
@@ -107,19 +129,17 @@ public abstract class AbstractMinigame : MonoBehaviour
 		{
 			if (_endTime <= Time.time)
 			{
-				Debug.Log("Show endscreen");
-				_hudManager.DisplayEndscreen();
+				EndCombo();
+				_hudManager.DisplayEndscreen(GetScore(false), _endScreenTime);
 				_endTime = Time.time + _endScreenTime;
 				_active = false;
 				_ended = true;
-				EndCombo();
 			}
 		}
 		else if (!_active && _ended)
 		{
-			if (_endTime <= Time.time || Input.GetMouseButtonDown(0))
+			if (_endTime <= Time.time /*|| Input.GetMouseButtonDown(0)*/)
 			{
-				Debug.Log("End minigame");
 				EndMinigame();
 			}
 		}
@@ -198,13 +218,27 @@ public abstract class AbstractMinigame : MonoBehaviour
 
 		try
 		{
-			MaingameManager.Instance.EndMinigame((int)_score);
+			MaingameManager.Instance.EndMinigame((int)_score, GetStarCount((int)_score));
 		}
 		catch(NullReferenceException)
 		{
 			Debug.LogError("No Maingamemanager was found!");
 		}
     }
+
+	public int GetStarCount(int pScore){
+		if (pScore >= _firstStarScore) {
+			if (pScore >= _secondStartScore) {
+				if (pScore >= _thirdStarScore) {
+					return 3;
+				}
+				return 2;
+			} 
+			return 1;
+		}
+
+		return 0;
+	}
 
 	protected virtual void DestroyDynamicObjects() { }
 
