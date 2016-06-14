@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class MetricsManager
 {
+	public static float MetricScore  = 0.5f;
+
 	public class AvarageManager
 	{
 		private List<float> _values = new List<float>();

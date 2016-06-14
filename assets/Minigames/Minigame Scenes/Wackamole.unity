@@ -470,11 +470,48 @@ MonoBehaviour:
   _firstStarScore: 100
   _secondStartScore: 200
   _thirdStarScore: 300
-  _minTurnOffTime: 3
-  _maxTurnOffTime: 3.5
+  _minTurnOffTime:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 2
+      inSlope: -2.5
+      outSlope: -1.7
+      tangentMode: 21
+    - time: 1
+      value: 0.3
+      inSlope: -1.7
+      outSlope: -2.5
+      tangentMode: 21
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  _maxTurnOffTimeDelta:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 2
+      inSlope: -1.7
+      outSlope: -1.7
+      tangentMode: 10
+    - time: 1
+      value: 0.3
+      inSlope: -1.7
+      outSlope: -1.7
+      tangentMode: 10
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
   _minTurnOnTime: 2.8
   _maxTurnOnTime: 4.2
-  _activeObjectAmount: 4
+  _activeObjectAmount: 5
+  _minFirstTurnOnTime: 0.5
+  _maxFirstTurnOnTime: 0.75
+  _metricScoreIncrements: 0.05
+  _missedCountThreshold: 1
+  _rightCountThreshold: 2
+  _wrongCountThreshold: 2
+  _metricScore: 0
 --- !u!1001 &145947309
 Prefab:
   m_ObjectHideFlags: 0
@@ -1728,6 +1765,10 @@ Prefab:
     - target: {fileID: 8195720, guid: 45803e452bd41ea48b7494108ceeb9ce, type: 2}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11431878, guid: 45803e452bd41ea48b7494108ceeb9ce, type: 2}
+      propertyPath: frequency
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 45803e452bd41ea48b7494108ceeb9ce, type: 2}
