@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿ using UnityEngine;
 using System.Collections;
 
 public abstract class ConditionParent : MonoBehaviour
 {
 	protected bool _animationPlaying;
+	protected ConditionMinigame _manager;
 
 	public bool AnimationPlaying
 	{
@@ -17,7 +18,7 @@ public abstract class ConditionParent : MonoBehaviour
 
 	protected virtual void Start()
 	{
-		
+		_manager = FindObjectOfType<ConditionMinigame>();
 	}
 
 	protected virtual void Update()

@@ -23,9 +23,25 @@ public class WhackMinigame : AbstractMinigame
 	[Tooltip("The amount of objects that can turn on at the same time")]
 	private int _activeObjectAmount = 4;
 
+	[SerializeField]
+	[Tooltip("The minimum time until the first lightbulbs turn on")]
+	private float _minFirstTurnOnTime = 0.5f;
+
+	[SerializeField]
+	[Tooltip("The maximum time until the first lightbulbs turn on")]
+	private float _maxFirstTurnOnTime = 0.75f;
+
 	//A list of all whack objects
 	private List<WhackObject> _whackObjects = new List<WhackObject>();
 
+	private bool _justStarted;
+
+	//For changing difficulty
+	private MetricsManager.AvarageManager _timeToHit = new MetricsManager.AvarageManager();
+	private MetricsManager.AvarageManager _timeLeft = new MetricsManager.AvarageManager();
+	private MetricsManager.CounterManager _missedCount = new MetricsManager.CounterManager();
+	private MetricsManager.CounterManager _wrongCount = new MetricsManager.CounterManager();
+	private float _metricScore;
 
 	protected override void Start()
 	{
@@ -37,10 +53,14 @@ public class WhackMinigame : AbstractMinigame
 		{
 			Debug.LogError("You have no WhackObjects in your Scene!");
 		}
+
+		_justStarted = true;
 	}
 
 	protected override void Update()
 	{
+		Debug.Log(_timeLeft.Avarage);
+
 		if (_active)
 		{
 			//Determine wich object is ready for a state change
@@ -51,6 +71,7 @@ public class WhackMinigame : AbstractMinigame
 					if (obj.State)
 					{
 						obj.SwitchTime = Mathf.Infinity;
+						_missedCount.Add();
 						EndCombo();
 					}
 					else if (!obj.State)
@@ -60,12 +81,10 @@ public class WhackMinigame : AbstractMinigame
 
 					obj.SwitchState();
 				}
-
-				//Gametime check
-				base.Update();
 			}
 
 			int counter = 0;
+			bool temp = false;
 
 			while (GetTurningOnObjectCount() < _activeObjectAmount)
 			{
@@ -86,10 +105,23 @@ public class WhackMinigame : AbstractMinigame
 					}
 				}
 
-				_whackObjects[index].SwitchTime = Random.Range(_minTurnOnTime, _maxTurnOnTime) + Time.time;
+				if (_justStarted)
+				{
+					_whackObjects[index].SwitchTime = Random.Range(_minFirstTurnOnTime, _maxFirstTurnOnTime) + Time.time;
+					temp = true;
+				}
+				else
+				{
+					_whackObjects[index].SwitchTime = Random.Range(_minTurnOnTime, _maxTurnOnTime) + Time.time;
+				}
 
 				if (counter >= 100)
 					break;
+			}
+
+			if (temp)
+			{
+				_justStarted = false;
 			}
 
 
@@ -104,17 +136,19 @@ public class WhackMinigame : AbstractMinigame
 				{
 					WhackObject obj = hit.collider.GetComponent<WhackObject>();
 
-					obj.SwitchTime = Mathf.Infinity;
-
 					if (obj.State)
 					{
+						_timeLeft.AddValue(obj.LeftTime);
+						_timeToHit.AddValue(obj.HitTime);
 						AddCombo();
 					}
 					else
 					{
+						_wrongCount.Add();
 						EndCombo();
 					}
 
+					obj.SwitchTime = Mathf.Infinity;
 					obj.Interact();
 				}
 			}

@@ -7,6 +7,8 @@ public abstract class WhackObject : MonoBehaviour
 
 	private float _switchTime = Mathf.Infinity;
 
+	private float _initialTime = 0.0f;
+
 	public void SwitchState()
 	{
 		if (_state)
@@ -29,7 +31,27 @@ public abstract class WhackObject : MonoBehaviour
 	public float SwitchTime
 	{
 		get { return _switchTime; }
-		set { _switchTime = value; }
+		set
+		{
+			_switchTime = value;
+			_initialTime = value - Time.time;
+		}
+	}
+
+	public float HitTime
+	{
+		get
+		{
+			return _initialTime - (_switchTime - Time.time);
+		}
+	}
+
+	public float LeftTime
+	{
+		get
+		{
+			return _switchTime - Time.time;
+		}
 	}
 
 	public void Interact()
