@@ -56,6 +56,8 @@ public class CatchMinigame : AbstractMinigame
 	[SerializeField]
 	GameObject helpArrow;
 
+	public GameObject dropper;
+
 	private float _nextSpawnTime;
 	private List<GameObject> _dropObjects;
 	private bool _usesDumpObject;
@@ -79,6 +81,7 @@ public class CatchMinigame : AbstractMinigame
 		}
 
 		helpArrow.SetActive (false);
+		dropper.SetActive (false);
 	}
 
 	protected override void Update()
