@@ -511,7 +511,6 @@ MonoBehaviour:
   _missedCountThreshold: 1
   _rightCountThreshold: 2
   _wrongCountThreshold: 2
-  _metricScore: 0
 --- !u!1001 &145947309
 Prefab:
   m_ObjectHideFlags: 0
