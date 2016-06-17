@@ -34,6 +34,7 @@ public class TestDropObject : C_DropObject
 
 	public override void Dump()
 	{
+		_manager.dropper.SetActive (true);
 		_manager.DestroyObject(this.gameObject);
 	}
 }

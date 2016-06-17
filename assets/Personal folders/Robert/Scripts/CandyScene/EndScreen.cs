@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class EndScreen : MonoBehaviour {
@@ -33,7 +33,7 @@ public class EndScreen : MonoBehaviour {
 		}
 		if(_youWon && timer <= Time.time)
 		{
-			Debug.Log("lol");
+			Debug.Log("Quitting");
 			Application.Quit();
 		}
 	}
