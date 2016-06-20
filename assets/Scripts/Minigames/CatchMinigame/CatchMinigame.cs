@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
+using System.Collections;
 
 public class CatchMinigame : AbstractMinigame
 {
@@ -44,9 +45,23 @@ public class CatchMinigame : AbstractMinigame
 	[Tooltip("Determines the CatchObjectSpeed that is required for a DropObject to drop")]
 	private AnimationCurve _plateFallThreshold = new AnimationCurve(new Keyframe(0, 50), new Keyframe(40, 0));
 
+	[SerializeField]
+	[Tooltip("Amount of plates catched that triggers arrow to show up")]
+	int maxPlateCount;
+
+	[SerializeField]
+	[Tooltip("Duration of arrow showing up")]
+	float time;
+
+	[SerializeField]
+	GameObject helpArrow;
+
+	public GameObject dropper;
+
 	private float _nextSpawnTime;
 	private List<GameObject> _dropObjects;
 	private bool _usesDumpObject;
+	public int plateCount;
 
 	protected override void Start()
 	{
@@ -64,6 +79,9 @@ public class CatchMinigame : AbstractMinigame
 		{
 			Debug.LogError("There is no CatchObject in your scene!");
 		}
+
+		helpArrow.SetActive (false);
+		dropper.SetActive (false);
 	}
 
 	protected override void Update()
@@ -77,6 +95,10 @@ public class CatchMinigame : AbstractMinigame
 				obj.GetComponent<C_DropObject>().SetValues(this, UnityEngine.Random.Range(_minDropSpeed, _maxDropSpeed), _objectLifetime);
 				_dropObjects.Add(obj);
 			}
+		}
+
+		if(plateCount == maxPlateCount){
+			StartCoroutine (ShowArrow(time));
 		}
 
 		base.Update();
@@ -102,11 +124,19 @@ public class CatchMinigame : AbstractMinigame
 			GameObject.Destroy(go);
 		}
 
+		GameObject.Destroy (helpArrow);
+
 		_dropObjects.Clear();
 	}
 
 	public bool EvaluateDrop(int pDropObjectCount, float pCatchObjectSpeed)
 	{
 		return _plateFallThreshold.Evaluate(pDropObjectCount) < pCatchObjectSpeed && pDropObjectCount > 0;
+	}
+
+	IEnumerator ShowArrow(float seconds){
+		helpArrow.SetActive (true);
+		yield return new WaitForSeconds (seconds);
+		helpArrow.SetActive (false);
 	}
 }

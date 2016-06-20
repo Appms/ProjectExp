@@ -36,6 +36,8 @@ public abstract class C_CatchObject : MonoBehaviour
 
 			transform.position = Vector2.Lerp(transform.position, _manager.MinigameCamera.ScreenToWorldPoint(Input.mousePosition + new Vector3(0.0f, 0.0f, Mathf.Abs((transform.position - _manager.transform.position).z))), _followSpeed);
 		}
+
+		_manager.plateCount = _catchedObjects.Count;
 	}
 
 	protected virtual void LateUpdate()
