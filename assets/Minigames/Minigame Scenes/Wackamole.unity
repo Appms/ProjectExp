@@ -440,7 +440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shadowType: 3
-  levels: 39.8
+  levels: 100
   angle: 135
   frequency: 100
   size: 0
@@ -530,7 +530,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 122692698}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0923359e9e352a4b9b11c7b7161ad67, type: 3}
   m_Name: 
@@ -610,7 +610,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 122692698}
   m_LocalRotation: {x: 0.100941174, y: 0.81921625, z: -0.1627291, w: 0.54056907}
-  m_LocalPosition: {x: 3.316, y: -0.441, z: 11.186}
+  m_LocalPosition: {x: 3.318, y: -0.441, z: 11.185}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -659,9 +659,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   focusObject: {fileID: 546738464}
   focalDistance: 10
-  focalSize: 0.152
-  aperture: 0.668
-  maxBlurSize: 0.5
+  focalSize: 0.548
+  aperture: 0.5
 --- !u!1 &127750252 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 72ee21687a015d54d8e2269c04e015f1, type: 3}
@@ -2996,6 +2995,10 @@ Prefab:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 117970, guid: a1c70c2653493ff4c970d57340256c98, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a1c70c2653493ff4c970d57340256c98, type: 2}
   m_IsPrefabParent: 0
@@ -3240,6 +3243,10 @@ Prefab:
     - target: {fileID: 400000, guid: a53cecddfed50834e862d2f9a486263b, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.99999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: a53cecddfed50834e862d2f9a486263b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a53cecddfed50834e862d2f9a486263b, type: 3}

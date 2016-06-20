@@ -14,8 +14,8 @@ namespace UnityStandardAssets.ImageEffects
         public float focalSize = 0.05f;
         [Range(0, 1)]
         public float aperture = 0.5f;
-        [Range(0.1f, 2)]
-        public float maxBlurSize = 0.5f;
+        //[Range(0.1f, 2)]
+        //public float maxBlurSize = 0.5f;
 
         private float internalBlurWidth = 1.0f;
 
@@ -54,7 +54,7 @@ namespace UnityStandardAssets.ImageEffects
                 );
         }
 
-        float FocalDistance01(float worldDist)
+        float CalculateDepth(float worldDist)
         {
             return camera.WorldToViewportPoint((worldDist - camera.nearClipPlane) * camera.transform.forward + camera.transform.position).z / (camera.farClipPlane - camera.nearClipPlane);
         }
@@ -62,19 +62,11 @@ namespace UnityStandardAssets.ImageEffects
         // Called by the camera to apply the image effect
         void OnRenderImage(RenderTexture source, RenderTexture destination)
         {
-            if(focusObject != null)
-            {
-                Vector3 cameraToObject = focusObject.transform.position - camera.transform.position;
-                float angleToObject = Vector3.Angle(cameraToObject, camera.transform.forward);
+            material.SetFloat("_FocusDepth", (focusObject != null) ? CalculateDepth(Vector3.Distance(focusObject.transform.position, camera.transform.position)) : CalculateDepth(focalDistance));
+            material.SetFloat("_FocalSize", focalSize);
+            material.SetFloat("_Aperture", 1.0f / (1.0f - aperture) - 1.0f);
 
-                float objectDepth = Mathf.Clamp01(Mathf.Cos(Mathf.Deg2Rad * angleToObject) * cameraToObject.magnitude / camera.farClipPlane);
-
-                Debug.Log(objectDepth);
-
-                material.SetFloat("_FocusDepth", objectDepth);
-            }
-
-            else material.SetFloat("_FocusDepth", 0);
+            material.SetFloat("_FocalSize", focalSize);
 
             int rtW = source.width;
             int rtH = source.height;
@@ -94,42 +86,6 @@ namespace UnityStandardAssets.ImageEffects
             Graphics.Blit(buffer, destination);
 
             RenderTexture.ReleaseTemporary(buffer);
-
-            /*internalBlurWidth = Mathf.Max(maxBlurSize, 0.0f);
-
-            // focal & coc calculations
-
-            float focalDistance01 = (focusObject) ? (Camera.main.WorldToViewportPoint (focusObject.position)).z / (Camera.main.farClipPlane) : FocalDistance01 (focalDistance);
-            material.SetVector("_CurveParams", new Vector4(1.0f, focalSize, (1.0f / (1.0f - aperture) - 1.0f), focalDistance01));
-
-            // possible render texture helpers
-
-            RenderTexture rtLow = null;
-            RenderTexture rtLow2 = null;
-
-            source.filterMode = FilterMode.Bilinear;
-
-            source.MarkRestoreExpected(); // only touching alpha channel, RT restore expected
-            Graphics.Blit(source, source, material, 0);
-
-            rtLow = RenderTexture.GetTemporary (source.width >> 1, source.height >> 1, 0, source.format);
-            rtLow2 = RenderTexture.GetTemporary (source.width >> 1, source.height >> 1, 0, source.format);
-
-            material.SetVector ("_Offsets", new Vector4 (0.0f, internalBlurWidth, 0.1f, internalBlurWidth));
-
-            // blur
-            Graphics.Blit (source, rtLow, material, 6);
-            Graphics.Blit (rtLow, rtLow2, material, 17);
-
-            // cheaper blur in high resolution, upsample and combine
-            material.SetTexture("_LowRez", rtLow2);
-            material.SetTexture("_FgOverlap", null);
-            material.SetVector ("_Offsets",  Vector4.one * ((1.0f*source.width)/(1.0f*rtLow2.width)) * internalBlurWidth);
-            Graphics.Blit (source, destination, material, 18);
-
-            if (rtLow) RenderTexture.ReleaseTemporary(rtLow);
-            if (rtLow2) RenderTexture.ReleaseTemporary(rtLow2);*/
-            
         }
     }
 }
