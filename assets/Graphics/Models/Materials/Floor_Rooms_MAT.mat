@@ -168,7 +168,7 @@ Material:
       data:
         first:
           name: _Levels
-        second: 39.8
+        second: 100
       data:
         first:
           name: _Frequency
