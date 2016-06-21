@@ -14,6 +14,11 @@ public abstract class ConditionObject : MonoBehaviour
 
 	protected ConditionMinigame _manager;
 
+	public bool Changeable
+	{
+		get { return _changeable; } 
+	}
+
 	public bool State
 	{
 		get { return _state; }
