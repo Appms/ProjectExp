@@ -5,10 +5,10 @@ using System;
 public class TestConditionRadiator : ConditionObject
 {
 	[SerializeField]
-	private Color _onColor;
+	private float _onSaturation;
 
 	[SerializeField]
-	private Color _offColor;
+	private float _offSaturation;
 
 	protected override void InitTrue()
 	{
@@ -16,7 +16,7 @@ public class TestConditionRadiator : ConditionObject
 
 		foreach (Renderer r in GetComponentsInChildren<Renderer>())
 		{
-			r.material.SetColor("_Color", _onColor);
+			r.material.SetFloat("_S", _onSaturation);
 		}
 	}
 
@@ -26,7 +26,7 @@ public class TestConditionRadiator : ConditionObject
 
 		foreach (Renderer r in GetComponentsInChildren<Renderer>())
 		{
-			r.material.SetColor("_Color", _offColor);
+			r.material.SetFloat("_S", _offSaturation);
 		}
 	}
 
@@ -38,7 +38,7 @@ public class TestConditionRadiator : ConditionObject
 
 		foreach (Renderer r in GetComponentsInChildren<Renderer>())
 		{
-			r.material.SetColor("_Color", _offColor);
+			r.material.SetFloat("_S", _offSaturation);
 		}
 	}
 
@@ -50,7 +50,7 @@ public class TestConditionRadiator : ConditionObject
 
 		foreach (Renderer r in GetComponentsInChildren<Renderer>())
 		{
-			r.material.SetColor("_Color", _onColor);
+			r.material.SetFloat("_S", _onSaturation);
 		}
 	}
 }

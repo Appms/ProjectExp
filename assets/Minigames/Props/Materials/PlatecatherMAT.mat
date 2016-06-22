@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Radiatoroff
+  m_Name: PlatecatherMAT
   m_Shader: {fileID: 4800000, guid: 64c8bd7c265dd244cadd482f47b494ad, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -112,15 +112,15 @@ Material:
       data:
         first:
           name: _H
-        second: 0
+        second: -0.332
       data:
         first:
           name: _S
-        second: 0.042
+        second: 1
       data:
         first:
           name: _B
-        second: 0
+        second: -0.556
       data:
         first:
           name: _Parallax
@@ -132,7 +132,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: 0.5
+        second: 0.982
       data:
         first:
           name: _BumpScale
@@ -156,13 +156,13 @@ Material:
       data:
         first:
           name: _Metallic
-        second: 0
+        second: 0.299
     m_Colors:
       data:
         first:
           name: _EmissionColor
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: 0, g: 0, b: 0, a: 1}
       data:
         first:
           name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: 0.22783303, g: 0.39435035, b: 0.7205882, a: 1}

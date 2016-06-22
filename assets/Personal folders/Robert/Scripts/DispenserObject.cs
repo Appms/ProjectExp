@@ -13,6 +13,7 @@ public class DispenserObject : MonoBehaviour {
 	public int index;
 
 	void Update () {
+		this.transform.rotation =  Quaternion.Euler(0,90,0);
 		if(this.transform.position.y < -2 && !_outOfGame){
 			//Object removes itself from the list
 			list.Remove(this);
