@@ -17,6 +17,8 @@ public class T_SpawnObject : MonoBehaviour
 	private Vector3 _currentVelocity;
 	private Vector3 worldMousePos;
 	private LineRenderer _lineRenderer;
+	//[SerializeField]
+	//Transform debugWorldPos;
 
 	//Control tuneVariables
 	
@@ -29,14 +31,18 @@ public class T_SpawnObject : MonoBehaviour
 		_manager = FindObjectOfType<ThrowMinigame>();
 		_oldMousePos = _manager.MinigameCamera.ScreenToWorldPoint(Input.mousePosition + new Vector3(0.0f, 0.0f, Mathf.Abs((transform.position - _manager.transform.position).z)));
 		_lineRenderer = GetComponent<LineRenderer>();
+		_lineRenderer.enabled = false;
 	}
 
 	protected virtual void Update()
 	{
 		if (_manager.GetActive())
 		{
-			worldMousePos = _manager.MinigameCamera.ScreenToWorldPoint(Input.mousePosition + new Vector3(0.0f, 0.0f, Mathf.Abs((transform.position - _manager.transform.position).z)));
-			
+			Debug.Log(Mathf.Abs((transform.position - _manager.transform.position).z));
+			worldMousePos = _manager.MinigameCamera.ScreenToWorldPoint(Input.mousePosition + new Vector3(0,
+																										 0, 
+																										 Mathf.Abs((transform.position - _manager.transform.position).z)));
+			//debugWorldPos.position = worldMousePos;
 			projectileVector = worldMousePos - (this.transform.position + _spawnOffset);
 			float distance = Vector3.Distance(worldMousePos, this.transform.position + _spawnOffset);
 			distance = Mathf.Clamp(distance, 0, _maxMouseDistance);
@@ -72,7 +78,7 @@ public class T_SpawnObject : MonoBehaviour
 
 			if (_grabbedObject != null)
 			{
-				_grabbedObject.transform.position = (this.transform.position + _spawnOffset); //+ projectileVector;//projectileVector;
+				_grabbedObject.transform.position = (this.transform.position + _spawnOffset) + projectileVector; //+ projectileVector;//projectileVector;
 				_lineRenderer.SetPosition(1, (this.transform.position + _spawnOffset) + projectileVector);
 				//_currentVelocity = Vector3.Lerp(_currentVelocity, (worldMousePos - _oldMousePos) * (_throwingPower/Time.deltaTime), Time.deltaTime*4);
 				//_grabbedObject.GetComponent<Rigidbody>().velocity = _currentVelocity;
@@ -109,14 +115,14 @@ public class T_SpawnObject : MonoBehaviour
 		OnRelease();
 		_grabbedObject.GetComponent<Rigidbody>().useGravity = true;
 		_grabbedObject = null;
+		_lineRenderer.enabled = false;
 		
 	}
 	protected virtual void OnHold(){
-
+		_lineRenderer.enabled = true;
 	}
 	protected virtual void OnRelease(){
 		//_currentVelocity = Vector3.Lerp(_currentVelocity, (worldMousePos - _oldMousePos) * (_throwingPower/Time.deltaTime), Time.deltaTime*4);
-
 		_grabbedObject.GetComponent<Rigidbody>().velocity = -projectileVector * _throwingPower;
 	}
 }

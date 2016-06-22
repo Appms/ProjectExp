@@ -47,6 +47,24 @@ public class ComicShadows : MonoBehaviour {
                 material = new Material(Shader.Find("Hidden/ToonShading"));
                 break;
         }
+
+        Object[] renderers = GameObject.FindObjectsOfType(typeof(Renderer));
+        int i_max = renderers.Length;
+        for (int i = 0; i < i_max; i++)
+        {
+            Material[] materials = ((Renderer)renderers[i]).sharedMaterials;
+            int j_max = materials.Length;
+            for (int j = 0; j < j_max; j++)
+            {
+                string s = materials[j].shader.name;
+
+                if (s == "Custom/AlphaShadows")
+                {
+                    materials[j].SetFloat("_Levels", levels);
+                }
+            }
+        }
+
     }
 
     void OnValidate()
@@ -72,12 +90,29 @@ public class ComicShadows : MonoBehaviour {
                 material = new Material(Shader.Find("Hidden/ToonShading"));
                 break;
         }
+
+        Object[] renderers = GameObject.FindObjectsOfType(typeof(Renderer));
+        int i_max = renderers.Length;
+        for (int i = 0; i < i_max; i++)
+        {
+            Material[] materials = ((Renderer)renderers[i]).sharedMaterials;
+            int j_max = materials.Length;
+            for (int j = 0; j < j_max; j++)
+            {
+                string s = materials[j].shader.name;
+
+                if (s == "Custom/AlphaShadows")
+                {
+                    materials[j].SetFloat("_Levels", levels);
+                }
+            }
+        }
+
     }
 
     [ImageEffectOpaque]
     void OnRenderImage (RenderTexture source, RenderTexture destination)
     {
-        material.SetFloat("_levels", levels);
         material.SetFloat("_angle", angle);
         material.SetFloat("_frequency", frequency);
         material.SetFloat("_size", size);

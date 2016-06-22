@@ -33,10 +33,12 @@ public class TestBasket : T_SpawnObject
 	protected override void OnRelease(){
 		base.OnRelease();
 		ResetSpawn();
+		DisableTrajectoryPoints();
 	}
 
 	protected override void OnHold(){
-		setTrajectoryPoints(this.transform.position + _spawnOffset, -projectileVector * _throwingPower);
+		base.OnHold();
+		setTrajectoryPoints(_grabbedObject.transform.position, -projectileVector * _throwingPower);
 	}
 
 	private void setTrajectoryPoints(Vector3 pStartPosition , Vector3 pVelocity )
@@ -49,14 +51,18 @@ public class TestBasket : T_SpawnObject
 		{
 			float dx = velocity * fTime * Mathf.Cos(angle * Mathf.Deg2Rad);
 			float dy = velocity * fTime * Mathf.Sin(angle * Mathf.Deg2Rad) - (Physics2D.gravity.magnitude * fTime * fTime / 2.0f);
-			Vector3 pos = new Vector3(pStartPosition.x + dx , pStartPosition.y + dy ,0);
+			Vector3 pos = new Vector3(pStartPosition.x + dx , pStartPosition.y + dy , pStartPosition.z);
 			trajectoryPoints[i].transform.position = pos;
 			trajectoryPoints[i].GetComponent<Renderer>().enabled = true;
 			trajectoryPoints[i].transform.eulerAngles = new Vector3(0,0,Mathf.Atan2(pVelocity.y - (Physics.gravity.magnitude)*fTime,pVelocity.x)*Mathf.Rad2Deg);
 			fTime += trajectoryPointSpacing;
 		}
 	}
-
+	private void DisableTrajectoryPoints(){
+		foreach(Transform t in trajectoryPoints){
+			t.GetComponent<Renderer>().enabled = false;
+		}
+	}
 	private void ResetSpawn(){
 		//Debug.Log("ResetSpawn");
 		//this.transform.position = new Vector3(	_originPos.x + Random.Range(Pos1.x, Pos2.x), 

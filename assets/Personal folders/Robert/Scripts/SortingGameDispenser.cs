@@ -10,7 +10,7 @@ public class SortingGameDispenser : AbstractMinigame  {
 	public float minTime;
 	[Range(0.1f,5f)]
 	public float maxTime;
-	[Range(0.0f,5f)]
+	[Range(0.0f,20f)]
 	public float fallingDrag;
 
 	List<DispenserObject> dispenserObjects = new List<DispenserObject>();
@@ -21,6 +21,8 @@ public class SortingGameDispenser : AbstractMinigame  {
 	GameObject[] objects;
 	[SerializeField]
 	Transform spawnPosition;
+	[SerializeField]
+	Transform debugCube;
 
 	//Control Variables
 	//point where you cant control dispensed Objects anymore
@@ -46,7 +48,8 @@ public class SortingGameDispenser : AbstractMinigame  {
 	override protected void Update () {
 		if(GetActive()){
 		
-		worldMousePos = MinigameCamera.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, 0f, 10f));
+		worldMousePos = MinigameCamera.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, 0f, 3f));
+		debugCube.transform.position = worldMousePos;
 		//Debug.Log(_timer.GetTime());
 		if(!_timer.Run()){
 			//Debug.Log("GO!");
