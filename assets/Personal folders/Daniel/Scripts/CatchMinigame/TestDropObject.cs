@@ -29,7 +29,7 @@ public class TestDropObject : C_DropObject
 	public override void Drop()
 	{
 		base.Drop();
-		GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+		//GetComponent<Renderer>().material.SetColor("_Color", Color.red);
 	}
 
 	public override void Dump()

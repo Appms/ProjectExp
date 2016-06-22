@@ -139,4 +139,8 @@ public class CatchMinigame : AbstractMinigame
 		yield return new WaitForSeconds (seconds);
 		helpArrow.SetActive (false);
 	}
+
+	private void OnDrawGizmos() {
+		Gizmos.DrawLine(_minDropPosition, _maxDropPosition);
+	}
 }

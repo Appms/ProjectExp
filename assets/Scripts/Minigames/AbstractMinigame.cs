@@ -147,7 +147,7 @@ public abstract class AbstractMinigame : MonoBehaviour
 
 	protected virtual void OnGUI()
 	{
-		_hudManager.UpdateValues(Mathf.Round(_endTime - Time.time).ToString(), GetScore(false).ToString(), GetComboScore(false).ToString() + " x " + GetMultiplier() + " = " + GetComboScore(true).ToString());
+		_hudManager.UpdateValues(Mathf.Round(_endTime - Time.time).ToString(), GetScore(false).ToString()," x " + GetMultiplier(), GetComboScore(true).ToString());
 	}
 
 
