@@ -51,12 +51,12 @@
 				float2 nearest = 2.0*frac(st2) - 1.0;
 				float dist = length(nearest);
 
-				_levels = floor(_levels);
-				float scaleFactor = 1 / _levels;
-				float toonShadow = floor(c.w*_levels)*scaleFactor;
-				float radius = sqrt(1.0 - toonShadow);
+				//_levels = floor(_levels);
+				//float scaleFactor = 1 / _levels;
+				//float toonShadow = floor(c.w*_levels)*scaleFactor;
+				float radius = sqrt(1.0 - c.w);
 
-				float shadowIntensity = lerp(aastep(pow(radius, 10 - _size) , dist), 1, toonShadow);
+				float shadowIntensity = lerp(aastep(pow(radius, 10 - _size) , dist), 1, c.w);
 
 				return lerp(lerp(c, _shadowColor, _shadowColor.w), c, shadowIntensity);
 			}
