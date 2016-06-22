@@ -65,7 +65,7 @@
 
 				float shadowIntensity = lerp(aastep(0.5, X + Y), 1, toonShadow);
 
-				return lerp(lerp(_shadowColor, _shadowColor, shadowIntensity), c, shadowIntensity);
+				return lerp(lerp(c, _shadowColor, _shadowColor.w), c, shadowIntensity);
 			}
 			ENDCG
 		}

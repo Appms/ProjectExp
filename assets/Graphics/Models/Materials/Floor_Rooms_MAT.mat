@@ -147,10 +147,6 @@ Material:
         second: 0
       data:
         first:
-          name: _Reflectivity
-        second: 0.402
-      data:
-        first:
           name: _H
         second: 0
       data:
@@ -161,6 +157,14 @@ Material:
         first:
           name: _B
         second: 0
+      data:
+        first:
+          name: _NormalIntensity
+        second: 1
+      data:
+        first:
+          name: _Reflectivity
+        second: 0.402
       data:
         first:
           name: _SoftShadows
@@ -181,10 +185,6 @@ Material:
         first:
           name: _Size
         second: 10
-      data:
-        first:
-          name: _NormalIntensity
-        second: 1
     m_Colors:
       data:
         first:
