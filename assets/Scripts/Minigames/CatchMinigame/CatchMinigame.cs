@@ -97,7 +97,7 @@ public class CatchMinigame : AbstractMinigame
 			}
 		}
 
-		if(plateCount == maxPlateCount){
+		if(plateCount == maxPlateCount || plateCount == (maxPlateCount * 2)){
 			StartCoroutine (ShowArrow(time));
 		}
 
@@ -138,5 +138,9 @@ public class CatchMinigame : AbstractMinigame
 		helpArrow.SetActive (true);
 		yield return new WaitForSeconds (seconds);
 		helpArrow.SetActive (false);
+	}
+
+	private void OnDrawGizmos() {
+		Gizmos.DrawLine(_minDropPosition, _maxDropPosition);
 	}
 }
