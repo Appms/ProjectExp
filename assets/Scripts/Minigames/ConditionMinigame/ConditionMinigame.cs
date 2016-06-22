@@ -15,6 +15,11 @@ public class ConditionMinigame : AbstractMinigame
 	private float _feedbackEndTime;
 	private bool _evaluated;
 
+	public List<ConditionObject> CurrentConditionObjects
+	{
+		get { return _currentConditionObjects; }
+	}
+
 	protected override void Start()
 	{
 		base.Start();
@@ -42,6 +47,8 @@ public class ConditionMinigame : AbstractMinigame
 	public void Evaluate()
 	{
 		bool result = _currentConditionObjects.ToArray().All(x => x.State == true) || _currentConditionObjects.ToArray().All(x => x.State == false);
+
+		
 
 		if (result)
 		{
@@ -83,7 +90,6 @@ public class ConditionMinigame : AbstractMinigame
 		base.DestroyDynamicObjects();
 		GameObject.Destroy(_currentConditionPrefab);
 	}
-
 
 	private List<bool> _tempStates = new List<bool>();
 

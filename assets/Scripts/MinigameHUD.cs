@@ -51,7 +51,7 @@ public class MinigameHUD : MonoBehaviour
 
 	public void UpdateValues(string pTime, string pScore, string pCombo)
 	{
-		_timeText.text = pTime;
+		_timeText.text = pTime + "    M: " + MetricsManager.MetricScore;
 		_scoreText.text = pScore;
 		_comboText.text = pCombo;
 	}

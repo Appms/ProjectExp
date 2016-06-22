@@ -62,7 +62,7 @@ public class StoryTeller : MonoBehaviour {
 		if(_startTelling && Input.GetMouseButtonDown(0)){
 			if(!NextPosition()){
 				if(!NextPage()){
-					Debug.Log("End");
+					UnityEngine.SceneManagement.SceneManager.LoadScene("HouseScene");
 				}
 			}
 		}

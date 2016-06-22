@@ -33,8 +33,10 @@ public abstract class C_DropObject : MonoBehaviour
 		}
 	}
 
-	public void SetValues(CatchMinigame pManager, float pSpeed, float pLifetime)
+	public void SetValues(CatchMinigame pManager, float pSpeed, float pLifetime, bool pDropped = false)
 	{
+		_droped = pDropped;
+
 		_manager = pManager;
 		_speed = pSpeed;
 
@@ -62,6 +64,6 @@ public abstract class C_DropObject : MonoBehaviour
 
 	public virtual void Dump()
 	{
-
+		
 	}
 }
