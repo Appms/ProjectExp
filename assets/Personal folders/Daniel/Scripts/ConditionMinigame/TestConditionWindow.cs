@@ -25,12 +25,12 @@ public class TestConditionWindow : ConditionObject
 
 	protected override void InitTrue()
 	{
-		transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
+		transform.localPosition = _closedPosition;
 	}
 
 	protected override void InitFalse()
 	{
-		transform.localPosition = new Vector3(0.0f, 0.75f, 0.0f);
+		transform.localPosition = _openPosition;
 	}
 
 	protected override void TurnTrue()

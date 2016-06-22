@@ -93,14 +93,7 @@
 
 			float4 frag(v2f_img i) : COLOR
 			{
-				float radAngle = radians(_angle);
-				float2x2 rotationMatrix = { cos(radAngle), -sin(radAngle),
-											sin(radAngle), cos(radAngle) };
-
-				float2 rotatedUVs = mul(rotationMatrix, i.uv / float2(1, _ScreenParams.x/_ScreenParams.y));
-
-				float2 nearest = 2.0*frac(_frequency * rotatedUVs) - 1.0;
-				float dist = length(nearest);
+				float2 aspectRatio = (_ScreenParams.x < _ScreenParams.y) ? float2(1, _ScreenParams.y / _ScreenParams.x) : float2(_ScreenParams.x / _ScreenParams.y, 1);
 
 				float3 texColor = texture2D_bilinear(_MainTex, i.uv).rgb;
 				float radius = sqrt(1.0 - texColor.g);
@@ -125,32 +118,29 @@
 				float2x2 rotC = { 0.966, -0.259, 0.259, 0.966 };
 				float2x2 rotM = { 0.966, 0.259, -0.259, 0.966 };
 
-				float2 Kst = mul(mul(_frequency, rotK), i.uv / float2(1, _ScreenParams.x / _ScreenParams.y));
+				float2 Kst = mul(mul(_frequency, rotK), i.uv * aspectRatio);
 				float2 Kuv = 2.0*frac(Kst) - 1.0;
 				float k = aastep(0.0, sqrt(cmyk.w) - length(Kuv) + n);
 
-				float2 Cst = mul(mul(_frequency, rotC), i.uv / float2(1, _ScreenParams.x / _ScreenParams.y));
+				float2 Cst = mul(mul(_frequency, rotC), i.uv * aspectRatio);
 				float2 Cuv = 2.0*frac(Cst) - 1.0;
 				float c = aastep(0.0, sqrt(cmyk.x) - length(Cuv) + n);
 
-				float2 Mst = mul(mul(_frequency, rotM), i.uv / float2(1, _ScreenParams.x / _ScreenParams.y));
+				float2 Mst = mul(mul(_frequency, rotM), i.uv * aspectRatio);
 				float2 Muv = 2.0*frac(Mst) - 1.0;
 				float m = aastep(0.0, sqrt(cmyk.y) - length(Muv) + n);
 
-				float2 Yst = _frequency*i.uv / float2(1, _ScreenParams.x / _ScreenParams.y); // 0 deg
+				float2 Yst = _frequency * i.uv * aspectRatio;
 				float2 Yuv = 2.0*frac(Yst) - 1.0;
 				float y = aastep(0.0, sqrt(cmyk.z) - length(Yuv) + n);
 
 				float3 rgbscreen = 1.0 - 0.9*float3(c, m, y) + n;
 				rgbscreen = lerp(rgbscreen, black, 0.85*k + 0.3*n);
 
-				float afwidth = 2 * _frequency * max(length(ddx(i.uv / float2(1, _ScreenParams.x / _ScreenParams.y))), length(ddy(i.uv / float2(1, _ScreenParams.x / _ScreenParams.y))));
+				float afwidth = 2 * _frequency * max(length(ddx(i.uv * aspectRatio)), length(ddy(i.uv * aspectRatio)));
 				float blend = smoothstep(0.7, 1.4, afwidth);
 
 				return float4(lerp(rgbscreen, texColor, blend), 1.0);
-
-				//return aastep(radius, dist);
-				//return float4(rotatedUVs, 0.0, 1.0);
 			}
 			ENDCG
 		}
