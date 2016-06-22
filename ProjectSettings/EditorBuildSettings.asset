@@ -8,28 +8,18 @@ EditorBuildSettings:
   - enabled: 1
     path: assets/Personal folders/Robert/Scenes/Beginning.unity
   - enabled: 1
-    path: assets/Scenes/HouseScene.unity
-  - enabled: 1
-    path: assets/Personal folders/Daniel/Scenes/TestCatch_Minigame.unity
-  - enabled: 1
-    path: assets/Personal folders/Daniel/Scenes/TestCondition_Minigame.unity
-  - enabled: 1
-    path: assets/Personal folders/Daniel/Scenes/TestThrow_Minigame.unity
-  - enabled: 1
-    path: assets/Personal folders/Daniel/Scenes/TestWhack_Minigame.unity
-  - enabled: 1
-    path: assets/Personal folders/Robert/Scenes/Sorting_Minigame_Scene.unity
-  - enabled: 1
-    path: assets/Personal folders/Adis/SolarGameAdisScene.unity
-  - enabled: 1
     path: assets/Scenes/CandyScene.unity
   - enabled: 1
-    path: assets/Minigames/Minigame Scenes/Wackamole.unity
+    path: "assets/Minigames/Minigame Scenes/Andr\xE9s Scenes/WackamoleAndr\xE9s.unity"
   - enabled: 1
-    path: assets/Minigames/Minigame Scenes/Dishwasher Danny.unity
+    path: "assets/Minigames/Minigame Scenes/Andr\xE9s Scenes/ClothingThrowingAndr\xE9s.unity"
   - enabled: 1
-    path: assets/Minigames/Minigame Scenes/ClothingThrowing.unity
+    path: "assets/Minigames/Minigame Scenes/Andr\xE9s Scenes/ConditionAndr\xE9s.unity"
   - enabled: 1
-    path: assets/backup Scenes/ClothingThrowing 1.unity
+    path: "assets/Minigames/Minigame Scenes/Andr\xE9s Scenes/DishwasherAndr\xE9s.unity"
   - enabled: 1
-    path: assets/backup Scenes/Dishwasher 1.unity
+    path: "assets/Minigames/Minigame Scenes/Andr\xE9s Scenes/Solar Panel Andr\xE9s.unity"
+  - enabled: 1
+    path: "assets/Minigames/Minigame Scenes/Andr\xE9s Scenes/WashThrowingAndr\xE9s.unity"
+  - enabled: 1
+    path: "assets/Minigames/Minigame Scenes/Andr\xE9s Scenes/HouseSceneAndr\xE9s.unity"
