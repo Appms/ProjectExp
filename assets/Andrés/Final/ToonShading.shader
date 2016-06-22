@@ -43,11 +43,7 @@
 			{
 				float4 c = tex2D(_MainTex, i.uv);
 
-				_levels = floor(_levels);
-				float scaleFactor = 1 / _levels;
-				float toonShadow = floor(c.w*_levels)*scaleFactor;
-
-				return lerp(lerp(_shadowColor, _shadowColor, toonShadow), c, toonShadow);
+				return lerp(lerp(c, _shadowColor, _shadowColor.w), c, c.w);
 			}
 			ENDCG
 		}

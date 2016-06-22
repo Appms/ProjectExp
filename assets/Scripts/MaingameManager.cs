@@ -9,6 +9,10 @@ public class MaingameManager : MonoBehaviour
     private Camera _camera;
 
     [SerializeField]
+    [Tooltip("Main House Scene lights.")]
+    private GameObject _lights;
+
+    [SerializeField]
     [Tooltip("Main House Scene HUD.")]
     private GameObject _hud;
 
@@ -172,9 +176,10 @@ public class MaingameManager : MonoBehaviour
 	public void StartMinigame(string pName, StarScript pStarScript)
     {
 		_starScript = pStarScript;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(pName, UnityEngine.SceneManagement.LoadSceneMode.Additive);
         _camera.enabled = false;
         _hud.SetActive(false);
-        UnityEngine.SceneManagement.SceneManager.LoadScene(pName, UnityEngine.SceneManagement.LoadSceneMode.Additive);
+        _lights.SetActive(false);
         _currentMinigameName = pName;
     }
 
@@ -184,9 +189,10 @@ public class MaingameManager : MonoBehaviour
     /// <param name="pScore">The score from the Minigame</param>
 	public void EndMinigame(int pScore, int pStarCount)
     {
+        UnityEngine.SceneManagement.SceneManager.UnloadScene(_currentMinigameName);
         _camera.enabled = true;
         _hud.SetActive(true);
-        UnityEngine.SceneManagement.SceneManager.UnloadScene(_currentMinigameName);
+        _lights.SetActive(true);
         _currentMinigameName = "";
         _score += pScore;
 

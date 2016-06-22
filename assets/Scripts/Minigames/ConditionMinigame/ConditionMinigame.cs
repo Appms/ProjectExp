@@ -14,6 +14,15 @@ public class ConditionMinigame : AbstractMinigame
 	private List<ConditionObject> _currentConditionObjects;
 	private float _feedbackEndTime;
 	private bool _evaluated;
+	private bool blurBool;
+
+	private Vector3 _startValues = new Vector3(0,0,0);
+	private Vector3 _endValues = new Vector3(3, 4, 1);
+
+	[SerializeField]
+	private float _fadeLerpTime = 0.5f;
+	private float _currentLerpTime;
+
 
 	public List<ConditionObject> CurrentConditionObjects
 	{
@@ -23,6 +32,7 @@ public class ConditionMinigame : AbstractMinigame
 	protected override void Start()
 	{
 		base.Start();
+		_currentLerpTime = 0.0f;
 		newElement();
 	}
 
@@ -32,12 +42,53 @@ public class ConditionMinigame : AbstractMinigame
 		{
 			if (_evaluated && objectAnimationsFinished())
 			{
-				newElement();
-
-				if (parentAnimationsFinished())
+				_currentLerpTime += Time.deltaTime;
+				if (_currentLerpTime > _fadeLerpTime)
 				{
-					_evaluated = false;
+					_currentLerpTime = _fadeLerpTime;
+
+					if (blurBool)
+					{
+						newElement();
+						blurBool = false;
+						_currentLerpTime = 0.0f;
+					}
+					else
+					{
+						FindObjectOfType<UnityStandardAssets.ImageEffects.BlurEffect>().enabled = false;
+						_evaluated = false;
+						//_currentLerpTime = 0.0f;
+					}
 				}
+
+				float perc = _currentLerpTime / _fadeLerpTime;
+				//transform.localPosition = Vector3.Lerp(_startValues, _endValues, perc);
+
+				Vector3 temp;
+
+				if (blurBool)
+				{
+					temp = Vector3.Lerp(_startValues, _endValues, perc);
+				}
+				else
+				{
+					temp = Vector3.Lerp(_endValues, _startValues, perc);
+				}
+
+				FindObjectOfType<UnityStandardAssets.ImageEffects.BlurEffect>().downsampling = Mathf.RoundToInt(temp.x);
+				FindObjectOfType<UnityStandardAssets.ImageEffects.BlurEffect>().iterations = Mathf.RoundToInt(temp.y);
+				FindObjectOfType<UnityStandardAssets.ImageEffects.BlurEffect>().blurSpread = temp.z;
+
+				//newElement();
+
+				//if (parentAnimationsFinished())
+				//{
+				//	_evaluated = false;
+				//}
+			}
+			else
+			{
+				_currentLerpTime = 0.0f;
 			}
 		}
 
@@ -48,12 +99,12 @@ public class ConditionMinigame : AbstractMinigame
 	{
 		bool result = _currentConditionObjects.ToArray().All(x => x.State == true) || _currentConditionObjects.ToArray().All(x => x.State == false);
 
-		
-
 		if (result)
 		{
 			AddCombo();
 			_evaluated = true;
+			blurBool = true;
+			FindObjectOfType<UnityStandardAssets.ImageEffects.BlurEffect>().enabled = true;
 		}
 		else
 		{
@@ -80,7 +131,7 @@ public class ConditionMinigame : AbstractMinigame
 			_currentConditionPrefab.GetComponent<ConditionParent>().Despawn();
 		}
 
-		_evaluated = false;
+		//_evaluated = false;
 		_currentConditionPrefab = (GameObject)GameObject.Instantiate(_conditionPrefab, Vector3.zero, Quaternion.identity);
 		_currentConditionObjects = new List<ConditionObject>(_currentConditionPrefab.GetComponentsInChildren<ConditionObject>());
 	}
