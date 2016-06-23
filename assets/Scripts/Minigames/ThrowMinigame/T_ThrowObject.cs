@@ -11,6 +11,7 @@ public abstract class T_ThrowObject : MonoBehaviour
 	protected virtual void Start()
 	{
 		_manager = FindObjectOfType<ThrowMinigame>();
+        transform.Rotate(0, 180, 0);
 	}
 
 	protected virtual void Update()
@@ -31,10 +32,13 @@ public abstract class T_ThrowObject : MonoBehaviour
 
 	protected virtual void OnCollisionEnter(Collision pColl)
 	{
-		//if (_manager.MinigameLayers == 1 << pColl.gameObject.layer)
-		//{
-			_manager.EndCombo();
-			GameObject.Destroy(this.gameObject);
+        //if (_manager.MinigameLayers == 1 << pColl.gameObject.layer)
+        //{
+        if (!Grabbed)
+        {
+            _manager.EndCombo();
+            GameObject.Destroy(this.gameObject);
+        }
 		//}
 	}
 }

@@ -58,7 +58,8 @@ public class T_SpawnObject : MonoBehaviour
 					if (hit.collider.GetComponent<T_SpawnObject>() != null)
 					{
 						GameObject go = (GameObject)Instantiate(_manager.ThrowObjectPrefab, worldMousePos, Quaternion.identity);
-						go.GetComponent<Rigidbody>().useGravity = false;
+                        //go.transform.Rotate(0, 180, 0);
+                        go.GetComponent<Rigidbody>().useGravity = false;
 						GameObject.Destroy(go, 10.0f);
 						_grabbedObject = go.GetComponent<T_ThrowObject>();
 						_grabbedObject.Grabbed = true;
