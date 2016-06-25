@@ -14389,6 +14389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 824937289}
+  _audioListener: {fileID: 1296631794}
   _lights: {fileID: 287925728}
   _hud: {fileID: 158357912}
   _gameTimer: {fileID: 804721464}
@@ -17577,7 +17578,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11415572, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11493216, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
       propertyPath: m_Enabled
@@ -17692,6 +17693,11 @@ Prefab:
     - {fileID: 11479898, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
   m_IsPrefabParent: 0
+--- !u!81 &1296631794 stripped
+AudioListener:
+  m_PrefabParentObject: {fileID: 8162478, guid: 87c8d3669f76de142ba5ece114ced0a0,
+    type: 2}
+  m_PrefabInternal: {fileID: 1296631793}
 --- !u!4 &1297002529 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 32f1f37b13e583c449deb689a385cd47, type: 3}

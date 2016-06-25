@@ -7,10 +7,10 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: WashRacketSpines
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 96b73c7ee8974684ba2ff3de2d8837d2, type: 3}
   m_ShaderKeywords: _ALPHATEST_ON
   m_LightmapFlags: 5
-  m_CustomRenderQueue: 2450
+  m_CustomRenderQueue: 2000
   stringTagMap:
     RenderType: TransparentCutout
   m_SavedProperties:
@@ -40,6 +40,13 @@ Material:
       data:
         first:
           name: _DetailNormalMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _EmissiveMap
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -86,13 +93,6 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _EmissiveMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -106,6 +106,26 @@ Material:
         first:
           name: _Cutoff
         second: 0.5
+      data:
+        first:
+          name: _NormalIntensity
+        second: 1
+      data:
+        first:
+          name: _H
+        second: 0
+      data:
+        first:
+          name: _S
+        second: 0
+      data:
+        first:
+          name: _B
+        second: 0
+      data:
+        first:
+          name: _CutoutThreshold
+        second: 0.01
       data:
         first:
           name: _Parallax
@@ -142,26 +162,6 @@ Material:
         first:
           name: _Metallic
         second: 0
-      data:
-        first:
-          name: _H
-        second: 0
-      data:
-        first:
-          name: _S
-        second: 0
-      data:
-        first:
-          name: _B
-        second: 0
-      data:
-        first:
-          name: _NormalIntensity
-        second: 1
-      data:
-        first:
-          name: _CutoutThreshold
-        second: 0.01
     m_Colors:
       data:
         first:
