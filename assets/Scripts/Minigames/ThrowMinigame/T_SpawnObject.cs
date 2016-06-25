@@ -38,7 +38,7 @@ public class T_SpawnObject : MonoBehaviour
 	{
 		if (_manager.GetActive())
 		{
-			Debug.Log(Mathf.Abs((transform.position - _manager.transform.position).z));
+			//Debug.Log(Mathf.Abs((transform.position - _manager.transform.position).z));
 			worldMousePos = _manager.MinigameCamera.ScreenToWorldPoint(Input.mousePosition + new Vector3(0,
 																										 0, 
 																										 Mathf.Abs((transform.position - _manager.transform.position).z)));

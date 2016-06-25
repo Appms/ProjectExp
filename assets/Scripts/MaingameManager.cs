@@ -9,6 +9,10 @@ public class MaingameManager : MonoBehaviour
     private Camera _camera;
 
     [SerializeField]
+    [Tooltip("Camera's audio listener.")]
+    private AudioListener _audioListener;
+
+    [SerializeField]
     [Tooltip("Main House Scene lights.")]
     private GameObject _lights;
 
@@ -178,6 +182,7 @@ public class MaingameManager : MonoBehaviour
 		_starScript = pStarScript;
         UnityEngine.SceneManagement.SceneManager.LoadScene(pName, UnityEngine.SceneManagement.LoadSceneMode.Additive);
         _camera.enabled = false;
+        _audioListener.enabled = false;
         _hud.SetActive(false);
         _lights.SetActive(false);
         _currentMinigameName = pName;
@@ -191,6 +196,7 @@ public class MaingameManager : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.UnloadScene(_currentMinigameName);
         _camera.enabled = true;
+        _audioListener.enabled = true;
         _hud.SetActive(true);
         _lights.SetActive(true);
         _currentMinigameName = "";

@@ -31,10 +31,10 @@ public class DispenserObject : MonoBehaviour {
 		if(box != null){
 			if(box.index == this.index){
 				//AddScore
-				Debug.Log("AddingScore");
+				//Debug.Log("AddingScore");
 			}else{
 				//AbortCombo
-				Debug.Log("AbortCombo");
+				//Debug.Log("AbortCombo");
 			}
 		}
 	}
