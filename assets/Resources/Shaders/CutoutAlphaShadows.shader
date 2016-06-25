@@ -3,7 +3,8 @@
 	Properties
 	{
 		_MainTex("Albedo Map", 2D) = "white" {}
-		_CutoutThreshold("Cutout Threshold", Range(0,1)) = 0.1
+		_Color("Color", Color) = (1,1,1,1)
+		_Cutoff("Cutout Threshold", Range(0,1)) = 0.1
 		_NormalMap("Normal Map", 2D) = "bump" {}
 		_NormalIntensity("Normal Intensity", Range(0,10)) = 1
 		_EmissiveMap("Emission Map", 2D) = "black" {}
@@ -15,7 +16,73 @@
 
 	SubShader
 	{
-		Tags{ "RenderType" = "Opaque" "PerformanceChecks" = "False" }
+		Tags{ "RenderType" = "TransparentCutout" "PerformanceChecks" = "False" }
+
+		/*Pass{
+			Name "ShadowCaster"
+			Tags{"LightMode" = "ShadowCaster"}
+
+			ZWrite On ZTest Less Cull Off
+			Offset 1, 1
+
+			CGPROGRAM
+			#pragma vertex vertShadow
+			#pragma fragment fragShadow
+			#pragma fragmentoption ARB_precision_hint_fastest
+			#pragma multi_compile_shadowcaster
+
+			#include "UnityCG.cginc"
+
+			float4 _Color;
+			sampler2D _MainTex;
+			fixed _Cutoff;
+
+			struct v2f {
+				V2F_SHADOW_CASTER;
+				float2 uv : TEXCOORD1;
+			};
+
+			v2f vertShadow(appdata_full v)
+			{
+				v2f o;
+				TRANSFER_SHADOW_CASTER(o)
+
+				return o;
+			}
+
+			float4 fragShadow(v2f i) : COLOR
+			{
+				fixed4 texcol = tex2D(_MainTex, i.uv);
+				clip(texcol.a - _Cutoff);
+				SHADOW_CASTER_FRAGMENT(i)
+			}
+			ENDCG
+		}*/
+
+		Pass{
+			Name "ShadowCaster"
+			Tags{ "LightMode" = "ShadowCaster" }
+
+			ZWrite On ZTest LEqual
+
+			CGPROGRAM
+			#pragma target 3.0
+			// TEMPORARY: GLES2.0 temporarily disabled to prevent errors spam on devices without textureCubeLodEXT
+			#pragma exclude_renderers gles
+
+			// -------------------------------------
+
+
+			#pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
+			#pragma multi_compile_shadowcaster
+
+			#pragma vertex vertShadowCaster
+			#pragma fragment fragShadowCaster
+
+			#include "UnityStandardShadow.cginc"
+
+			ENDCG
+		}
 
 		Pass
 		{
@@ -40,7 +107,7 @@
 
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
-			float _CutoutThreshold;
+			uniform fixed _Cutoff;
 			sampler2D _NormalMap;
 			float4 _NormalMap_ST;
 			float _NormalIntensity;
@@ -50,6 +117,8 @@
 			float _H;
 			float _S;
 			float _B;
+
+			uniform fixed4 _Color;
 
 			float _Levels;
 			float4 _LightColor0;
@@ -150,9 +219,9 @@
 				float toonShadow = floor(shadowLum * _Levels) * scaleFactor;
 
 				float4 finalColor = lerp(lerp(saturate(HSB2RGB(baseColor)), saturate(HSB2RGB(baseColor)) + _LightColor0 * 0.25 + float4(i.vertexlighting, 1), toonShadow), _EmissionColor, tex2D(_EmissiveMap, i.emissionuv).r);
-				finalColor.w = floor(shadowLum * _Levels) * scaleFactor;
+				finalColor.w = toonShadow;
 
-				if(tex2D(_MainTex, i.uv).w < _CutoutThreshold)clip(tex2D(_MainTex, i.uv).w - _CutoutThreshold);
+				clip(tex2D(_MainTex, i.uv).w * _Color.a - _Cutoff);
 
 				return finalColor;
 			}
@@ -246,5 +315,5 @@
 			ENDCG 
 		}
 	}
-	Fallback "VertexLit"
+	//Fallback "VertexLit"
 }
