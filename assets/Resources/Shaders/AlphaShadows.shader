@@ -16,6 +16,7 @@
 	{
 		Tags{ "RenderType" = "Opaque" "PerformanceChecks" = "False" }
 
+		// Forward Base pass (vertex lighting)
 		Pass
 		{
 			Name "FORWARD"
@@ -37,21 +38,22 @@
 
 			#include "UtilityCG.cginc"
 
-			sampler2D _MainTex;
-			float4 _MainTex_ST;
-			sampler2D _NormalMap;
-			float4 _NormalMap_ST;
-			float _NormalIntensity;
-			sampler2D _EmissiveMap;
-			float4 _EmissiveMap_ST;
-			float4 _EmissionColor;
-			float _H;
-			float _S;
-			float _B;
+			uniform sampler2D _MainTex;
+			uniform float4 _MainTex_ST;
+			uniform sampler2D _NormalMap;
+			uniform float4 _NormalMap_ST;
+			uniform float _NormalIntensity;
+			uniform sampler2D _EmissiveMap;
+			uniform float4 _EmissiveMap_ST;
+			uniform float4 _EmissionColor;
+			uniform float _H;
+			uniform float _S;
+			uniform float _B;
 
 			float _Levels;
 			float4 _LightColor0;
 
+			//Based on Unity's Shade4PointLights, adding levels for toon rendering.
 			float3 Shade4PointToonLights(
 				float4 lightPosX, float4 lightPosY, float4 lightPosZ,
 				float3 lightColor0, float3 lightColor1, float3 lightColor2, float3 lightColor3,
@@ -94,6 +96,7 @@
 			{
 				v2f o;
 
+				// Initialize screen position, normal, color and uvs
 				o.pos = mul(UNITY_MATRIX_MVP, v.pos);
 				o.normal = v.normal;
 				o.color = v.color;
@@ -101,21 +104,22 @@
 				o.emissionuv = TRANSFORM_TEX(v.uv, _EmissiveMap);
 				o.normaluv = TRANSFORM_TEX(v.uv, _NormalMap);
 				o.position = mul(_Object2World, v.pos).xyz;
-				o.vertexlighting = float3(0.0, 0.0, 0.0);
 
+				// Calculate normal, tangent and bitangent world vectors
 				o.normalWorld = UnityObjectToWorldNormal(v.normal);
 				o.tangentWorld = UnityObjectToWorldDir(v.tangent.xyz);
 				o.binormalWorld = normalize(cross(o.normalWorld, o.tangentWorld) * v.tangent.w);
 
+				// Calculate vertex lighting
+				o.vertexlighting = float3(0.0, 0.0, 0.0);
 				#ifdef VERTEXLIGHT_ON
-
 					o.vertexlighting = saturate(Shade4PointToonLights(
 					unity_4LightPosX0, unity_4LightPosY0, unity_4LightPosZ0,
 					unity_LightColor[0].rgb, unity_LightColor[1].rgb, unity_LightColor[2].rgb, unity_LightColor[3].rgb,
 					unity_4LightAtten0, o.position, normalize(UnityObjectToWorldNormal(v.normal)), floor(_Levels)));
-
 				#endif
 
+				// Transfer shadows from shadow map
 				TRANSFER_VERTEX_TO_FRAGMENT(o);
 
 				return o;
@@ -129,8 +133,10 @@
 				baseColor.s += _S;
 				baseColor.b += _B;
 
+				// Calculate the tangent space matrix
 				float3x3 tangentToWorldSpace = float3x3(i.tangentWorld, i.binormalWorld, i.normalWorld);
 
+				// Calculate world Normal, Eye and Light vector
 				float3 N = mul(normalize(UnpackNormal(tex2D(_NormalMap, i.normaluv))), tangentToWorldSpace);
 				float3 E = -normalize(UnityWorldSpaceViewDir(i.position));
 				float3 L = normalize(UnityWorldSpaceLightDir(i.position));
@@ -139,14 +145,16 @@
 				float attenuation = LIGHT_ATTENUATION(i);
 
 				// Calculate shadows
-				float vertexLum = 0.3*i.vertexlighting.r + 0.59*i.vertexlighting.g + 0.11*i.vertexlighting.b;
+				float vertexLum = Luminance(i.vertexlighting);
 				float3 shadow = saturate((dot(L, N) * Luminance(_LightColor0 * 0.25) + vertexLum) * (attenuation + vertexLum));
-				float shadowLum = lerp(0.3*shadow.r + 0.59*shadow.g + 0.11*shadow.b, 1, tex2D(_EmissiveMap, i.emissionuv).r);
+				float shadowLum = Luminance(shadow);
 				
+				// Calculate toon shadows
 				_Levels = floor(_Levels);
 				float scaleFactor = 1 / _Levels;
 				float toonShadow = floor(shadowLum * _Levels) * scaleFactor;
 
+				//Composite the final color
 				float4 finalColor = lerp(lerp(saturate(HSB2RGB(baseColor)), saturate(HSB2RGB(baseColor)) + _LightColor0 * 0.25 + float4(i.vertexlighting, 1), toonShadow), _EmissionColor, tex2D(_EmissiveMap, i.emissionuv).r);
 				finalColor.w = floor(shadowLum * _Levels) * scaleFactor;
 
@@ -155,6 +163,7 @@
 			ENDCG
 		}
 
+		// Forward Additive pass (vertex lighting)
 		Pass
 		{
 			Name "FORWARD_DELTA"

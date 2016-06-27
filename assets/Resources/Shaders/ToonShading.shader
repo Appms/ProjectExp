@@ -26,7 +26,6 @@
 			#include "UnityCG.cginc"
 
 			uniform sampler2D _MainTex;
-			uniform float _bwBlend;
 			uniform float _levels;
 			uniform float _angle;
 			uniform float _frequency;

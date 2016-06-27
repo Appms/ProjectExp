@@ -5,6 +5,10 @@
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 		_frequency ("Frecuency", Range(1,1000)) = 10
 	}
+
+	// Halftone shader implementation based on:
+	// http://webstaff.itn.liu.se/~stegu/webglshadertutorial/shadertutorial.html
+
 	SubShader
 	{
 		// No culling or depth
