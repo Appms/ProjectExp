@@ -19,9 +19,6 @@
 
 			#include "UnityCG.cginc"
 
-			#define PI 3.141592653589793238462643383279502884197169399375105820974944592307816406286
-			#define SIGMA 0.4
-
 			uniform sampler2D _MainTex;
 			uniform float4 _MainTex_TexelSize;
 			uniform half4 _BlurOffsets;
@@ -41,7 +38,7 @@
 			v2f vert(appdata_img i) {
 				v2f o;
 				o.pos = mul(UNITY_MATRIX_MVP, i.vertex);
-				o.uv = i.texcoord - _BlurOffsets.xy * _MainTex_TexelSize.xy; // hack, see BlurEffect.cs for the reason for this. let's make a new blur effect soon
+				o.uv = i.texcoord - _BlurOffsets.xy * _MainTex_TexelSize.xy;
 				o.taps[0] = o.uv + _MainTex_TexelSize * _BlurOffsets.xy;
 				o.taps[1] = o.uv - _MainTex_TexelSize * _BlurOffsets.xy;
 				o.taps[2] = o.uv + _MainTex_TexelSize * _BlurOffsets.xy * half2(1, -1);

@@ -728,6 +728,10 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 11415572, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
+      propertyPath: frequency
+      value: 217
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11466572, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}

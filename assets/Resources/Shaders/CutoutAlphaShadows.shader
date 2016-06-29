@@ -20,47 +20,6 @@
 
 		/*Pass{
 			Name "ShadowCaster"
-			Tags{"LightMode" = "ShadowCaster"}
-
-			ZWrite On ZTest Less Cull Off
-			Offset 1, 1
-
-			CGPROGRAM
-			#pragma vertex vertShadow
-			#pragma fragment fragShadow
-			#pragma fragmentoption ARB_precision_hint_fastest
-			#pragma multi_compile_shadowcaster
-
-			#include "UnityCG.cginc"
-
-			float4 _Color;
-			sampler2D _MainTex;
-			fixed _Cutoff;
-
-			struct v2f {
-				V2F_SHADOW_CASTER;
-				float2 uv : TEXCOORD1;
-			};
-
-			v2f vertShadow(appdata_full v)
-			{
-				v2f o;
-				TRANSFER_SHADOW_CASTER(o)
-
-				return o;
-			}
-
-			float4 fragShadow(v2f i) : COLOR
-			{
-				fixed4 texcol = tex2D(_MainTex, i.uv);
-				clip(texcol.a - _Cutoff);
-				SHADOW_CASTER_FRAGMENT(i)
-			}
-			ENDCG
-		}*/
-
-		Pass{
-			Name "ShadowCaster"
 			Tags{ "LightMode" = "ShadowCaster" }
 
 			ZWrite On ZTest LEqual
@@ -82,7 +41,7 @@
 			#include "UnityStandardShadow.cginc"
 
 			ENDCG
-		}
+		}*/
 
 		Pass
 		{
@@ -315,5 +274,5 @@
 			ENDCG 
 		}
 	}
-	//Fallback "VertexLit"
+	Fallback "Standard"
 }
