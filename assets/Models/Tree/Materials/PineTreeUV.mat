@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: PineTreeUV
-  m_Shader: {fileID: 4800000, guid: 64c8bd7c265dd244cadd482f47b494ad, type: 3}
+  m_Shader: {fileID: 4800000, guid: 96b73c7ee8974684ba2ff3de2d8837d2, type: 3}
   m_ShaderKeywords: _ALPHATEST_ON _EMISSION _NORMALMAP
   m_LightmapFlags: 1
   m_CustomRenderQueue: 2000
@@ -112,7 +112,7 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: 0.971
+        second: 0.015
       data:
         first:
           name: _Parallax

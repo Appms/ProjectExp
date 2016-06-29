@@ -44,11 +44,11 @@ public class TestRack : T_CatchObject
 	public override void Dump()
 	{
 		base.Dump();
-		GetComponent<Animator>().SetTrigger("SpawnObject");
+		//GetComponent<Animator>().SetTrigger("SpawnObject");
 		ResetPos();
 	}
 	private void ResetPos(){
-		Debug.Log("ResetSpawn");
+		//Debug.Log("ResetSpawn");
 		this.transform.position = new Vector3(	_originPos.x + Random.Range(Pos1.x, Pos2.x), 
 												_originPos.y + Random.Range(Pos1.y, Pos2.y), 
 												_originPos.z + Random.Range(Pos1.z, Pos2.z));

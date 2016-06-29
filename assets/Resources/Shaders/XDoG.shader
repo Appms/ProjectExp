@@ -68,22 +68,21 @@
 			{
 				float4 finalColor, blurA, blurB = float4(0,0,0,0);
 
-				int kernelASize = _kernelAWidth + (1 - fmod(_kernelAWidth, 2));
-				int kernelBSize = _kernelBWidth + (1 - fmod(_kernelBWidth, 2));
+				uint kernelASize = _kernelAWidth + (1 - fmod(_kernelAWidth, 2));
+				uint kernelBSize = _kernelBWidth + (1 - fmod(_kernelBWidth, 2));
 
-				for (int y = -(kernelASize-1)/2; y <= (kernelASize - 1) / 2; y++)
+				for (uint y = -(kernelASize-1)/2; y <= (kernelASize - 1) / 2; y++)
 				{
-					for (int x = -(kernelASize - 1) / 2; x <= (kernelASize - 1) / 2; x++) {
+					for (uint x = -(kernelASize - 1) / 2; x <= (kernelASize - 1) / 2; x++) {
 
 						float2 texCoords = float2(i.uv.x + x * _MainTex_TexelSize.x, i.uv.y + y * _MainTex_TexelSize.y);
 						blurA += Gauss(length(texCoords - i.uv), SIGMA) * tex2D(_MainTex, texCoords);
-						//blurA += 3 * SIGMA / Gauss(length(texCoords - i.uv), SIGMA) * Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.uv + texCoords));
 					}
 				}
 
-				for (int y2 = -(kernelBSize - 1); y2 <= (kernelBSize - 1); y2++)
+				for (uint y2 = -(kernelBSize - 1); y2 <= (kernelBSize - 1); y2++)
 				{
-					for (int x2 = -(kernelBSize - 1); x2 <= (kernelBSize - 1); x2++) {
+					for (uint x2 = -(kernelBSize - 1); x2 <= (kernelBSize - 1); x2++) {
 
 						float2 texCoords = float2(i.uv.x + x2 * _MainTex_TexelSize.x, i.uv.y + y2  * _MainTex_TexelSize.y);
 						blurB += Gauss(length(texCoords - i.uv), SIGMA) * tex2D(_MainTex, texCoords);
@@ -92,12 +91,7 @@
 
 				blurA = float4(remap(blurA.x, 0, pow(kernelASize, 2) * Gauss(0, SIGMA), 0, 1), remap(blurA.y, 0, pow(kernelASize, 2) *  Gauss(0, SIGMA), 0, 1), remap(blurA.z, 0, pow(kernelASize, 2) *  Gauss(0, SIGMA), 0, 1), 1);
 				blurB = float4(remap(blurB.x, 0, pow(kernelBSize * 2, 2) *  Gauss(0, SIGMA), 0, 1), remap(blurB.y, 0, pow(kernelBSize * 2, 2) *  Gauss(0, SIGMA), 0, 1), remap(blurB.z, 0, pow(kernelBSize * 2, 2) * Gauss(0, SIGMA), 0, 1), 1);
-				
-				//float4 DoG = 1 - step(min(min(blurA.r, blurA.g), blurA.b) - min(min(blurB.r, blurB.g), blurB.b), _stepThreshold);
 
-				//finalblur = min(min(blurA.r, blurA.g),blurA.b) - min(min(blurB.r, blurB.g), blurB.b);
-
-				//e = theshold value
 				float lumA = 0.3*blurA.r + 0.59*blurA.g + 0.11*blurA.b;
 				float lumB = 0.3*blurB.r + 0.59*blurB.g + 0.11*blurB.b;
 
@@ -109,8 +103,6 @@
 				finalColor = 1 - DoGThreshold((1 + _cellDifference)*lumA - _cellDifference * lumB, _stepThreshold, _cellSharpness);
 
 				return 1 - DoGThreshold(lumA + _cellDifference*(lumA-lumB), _stepThreshold, _cellSharpness);
-
-				//return lerp(float4(1, 1, 1, 1), /*blurB*/ float4(0, 0, 0, 1), lerp(0, finalColor, _edgeIntensity));// *tex2D(_MainTex, i.uv);
 			}
 			ENDCG
 		}

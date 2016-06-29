@@ -25,7 +25,6 @@
 			#include "UnityCG.cginc"
 
 			uniform sampler2D _MainTex;
-			uniform float _bwBlend;
 			uniform float _levels;
 			uniform float _angle;
 			uniform float _frequency;
@@ -51,9 +50,6 @@
 				float2 nearest = 2.0*frac(st2) - 1.0;
 				float dist = length(nearest);
 
-				//_levels = floor(_levels);
-				//float scaleFactor = 1 / _levels;
-				//float toonShadow = floor(c.w*_levels)*scaleFactor;
 				float radius = sqrt(1.0 - c.w);
 
 				// Calculate half of the size of the square's sides

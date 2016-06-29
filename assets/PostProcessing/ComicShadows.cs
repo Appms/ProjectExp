@@ -58,7 +58,7 @@ public class ComicShadows : MonoBehaviour {
             {
                 string s = materials[j].shader.name;
 
-                if (s == "Custom/AlphaShadows")
+                if (s == "Custom/AlphaShadows" || s == "Custom/CutoutAlphaShadows")
                 {
                     materials[j].SetFloat("_Levels", levels);
                 }
@@ -101,7 +101,7 @@ public class ComicShadows : MonoBehaviour {
             {
                 string s = materials[j].shader.name;
 
-                if (s == "Custom/AlphaShadows")
+                if (s == "Custom/AlphaShadows" || s == "Custom/CutoutAlphaShadows")
                 {
                     materials[j].SetFloat("_Levels", levels);
                 }
@@ -129,7 +129,7 @@ public class ComicShadows : MonoBehaviour {
             {
                 string s = materials[j].shader.name;
 
-                if (s == "Custom/AlphaShadows")
+                if (s == "Custom/AlphaShadows" || s == "Custom/CutoutAlphaShadows")
                 {
                     materials[j].SetFloat("_Levels", levels);
                 }
