@@ -2,8 +2,7 @@
 using System.Collections;
 using System;
 
-public class TestConditionWindow : ConditionObject
-{
+public class TestConditionWindow : ConditionObject {
 	[SerializeField]
 	[Tooltip("The time the window needs to move up or down")]
 	private float _lerpTime;
@@ -23,18 +22,15 @@ public class TestConditionWindow : ConditionObject
 
 	private float _realLerpTime;
 
-	protected override void InitTrue()
-	{
+	protected override void InitTrue () {
 		transform.localPosition = _closedPosition;
 	}
 
-	protected override void InitFalse()
-	{
+	protected override void InitFalse () {
 		transform.localPosition = _openPosition;
 	}
 
-	protected override void TurnTrue()
-	{
+	protected override void TurnTrue () {
 		_currentLerpTime = 0.0f;
 		_startPosition = transform.localPosition;
 		_targetPosition = _openPosition;
@@ -42,8 +38,7 @@ public class TestConditionWindow : ConditionObject
 		_animationPlaying = true;
 	}
 
-	protected override void TurnFalse()
-	{
+	protected override void TurnFalse () {
 		_currentLerpTime = 0.0f;
 		_startPosition = transform.localPosition;
 		_targetPosition = _closedPosition;
@@ -51,13 +46,10 @@ public class TestConditionWindow : ConditionObject
 		_animationPlaying = true;
 	}
 
-	private void Update()
-	{
-		if (_animationPlaying)
-		{
+	private void Update () {
+		if (_animationPlaying) {
 			_currentLerpTime += Time.deltaTime;
-			if (_currentLerpTime > _realLerpTime)
-			{
+			if (_currentLerpTime > _realLerpTime) {
 				_currentLerpTime = _realLerpTime;
 				_animationPlaying = false;
 			}

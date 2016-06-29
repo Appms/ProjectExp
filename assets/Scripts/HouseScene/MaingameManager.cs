@@ -90,6 +90,7 @@ public class MaingameManager : MonoBehaviour
 
     private void Awake()
     {
+		Screen.SetResolution(1280, 720, true);
 		//TODO Have to do some research about touch input
 		//Input.simulateMouseWithTouches = true;
 
