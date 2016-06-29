@@ -2,7 +2,7 @@
 using System.Collections;
 
 [System.Serializable]
-public class Storyslide : MonoBehaviour{
+public class Storyslide{
 
 	public Vector3[] Positions;
 	public Texture texture;
