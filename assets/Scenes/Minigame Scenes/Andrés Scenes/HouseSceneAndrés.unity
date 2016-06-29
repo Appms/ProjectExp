@@ -1405,6 +1405,10 @@ Prefab:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 2100000, guid: a2e46563a2421e947a8fc775c1309f56, type: 2}
+    - target: {fileID: 183838, guid: 3f0cf76fba653d4449a618c192205140, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3f0cf76fba653d4449a618c192205140, type: 2}
   m_IsPrefabParent: 0
@@ -17562,7 +17566,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 442992, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2055800, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
       propertyPath: m_CullingMask.m_Bits
@@ -17614,7 +17618,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11404612, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
       propertyPath: shadowColor.a
-      value: 0.534
+      value: 0.23529412
       objectReference: {fileID: 0}
     - target: {fileID: 11404612, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
       propertyPath: shadowColor.r
@@ -17654,7 +17658,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11491930, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
       propertyPath: outlineColor.a
-      value: 0.347
+      value: 0.378
       objectReference: {fileID: 0}
     - target: {fileID: 11491930, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
       propertyPath: debug

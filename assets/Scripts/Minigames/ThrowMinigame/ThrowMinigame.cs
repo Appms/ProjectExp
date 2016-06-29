@@ -7,6 +7,9 @@ public class ThrowMinigame : AbstractMinigame
 	[Tooltip("The object that needs to be thrown")]
 	private GameObject _throwObjectPrefab;
 
+    [SerializeField]
+    TestBasket basket;
+
 	public GameObject ThrowObjectPrefab
 	{
 		get { return _throwObjectPrefab; }
@@ -26,6 +29,8 @@ public class ThrowMinigame : AbstractMinigame
 	{
 		base.DestroyDynamicObjects();
 		T_ThrowObject[] obj = FindObjectsOfType<T_ThrowObject>();
+
+        basket.DisableTrajectoryPoints();
 
 		foreach (T_ThrowObject t in obj)
 		{
