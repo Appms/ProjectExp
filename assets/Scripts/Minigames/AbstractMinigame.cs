@@ -3,8 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System;
 
-public abstract class AbstractMinigame : MonoBehaviour
-{
+public abstract class AbstractMinigame : MonoBehaviour {
 	[SerializeField]
 	[Tooltip("The time the tutorial image will be shown")]
 	protected float _tutorialTime = 4.0f;
@@ -51,12 +50,12 @@ public abstract class AbstractMinigame : MonoBehaviour
 	[HideInInspector]
 	private Camera _minigameCamera;
 
-	public Camera MinigameCamera
-	{
-		get
-		{
-			if (_minigameCamera == null)
-			{
+	/// <summary>
+	/// Gets the camera of the minigame
+	/// </summary>
+	public Camera MinigameCamera {
+		get {
+			if (_minigameCamera == null) {
 				_minigameCamera = GetComponent<Camera>();
 			}
 
@@ -79,26 +78,33 @@ public abstract class AbstractMinigame : MonoBehaviour
 
 	private MinigameHUD _hudManager;
 
-	public LayerMask MinigameLayers
-	{
+	/// <summary>
+	/// Returns the layers for Raycasts
+	/// </summary>
+	public LayerMask MinigameLayers {
 		get { return _layer; }
 	}
 
-	public int GetStarScore(int pStarNo)
-	{
-		switch (pStarNo)
-		{
-			case 1: return _firstStarScore;
-			case 2: return _secondStartScore;
-			case 3: return _thirdStarScore;
-			default: return 0;
+	/// <summary>
+	/// Returns the score needed for given star
+	/// </summary>
+	/// <param name="pStarNo">Can be 1-3 else returns 0</param>
+	/// <returns>The Amount of score needed for that star</returns>
+	public int GetStarScore (int pStarNo) {
+		switch (pStarNo) {
+			case 1:
+				return _firstStarScore;
+			case 2:
+				return _secondStartScore;
+			case 3:
+				return _thirdStarScore;
+			default:
+				return 0;
 		}
 	}
 
-	protected virtual void Start()
-	{
-		if (GetComponent<Camera>() == null)
-		{
+	protected virtual void Start () {
+		if (GetComponent<Camera>() == null) {
 			throw new MissingComponentException("Missing Camera component on Minigame Manager!");
 		}
 
@@ -106,53 +112,44 @@ public abstract class AbstractMinigame : MonoBehaviour
 
 		_hudManager = FindObjectOfType<MinigameHUD>();
 
-		if (_hudManager == null)
-		{
+		if (_hudManager == null) {
 			throw new MissingComponentException("You have no minigame HUD manager in your scene!");
 		}
 
 		_hudManager.DisplayTutorial();
 	}
 
-	protected virtual void Update()
-	{
-		if (!_active && !_ended)
-		{
-			if (_endTime <= Time.time || Input.GetMouseButtonDown(0))
-			{
+	protected virtual void Update () {
+		if (!_active && !_ended) {
+			if (_endTime <= Time.time || Input.GetMouseButtonDown(0)) {
 				_hudManager.HideTutorial();
 				_endTime = Time.time + _playTime;
 				_active = true;
 			}
-		}
-		else if (_active && !_ended)
-		{
-			if (_endTime <= Time.time)
-			{
+		} else if (_active && !_ended) {
+			if (_endTime <= Time.time) {
 				EndCombo();
 				_hudManager.DisplayEndscreen(GetScore(false), _endScreenTime);
 				_endTime = Time.time + _endScreenTime;
 				_active = false;
 				_ended = true;
 			}
-		}
-		else if (!_active && _ended)
-		{
-			if (_endTime <= Time.time /*|| Input.GetMouseButtonDown(0)*/)
-			{
+		} else if (!_active && _ended) {
+			if (_endTime <= Time.time /*|| Input.GetMouseButtonDown(0)*/) {
 				EndMinigame();
 			}
 		}
 	}
 
-	protected virtual void OnGUI()
-	{
-		_hudManager.UpdateValues(Mathf.Round(_endTime - Time.time).ToString(), GetScore(false).ToString()," x " + GetMultiplier(), GetComboScore(true).ToString());
+	protected virtual void OnGUI () {
+		_hudManager.UpdateValues(Mathf.Round(_endTime - Time.time).ToString(), GetScore(false).ToString(), " x " + GetMultiplier(), GetComboScore(true).ToString());
 	}
 
-
-	public bool GetActive()
-	{
+	/// <summary>
+	/// Returns the active state
+	/// </summary>
+	/// <returns>Active state</returns>
+	public bool GetActive () {
 		return _active;
 	}
 
@@ -161,8 +158,7 @@ public abstract class AbstractMinigame : MonoBehaviour
 	/// </summary>
 	/// <param name="pIncludeCombo">Determines if the current combo score is included</param>
 	/// <returns>The current score</returns>
-	protected int GetScore(bool pIncludeCombo)
-	{
+	protected int GetScore (bool pIncludeCombo) {
 		return pIncludeCombo ? (int)_score + GetComboScore(true) : (int)_score;
 	}
 
@@ -171,13 +167,11 @@ public abstract class AbstractMinigame : MonoBehaviour
 	/// </summary>
 	/// <param name="pUseMultiplier">Determines if the score is muiltiplied by the combo multiplier</param>
 	/// <returns>The current combo score</returns>
-	public int GetComboScore(bool pUseMultiplier)
-	{
+	public int GetComboScore (bool pUseMultiplier) {
 		return pUseMultiplier ? (int)(_combo * _scorePerUnit * (_combo * _multiplierPerCombo + _startMuliplier)) : (int)(_combo * _scorePerUnit);
 	}
 
-	public float GetMultiplier()
-	{
+	public float GetMultiplier () {
 		return _combo * _multiplierPerCombo + _startMuliplier;
 	}
 
@@ -185,8 +179,7 @@ public abstract class AbstractMinigame : MonoBehaviour
 	/// Adds to the combo counter
 	/// </summary>
 	/// <param name="pAmount">The amount added to the combo counter</param>
-	public void AddCombo(int pAmount = 1)
-	{
+	public void AddCombo (int pAmount = 1) {
 		_combo += pAmount;
 	}
 
@@ -194,8 +187,7 @@ public abstract class AbstractMinigame : MonoBehaviour
 	/// Removes from the combo counter
 	/// </summary>
 	/// <param name="pAmount">The amount removed from the combo counter</param>
-	public void RemoveCombo(int pAmount = 1)
-	{
+	public void RemoveCombo (int pAmount = 1) {
 		_combo -= pAmount;
 	}
 
@@ -203,8 +195,7 @@ public abstract class AbstractMinigame : MonoBehaviour
 	/// Sets the combo counter to zero and adds the combo score to the total score
 	/// </summary>
 	/// <param name="pUseMultiplier">Determines if the comco score is multiplied with the comco multiplier</param>
-	public void EndCombo(bool pUseMultiplier = true)
-	{
+	public void EndCombo (bool pUseMultiplier = true) {
 		_score += GetComboScore(pUseMultiplier);
 		_combo = 0;
 	}
@@ -212,34 +203,34 @@ public abstract class AbstractMinigame : MonoBehaviour
 	/// <summary>
 	/// Ends the current minigame
 	/// </summary>
-	public void EndMinigame()
-	{
+	public void EndMinigame () {
 		DestroyDynamicObjects();
 
-		try
-		{
+		try {
 			MaingameManager.Instance.EndMinigame((int)_score, GetStarCount((int)_score));
-		}
-		catch(NullReferenceException)
-		{
+		} catch (NullReferenceException) {
 			Debug.LogError("No Maingamemanager was found!");
 		}
-    }
+	}
 
-	public int GetStarCount(int pScore){
+	/// <summary>
+	/// Returns the number of stars for given score
+	/// </summary>
+	/// <param name="pScore"></param>
+	/// <returns></returns>
+	public int GetStarCount (int pScore) {
 		if (pScore >= _firstStarScore) {
 			if (pScore >= _secondStartScore) {
 				if (pScore >= _thirdStarScore) {
 					return 3;
 				}
 				return 2;
-			} 
+			}
 			return 1;
 		}
 
 		return 0;
 	}
 
-	protected virtual void DestroyDynamicObjects() { }
-
+	protected virtual void DestroyDynamicObjects () { }
 }

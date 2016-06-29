@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class WhackMinigame : AbstractMinigame
-{
+public class WhackMinigame : AbstractMinigame {
 	[SerializeField]
 	[Tooltip("The minimum time until an on object switches off")]
 	private AnimationCurve _minTurnOffTime = new AnimationCurve(new Keyframe(0.0f, 3.0f), new Keyframe(1.0f, 0.3f));
@@ -59,45 +58,35 @@ public class WhackMinigame : AbstractMinigame
 	[Tooltip("The amount of wrong obejcts to decrement the metric score")]
 	private int _wrongCountThreshold = 4;
 
-	protected override void Start()
-	{
+	protected override void Start () {
 		base.Start();
 
 		_whackObjects = new List<WhackObject>(FindObjectsOfType<WhackObject>());
 
-		if (_whackObjects.Count == 0)
-		{
+		if (_whackObjects.Count == 0) {
 			Debug.LogError("You have no WhackObjects in your Scene!");
 		}
 
 		_justStarted = true;
 	}
 
-	protected override void Update()
-	{
-		if (_active)
-		{
+	protected override void Update () {
+		if (_active) {
 			//Metric calculations
-			if (_missedCount.Counter >= _missedCountThreshold)
-			{
+			if (_missedCount.Counter >= _missedCountThreshold) {
 				_missedCount.Reset();
 				MetricsManager.MetricScore = Mathf.Max(0.0f, MetricsManager.MetricScore - _metricScoreIncrements);
 			}
 			//End metric calculations
 
 			//Determine wich object is ready for a state change
-			foreach (WhackObject obj in _whackObjects)
-			{
-				if (obj.SwitchTime <= Time.time)
-				{
-					if (obj.State)
-					{
+			foreach (WhackObject obj in _whackObjects) {
+				if (obj.SwitchTime <= Time.time) {
+					if (obj.State) {
 						obj.SwitchTime = Mathf.Infinity;
 						_missedCount.Add();
 						EndCombo();
-					}
-					else if (!obj.State)
-					{
+					} else if (!obj.State) {
 						obj.SwitchTime = Random.Range(_minTurnOffTime.Evaluate(MetricsManager.MetricScore), _minTurnOffTime.Evaluate(MetricsManager.MetricScore) + _maxTurnOffTimeDelta.Evaluate(MetricsManager.MetricScore)) + Time.time;
 					}
 
@@ -108,32 +97,26 @@ public class WhackMinigame : AbstractMinigame
 			int counter = 0;
 			bool temp = false;
 
-			while (GetTurningOnObjectCount() < _activeObjectAmount)
-			{
+			while (GetTurningOnObjectCount() < _activeObjectAmount) {
 				counter++;
 
 				int index = Random.Range(0, _whackObjects.Count);
 
 				int safetyCounter = 0;
 
-				while (_whackObjects[index].State && safetyCounter < _whackObjects.Count)
-				{
+				while (_whackObjects[index].State && safetyCounter < _whackObjects.Count) {
 					index++;
 					safetyCounter++;
 
-					if (index >= _whackObjects.Count)
-					{
+					if (index >= _whackObjects.Count) {
 						index = 0;
 					}
 				}
 
-				if (_justStarted)
-				{
+				if (_justStarted) {
 					_whackObjects[index].SwitchTime = Random.Range(_minFirstTurnOnTime, _maxFirstTurnOnTime) + Time.time;
 					temp = true;
-				}
-				else
-				{
+				} else {
 					_whackObjects[index].SwitchTime = Random.Range(_minTurnOnTime, _maxTurnOnTime) + Time.time;
 				}
 
@@ -141,38 +124,30 @@ public class WhackMinigame : AbstractMinigame
 					break;
 			}
 
-			if (temp)
-			{
+			if (temp) {
 				_justStarted = false;
 			}
 
 
 			//TODO Replace with Touch Input
-			if (Input.GetMouseButtonDown(0))
-			{
+			if (Input.GetMouseButtonDown(0)) {
 				Ray ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
 				List<RaycastHit> hits = new List<RaycastHit>(Physics.RaycastAll(ray, Mathf.Infinity, _layer));
 				RaycastHit hit = hits.Find(x => x.collider.GetComponent<WhackObject>() != null);
 
-				if (hit.collider != null)
-				{
+				if (hit.collider != null) {
 					WhackObject obj = hit.collider.GetComponent<WhackObject>();
 
-					if (obj.State)
-					{
+					if (obj.State) {
 						_timeLeft.AddValue(obj.LeftTime);
 						_timeToHit.AddValue(obj.HitTime);
 
 						_rightCount.Add();
 
-						if (_rightCount.Counter >= _rightCountThreshold)
-						{
-							if (_timeToHit.Avarage > _minTurnOffTime.Evaluate(MetricsManager.MetricScore))
-							{
+						if (_rightCount.Counter >= _rightCountThreshold) {
+							if (_timeToHit.Avarage > _minTurnOffTime.Evaluate(MetricsManager.MetricScore)) {
 								MetricsManager.MetricScore = Mathf.Max(0.0f, MetricsManager.MetricScore - _metricScoreIncrements);
-							}
-							else
-							{
+							} else {
 								MetricsManager.MetricScore = Mathf.Min(1.0f, MetricsManager.MetricScore + _metricScoreIncrements);
 							}
 
@@ -180,13 +155,10 @@ public class WhackMinigame : AbstractMinigame
 						}
 
 						AddCombo();
-					}
-					else
-					{
+					} else {
 						_wrongCount.Add();
 
-						if (_wrongCount.Counter >= _wrongCountThreshold)
-						{
+						if (_wrongCount.Counter >= _wrongCountThreshold) {
 							MetricsManager.MetricScore = Mathf.Max(0.0f, MetricsManager.MetricScore - _metricScoreIncrements);
 
 							_wrongCount.Reset();
@@ -204,14 +176,11 @@ public class WhackMinigame : AbstractMinigame
 		base.Update();
 	}
 
-	private int GetTurningOnObjectCount()
-	{
+	private int GetTurningOnObjectCount () {
 		int count = 0;
 
-		foreach (WhackObject obj in _whackObjects)
-		{
-			if (!obj.State && obj.SwitchTime < Mathf.Infinity)
-			{
+		foreach (WhackObject obj in _whackObjects) {
+			if (!obj.State && obj.SwitchTime < Mathf.Infinity) {
 				count++;
 			}
 		}
