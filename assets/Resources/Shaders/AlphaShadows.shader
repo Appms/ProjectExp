@@ -239,8 +239,10 @@
 				float toonShadow = floor(lum / 4 * _Levels) * scaleFactor;
 				half3 toonColor = light.color * toonShadow;
 
-				half4 color = half4(lerp(half3(0, 0, 0), toonColor, toonShadow * (1 - tex2D(_EmissiveMap, i.tex).r)), toonShadow);
-				color.w = toonShadow;
+				float emissiveValue = tex2D(_EmissiveMap, i.tex).r;
+
+				half4 color = half4(lerp(half3(0, 0, 0), toonColor, toonShadow * (1 - emissiveValue)), toonShadow);
+				color.w = lerp(toonShadow, 1, emissiveValue);
 
 				return color;
 			}

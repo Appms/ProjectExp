@@ -3720,10 +3720,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   threshold: 0.9
-  intensity: 12.9
-  downsampling: 2
+  intensity: 6
+  downsampling: 3
   iterations: 3
-  blurSpread: 0.658
+  blurSpread: 0.149
 --- !u!114 &1149498942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3779,7 +3779,7 @@ MonoBehaviour:
   frequency: 90
   size: 0
   shadowColorType: 0
-  shadowColor: {r: 0.83823526, g: 0.27119377, b: 0.27119377, a: 0.366}
+  shadowColor: {r: 0.83823526, g: 0.27119377, b: 0.27119377, a: 0.15686275}
 --- !u!114 &1149498945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6867,6 +6867,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 136202, guid: 7965022809c13e1498301ca31afc23d6, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11421568, guid: 7965022809c13e1498301ca31afc23d6, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 621e1d540f8302348a5cd43972c579e3,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7965022809c13e1498301ca31afc23d6, type: 2}
   m_IsPrefabParent: 0
