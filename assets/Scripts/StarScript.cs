@@ -10,6 +10,8 @@ public class StarScript : MonoBehaviour {
 	Color transparent;
 	Color nonTransparent;
 
+	public bool Played;
+
 	private void Start(){
 
 		transparent.a = 0.3f;
@@ -28,6 +30,7 @@ public class StarScript : MonoBehaviour {
 	}
 
 	public void StartMiniGame(string pName){
+		Played = true;
 		MaingameManager.Instance.StartMinigame (pName, this);
 	}
 

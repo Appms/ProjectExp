@@ -34,7 +34,14 @@ public class ButtonScript : MonoBehaviour {
             {
                 if (button.GetComponent<Button>().interactable)
                 {
-                    button.GetComponentInChildren<Image>().sprite = buttonPics[0];
+					if (button.GetComponent<StarScript>().Played)
+					{
+						button.GetComponentInChildren<Image>().sprite = buttonPics[2];
+					}
+					else
+					{
+						button.GetComponentInChildren<Image>().sprite = buttonPics[0];
+					}
                 }
                 else
                 {

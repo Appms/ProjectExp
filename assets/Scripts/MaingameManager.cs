@@ -36,6 +36,9 @@ public class MaingameManager : MonoBehaviour
     [Tooltip("Minigames displayed in the order they are supposed to be unlocked.")]
     private Button[] _minigames;
 
+	[SerializeField]
+	private GameObject _props;
+
     private int _minigameUnlock;
 
 	//Instance of this Singleton
@@ -177,9 +180,10 @@ public class MaingameManager : MonoBehaviour
     {
 		_starScript = pStarScript;
         UnityEngine.SceneManagement.SceneManager.LoadScene(pName, UnityEngine.SceneManagement.LoadSceneMode.Additive);
-        _camera.enabled = false;
+		_camera.gameObject.SetActive(false);
         _hud.SetActive(false);
         _lights.SetActive(false);
+		_props.SetActive(false);
         _currentMinigameName = pName;
     }
 
@@ -190,8 +194,9 @@ public class MaingameManager : MonoBehaviour
 	public void EndMinigame(int pScore, int pStarCount)
     {
         UnityEngine.SceneManagement.SceneManager.UnloadScene(_currentMinigameName);
-        _camera.enabled = true;
+		_camera.gameObject.SetActive(true);
         _hud.SetActive(true);
+		_props.SetActive(true);
         _lights.SetActive(true);
         _currentMinigameName = "";
         _score += pScore;
