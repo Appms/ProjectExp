@@ -58,7 +58,7 @@ public class TestBasket : T_SpawnObject
 			fTime += trajectoryPointSpacing;
 		}
 	}
-	private void DisableTrajectoryPoints(){
+	public void DisableTrajectoryPoints(){
 		foreach(Transform t in trajectoryPoints){
 			t.GetComponent<Renderer>().enabled = false;
 		}

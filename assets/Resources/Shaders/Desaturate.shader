@@ -21,17 +21,12 @@
 			uniform sampler2D _MainTex;
 			uniform float _bwBlend;
 
-			float aastep(float threshold, float value) {
-				float afwidth = 0.7 * length(float2(ddx(value), ddy(value)));
-				return smoothstep(threshold - afwidth, threshold + afwidth, value);
-			}
-
 			float4 frag (v2f_img i) : COLOR
 			{
 
 				float4 c = tex2D(_MainTex, i.uv);
 
-				float lum = 0.3*c.r + 0.59*c.g + 0.11*c.b;
+				float lum = Luminance(c);
 				float3 bw = float3(lum, lum, lum);
 
 				float4 result = c;

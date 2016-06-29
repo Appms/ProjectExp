@@ -8,6 +8,10 @@ public class MaingameManager : MonoBehaviour
     [Tooltip("Camera that renders the house scene.")]
     private Camera _camera;
 
+    //[SerializeField]
+    //[Tooltip("Camera's audio listener.")]
+    //private AudioListener _audioListener;
+
     [SerializeField]
     [Tooltip("Main House Scene lights.")]
     private GameObject _lights;

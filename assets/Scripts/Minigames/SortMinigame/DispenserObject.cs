@@ -37,7 +37,7 @@ public class DispenserObject : MonoBehaviour {
 				Debug.Log("AddingScore");
 			} else {
 				//AbortCombo
-				Debug.Log("AbortCombo");
+				//Debug.Log("AbortCombo");
 			}
 		}
 	}
