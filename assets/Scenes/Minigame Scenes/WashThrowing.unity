@@ -606,7 +606,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2055800, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
       propertyPath: m_CullingMask.m_Bits
-      value: 256
+      value: 288
       objectReference: {fileID: 0}
     - target: {fileID: 2055800, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
       propertyPath: far clip plane
@@ -3039,6 +3039,10 @@ Prefab:
     - target: {fileID: 22403812, guid: 7615ff5f6c938a245871c5e2fa5062f7, type: 2}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 176676, guid: 7615ff5f6c938a245871c5e2fa5062f7, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7615ff5f6c938a245871c5e2fa5062f7, type: 2}
