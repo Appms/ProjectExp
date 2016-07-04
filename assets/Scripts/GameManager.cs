@@ -49,7 +49,6 @@ public class GameManager : MonoBehaviour {
 					{
 						_state = 2;
 						_timer = Time.time + _exitMessageTime;
-						Debug.Log("Display help message");
 					}
 					break;
 
@@ -58,14 +57,13 @@ public class GameManager : MonoBehaviour {
 					{
 						_state = 3;
 						_timer = Time.time + _exitTime;
-						Debug.Log("Display exit message");
 					}
 					break;
 
 				case 3:
 					if (Time.time >= _timer)
 					{
-						Debug.Log("Exit that darn game");
+						Application.Quit();
 					}
 					break;
 			}

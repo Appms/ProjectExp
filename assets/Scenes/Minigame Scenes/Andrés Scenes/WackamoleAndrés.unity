@@ -513,7 +513,28 @@ Prefab:
       propertyPath: shadowColor.a
       value: 0.353
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 11466572, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
+      propertyPath: _scorePerUnit
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 11466572, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
+      propertyPath: _firstStarScore
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 11466572, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
+      propertyPath: _secondStartScore
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 11466572, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
+      propertyPath: _thirdStarScore
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 11466572, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
+      propertyPath: _activeObjectAmount
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8162478, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &200063297 stripped

@@ -2131,16 +2131,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tutorialTime: 4
   _endScreenTime: 4
-  _scorePerUnit: 10
+  _scorePerUnit: 12
   _multiplierPerCombo: 0.1
   _startMuliplier: 1
   _playTime: 20
   _layer:
     serializedVersion: 2
     m_Bits: 256
-  _firstStarScore: 75
-  _secondStartScore: 200
-  _thirdStarScore: 300
+  _firstStarScore: 50
+  _secondStartScore: 125
+  _thirdStarScore: 200
   _conditionPrefab: {fileID: 145774, guid: d640538a952c47643afa9ce573e57c0b, type: 2}
   _fadeLerpTime: 0.2
 --- !u!92 &1763512659
