@@ -3,8 +3,7 @@ using System.Collections;
 using System;
 
 [RequireComponent(typeof(Collider))]
-public abstract class ConditionObject : MonoBehaviour
-{
+public abstract class ConditionObject : MonoBehaviour {
 	[SerializeField]
 	private bool _changeable;
 
@@ -14,61 +13,48 @@ public abstract class ConditionObject : MonoBehaviour
 
 	protected ConditionMinigame _manager;
 
-	public bool Changeable
-	{
-		get { return _changeable; } 
+	public bool Changeable {
+		get { return _changeable; }
 	}
 
-	public bool State
-	{
+	public bool State {
 		get { return _state; }
 	}
 
-	public bool AnimationPlaying
-	{
+	public bool AnimationPlaying {
 		get { return _animationPlaying; }
 	}
 
-	public void SwitchState()
-	{
-		if (_state)
-		{
+	public void SwitchState () {
+		if (_state) {
 			TurnTrue();
-		}
-		else
-		{
+		} else {
 			TurnFalse();
 		}
 
 		_state = !_state;
 	}
 
-	protected virtual void Start()
-	{
+	protected virtual void Start () {
 		_manager = FindObjectOfType<ConditionMinigame>();
 
 		_state = _manager.RequestState();
 
-		if (_state)
-		{
+		if (_state) {
 			InitTrue();
-		}
-		else
-		{
+		} else {
 			InitFalse();
 		}
 	}
 
-	protected abstract void InitTrue();
-	protected abstract void InitFalse();
+	protected abstract void InitTrue ();
+	protected abstract void InitFalse ();
 
-	protected virtual void TurnTrue() { }
-	protected virtual void TurnFalse() { }
+	protected virtual void TurnTrue () { }
+	protected virtual void TurnFalse () { }
 
-	protected virtual void OnMouseDown()
-	{
-		if (_changeable && _manager.GetActive())
-		{
+	protected virtual void OnMouseDown () {
+		if (_changeable && _manager.GetActive()) {
 			SwitchState();
 			_manager.Evaluate();
 		}

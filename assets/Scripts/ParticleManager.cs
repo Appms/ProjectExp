@@ -10,8 +10,10 @@ public class ParticleManager : MonoBehaviour {
 	static Dictionary<Particles, string> particleDic = new Dictionary<Particles, string>();
 
 	static public void InitParticles(){
-		particleDic.Add(Particles.GetPoints, "Particles/GetPointsParticle");
-		particleDic.Add(Particles.PosFeedback, "Particles/GreenSparkleParticle");
+        if(!particleDic.ContainsValue("Particles/GetPointsParticle"))
+		    particleDic.Add(Particles.GetPoints, "Particles/GetPointsParticle");
+        if (!particleDic.ContainsValue("Particles/GreenSparkleParticle"))
+            particleDic.Add(Particles.PosFeedback, "Particles/GreenSparkleParticle");
 	}
 
 

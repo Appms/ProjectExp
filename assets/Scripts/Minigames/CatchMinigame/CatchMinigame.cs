@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System;
 using System.Collections;
 
-public class CatchMinigame : AbstractMinigame
-{
+public class CatchMinigame : AbstractMinigame {
 	[SerializeField]
 	[Tooltip("The prefab for the drop object.")]
 	private GameObject _dropObjectPrefab;
@@ -56,40 +55,40 @@ public class CatchMinigame : AbstractMinigame
 	[SerializeField]
 	GameObject helpArrow;
 
+	/// <summary>
+	/// Referece to the platedropper of the dumpobject
+	/// </summary>
 	public GameObject dropper;
 
 	private float _nextSpawnTime;
 	private List<GameObject> _dropObjects;
 	private bool _usesDumpObject;
+
+	/// <summary>
+	/// The amount of plates already dropped
+	/// </summary>
 	public int plateCount;
 
-	protected override void Start()
-	{
+	protected override void Start () {
 		base.Start();
 
 		_dropObjects = new List<GameObject>();
 
 		_usesDumpObject = FindObjectOfType<C_DumpObject>() != null;
 
-		try
-		{
+		try {
 			FindObjectOfType<C_CatchObject>().SetValues(this, _catchObjectFollowSpeed, _usesDumpObject);
-		}
-		catch (NullReferenceException)
-		{
+		} catch (NullReferenceException) {
 			Debug.LogError("There is no CatchObject in your scene!");
 		}
 
-		helpArrow.SetActive (false);
-		dropper.SetActive (false);
+		helpArrow.SetActive(false);
+		dropper.SetActive(false);
 	}
 
-	protected override void Update()
-	{
-		if (_active)
-		{
-			if (_nextSpawnTime <= Time.time)
-			{
+	protected override void Update () {
+		if (_active) {
+			if (_nextSpawnTime <= Time.time) {
 				_nextSpawnTime = Time.time + UnityEngine.Random.Range(_minSpawnTime, _maxSpawnTime);
 				GameObject obj = (GameObject)GameObject.Instantiate(_dropObjectPrefab, Vector3.Lerp(_minDropPosition, _maxDropPosition, UnityEngine.Random.Range(0.0f, 1000.0f) / 1000.0f), Quaternion.identity);
 				obj.GetComponent<C_DropObject>().SetValues(this, UnityEngine.Random.Range(_minDropSpeed, _maxDropSpeed), _objectLifetime);
@@ -97,17 +96,20 @@ public class CatchMinigame : AbstractMinigame
 			}
 		}
 
-		if(plateCount == maxPlateCount || plateCount == (maxPlateCount * 2)){
-			StartCoroutine (ShowArrow(time));
+		if (plateCount == maxPlateCount || plateCount == (maxPlateCount * 2)) {
+			StartCoroutine(ShowArrow(time));
 		}
 
 		base.Update();
 	}
 
-	public void DestroyObject(GameObject pObject, bool pCheckForComboBreak = false)
-	{
-		if (pCheckForComboBreak && !_usesDumpObject)
-		{
+	/// <summary>
+	/// Gets called when a plate destroys itself
+	/// </summary>
+	/// <param name="pObject">Reference to sender</param>
+	/// <param name="pCheckForComboBreak">Determines if combo should be broken</param>
+	public void DestroyObject (GameObject pObject, bool pCheckForComboBreak = false) {
+		if (pCheckForComboBreak && !_usesDumpObject) {
 			EndCombo();
 		}
 
@@ -115,32 +117,35 @@ public class CatchMinigame : AbstractMinigame
 		GameObject.Destroy(pObject);
 	}
 
-	protected override void DestroyDynamicObjects()
-	{
+	protected override void DestroyDynamicObjects () {
 		FindObjectOfType<C_CatchObject>().ClearObjectList();
 
-		foreach (GameObject go in _dropObjects)
-		{
+		foreach (GameObject go in _dropObjects) {
 			GameObject.Destroy(go);
 		}
 
-		GameObject.Destroy (helpArrow);
+		GameObject.Destroy(helpArrow);
 
 		_dropObjects.Clear();
 	}
 
-	public bool EvaluateDrop(int pDropObjectCount, float pCatchObjectSpeed)
-	{
+	/// <summary>
+	/// Evalutes if a plate should drop
+	/// </summary>
+	/// <param name="pDropObjectCount">amount of plates on the catchobject</param>
+	/// <param name="pCatchObjectSpeed">speed of the catchobject</param>
+	/// <returns>if the plate should drop</returns>
+	public bool EvaluateDrop (int pDropObjectCount, float pCatchObjectSpeed) {
 		return _plateFallThreshold.Evaluate(pDropObjectCount) < pCatchObjectSpeed && pDropObjectCount > 0;
 	}
 
-	IEnumerator ShowArrow(float seconds){
-		helpArrow.SetActive (true);
-		yield return new WaitForSeconds (seconds);
-		helpArrow.SetActive (false);
+	IEnumerator ShowArrow (float seconds) {
+		helpArrow.SetActive(true);
+		yield return new WaitForSeconds(seconds);
+		helpArrow.SetActive(false);
 	}
 
-	private void OnDrawGizmos() {
+	private void OnDrawGizmos () {
 		Gizmos.DrawLine(_minDropPosition, _maxDropPosition);
 	}
 }
