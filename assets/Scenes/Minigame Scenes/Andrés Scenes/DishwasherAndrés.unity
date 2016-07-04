@@ -3793,16 +3793,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tutorialTime: 4
   _endScreenTime: 4
-  _scorePerUnit: 10
+  _scorePerUnit: 8
   _multiplierPerCombo: 0.1
   _startMuliplier: 1
   _playTime: 20
   _layer:
     serializedVersion: 2
     m_Bits: 256
-  _firstStarScore: 120
-  _secondStartScore: 220
-  _thirdStarScore: 390
+  _firstStarScore: 50
+  _secondStartScore: 125
+  _thirdStarScore: 200
   _dropObjectPrefab: {fileID: 167796, guid: 830d401c6045c404ebf4af56674275a7, type: 2}
   _minDropSpeed: 0.5
   _maxDropSpeed: 0.8

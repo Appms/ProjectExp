@@ -17,7 +17,7 @@ public class EndScreen : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	_timer = new BertTimer();
-	Debug.Log("Yo replace score with real Score");
+	//Debug.Log("Yo replace score with real Score");
 	float score = 200;
 		timer = Time.time + 3.0f;
 	this.transform.position = new Vector3(this.transform.position.x,Mathf.Clamp(score,0,200), this.transform.position.z);

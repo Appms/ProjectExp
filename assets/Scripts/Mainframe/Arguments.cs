@@ -12,23 +12,20 @@ public class Arguments {
 
     public Arguments()
     {
-        string[] arguments = Environment.GetCommandLineArgs();
-
-		foreach (string s in arguments) {
-			Debug.LogError(s);
+		if (Application.isEditor || Debug.isDebugBuild) {
+			_userID = 2;
+			_gameID = 6;
+			_username = "YVONNE";
+			_gametime = 180;
+			_conURL = "http://www.serellyn.net/HEIM/php/";
+		} else {
+			string[] arguments = Environment.GetCommandLineArgs();
+			_userID = Convert.ToInt32(arguments[2]);
+			_gameID = Convert.ToInt32(arguments[3]);
+			_username = arguments[4];
+			_gametime = Convert.ToInt32(arguments[5]);
+			_conURL = arguments[6];
 		}
-
-		_userID = Convert.ToInt32(arguments[2]);
-		_gameID = Convert.ToInt32(arguments[3]);
-        _username = arguments[4];
-        _gametime = Convert.ToInt32(arguments[5]);
-        _conURL = arguments[6];
-
-        //_userID = 2;
-        //_gameID = 6;
-        //_username = "YVONNE";
-        //_gametime = 180;
-        //_conURL = "http://www.serellyn.net/HEIM/php/";
     }
 
 	public int getUserID() {
