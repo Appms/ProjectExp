@@ -649,18 +649,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tutorialTime: 4
   _endScreenTime: 4
-  _scorePerUnit: 10
-  _multiplierPerCombo: 0.1
+  _scorePerUnit: 5
+  _multiplierPerCombo: 0.15
   _startMuliplier: 1
   _playTime: 20
   _layer:
     serializedVersion: 2
     m_Bits: 256
-  _firstStarScore: 50
+  _firstStarScore: 100
   _secondStartScore: 150
-  _thirdStarScore: 250
-  minTime: 0.78
-  maxTime: 2.03
+  _thirdStarScore: 200
+  minTime: 0.7
+  maxTime: 1.5
   fallingDrag: 3
   distanceThreshold: 1
   objects:
