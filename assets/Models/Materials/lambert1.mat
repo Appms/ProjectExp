@@ -45,6 +45,20 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
+          name: _EmissiveMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _MetallicGlossMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
           name: _ParallaxMap
         second:
           m_Texture: {fileID: 0}
@@ -78,20 +92,6 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _MetallicGlossMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _EmissiveMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -111,8 +111,20 @@ Material:
         second: 0.5
       data:
         first:
-          name: _Parallax
-        second: 0.02
+          name: _NormalIntensity
+        second: 1
+      data:
+        first:
+          name: _H
+        second: 0.223
+      data:
+        first:
+          name: _S
+        second: 0.49
+      data:
+        first:
+          name: _B
+        second: -1
       data:
         first:
           name: _ZWrite
@@ -123,8 +135,16 @@ Material:
         second: 0
       data:
         first:
+          name: _Metallic
+        second: 0
+      data:
+        first:
           name: _BumpScale
         second: 1
+      data:
+        first:
+          name: _Parallax
+        second: 0.02
       data:
         first:
           name: _OcclusionStrength
@@ -143,28 +163,8 @@ Material:
         second: 0
       data:
         first:
-          name: _Metallic
-        second: 0
-      data:
-        first:
-          name: _H
-        second: 0.223
-      data:
-        first:
-          name: _S
-        second: 0.49
-      data:
-        first:
-          name: _B
-        second: -1
-      data:
-        first:
-          name: _NormalIntensity
-        second: 1
-      data:
-        first:
           name: _Levels
-        second: 41.9
+        second: 100
       data:
         first:
           name: _SoftShadows
