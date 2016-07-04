@@ -734,7 +734,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11466572, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
-    - {fileID: 8162478, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &98393135
@@ -18684,16 +18683,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tutorialTime: 4
   _endScreenTime: 4
-  _scorePerUnit: 7
+  _scorePerUnit: 30
   _multiplierPerCombo: 0.3
   _startMuliplier: 1
   _playTime: 20
   _layer:
     serializedVersion: 2
     m_Bits: 256
-  _firstStarScore: 50
-  _secondStartScore: 125
-  _thirdStarScore: 200
+  _firstStarScore: 30
+  _secondStartScore: 90
+  _thirdStarScore: 150
   _throwObjectPrefab: {fileID: 100444, guid: 3a8da120b8b314046a410a90cf79eab1, type: 2}
   basket: {fileID: 1653854374}
 --- !u!1 &1835515343
