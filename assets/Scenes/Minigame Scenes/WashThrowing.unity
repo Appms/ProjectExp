@@ -642,11 +642,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11479898, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
       propertyPath: focalDistance
-      value: 5.26
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11479898, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
       propertyPath: focalSize
-      value: 0.088
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 11479898, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
       propertyPath: aperture
@@ -18683,16 +18683,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tutorialTime: 4
   _endScreenTime: 4
-  _scorePerUnit: 30
-  _multiplierPerCombo: 0.3
+  _scorePerUnit: 10
+  _multiplierPerCombo: 0.2
   _startMuliplier: 1
   _playTime: 20
   _layer:
     serializedVersion: 2
     m_Bits: 256
-  _firstStarScore: 30
-  _secondStartScore: 90
-  _thirdStarScore: 150
+  _firstStarScore: 100
+  _secondStartScore: 150
+  _thirdStarScore: 200
   _throwObjectPrefab: {fileID: 100444, guid: 3a8da120b8b314046a410a90cf79eab1, type: 2}
   basket: {fileID: 1653854374}
 --- !u!1 &1835515343

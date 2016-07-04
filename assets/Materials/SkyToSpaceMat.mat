@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: SkyToSpaceMat
-  m_Shader: {fileID: 4800000, guid: 64c8bd7c265dd244cadd482f47b494ad, type: 3}
+  m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_CustomRenderQueue: 2000
@@ -107,6 +107,10 @@ Material:
         second: 0.5
       data:
         first:
+          name: _NormalIntensity
+        second: 1
+      data:
+        first:
           name: _H
         second: 0
       data:
@@ -117,10 +121,6 @@ Material:
         first:
           name: _B
         second: 0
-      data:
-        first:
-          name: _NormalIntensity
-        second: 1
       data:
         first:
           name: _Parallax
