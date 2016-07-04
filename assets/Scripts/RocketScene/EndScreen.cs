@@ -31,10 +31,15 @@ public class EndScreen : MonoBehaviour {
 			_timer.Interval = 3f;
 			_youWon = true;
 		}
-		if(_youWon && timer <= Time.time)
+		if(_youWon)
 		{
-			//Debug.Log("Quitting");
+			StartCoroutine(WaitSomeSecs(5));
 			Application.Quit();
 		}
+	}
+
+	IEnumerator WaitSomeSecs(float time){
+		yield return new WaitForSeconds(time);
+		Debug.Log("Quitting");
 	}
 }
