@@ -11,6 +11,8 @@ public class StoryTeller : MonoBehaviour {
 	Transform startScreen;
 	[SerializeField]
 	Transform storyScreen;
+	[SerializeField]
+	Transform whiteScreen;
 
 	[SerializeField]
 	public List<Storyslide> storySlides;
@@ -62,6 +64,8 @@ public class StoryTeller : MonoBehaviour {
 		if(_startTelling && Input.GetMouseButtonDown(0)){
 			if(!NextPosition()){
 				if(!NextPage()){
+					storyScreen.gameObject.SetActive(false);
+					whiteScreen.gameObject.SetActive(false);
 					UnityEngine.SceneManagement.SceneManager.LoadScene("HouseSceneAndrés");
 				}
 			}
