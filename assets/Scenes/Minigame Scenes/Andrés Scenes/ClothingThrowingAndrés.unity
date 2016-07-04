@@ -649,16 +649,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tutorialTime: 4
   _endScreenTime: 4
-  _scorePerUnit: 9
-  _multiplierPerCombo: 0.15
+  _scorePerUnit: 10
+  _multiplierPerCombo: 0.1
   _startMuliplier: 1
   _playTime: 20
   _layer:
     serializedVersion: 2
     m_Bits: 256
   _firstStarScore: 50
-  _secondStartScore: 125
-  _thirdStarScore: 200
+  _secondStartScore: 150
+  _thirdStarScore: 250
   minTime: 0.78
   maxTime: 2.03
   fallingDrag: 3
@@ -1498,7 +1498,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11466572, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
-    - {fileID: 8162478, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 87c8d3669f76de142ba5ece114ced0a0, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1009984417
