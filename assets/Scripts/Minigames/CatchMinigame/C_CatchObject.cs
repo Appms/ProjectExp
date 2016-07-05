@@ -42,7 +42,7 @@ public abstract class C_CatchObject : MonoBehaviour {
 
 	protected virtual void LateUpdate () {
 		for (int i = 0; i < _catchedObjects.Count; i++) {
-			//TODO Make this values availible to change
+			// Make this values availible to change
 			_catchedObjects[i].transform.position = transform.position + new Vector3(0.0f, i * 0.02f + 0.02f, 0.0f);
 		}
 

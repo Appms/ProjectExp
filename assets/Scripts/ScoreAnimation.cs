@@ -45,7 +45,7 @@ public class ScoreAnimation : MonoBehaviour {
         _scoreLabel = GetComponent<Text>();
 		//_originalFontSize = _scoreLabel.fontSize;
 
-		//TODO Change in scene
+		// Change in scene
 		_countUpTime = 2.0f;
 
         //_audio = GetComponent<AudioSource>();

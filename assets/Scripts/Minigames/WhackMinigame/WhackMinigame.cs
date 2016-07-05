@@ -129,7 +129,7 @@ public class WhackMinigame : AbstractMinigame {
 			}
 
 
-			//TODO Replace with Touch Input
+			// Replace with Touch Input
 			if (Input.GetMouseButtonDown(0)) {
 				Ray ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
 				List<RaycastHit> hits = new List<RaycastHit>(Physics.RaycastAll(ray, Mathf.Infinity, _layer));

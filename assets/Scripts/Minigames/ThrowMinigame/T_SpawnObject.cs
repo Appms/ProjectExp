@@ -47,7 +47,7 @@ public class T_SpawnObject : MonoBehaviour
 			float distance = Vector3.Distance(worldMousePos, this.transform.position + _spawnOffset);
 			distance = Mathf.Clamp(distance, 0, _maxMouseDistance);
 			projectileVector = projectileVector.normalized * distance;
-			//TODO Replace by Touchinput
+			// Replace by Touchinput
 			if (Input.GetMouseButtonDown(0))
 			{
 				Ray ray = _manager.MinigameCamera.ScreenPointToRay(Input.mousePosition);
@@ -68,7 +68,7 @@ public class T_SpawnObject : MonoBehaviour
 				}
 			}
 
-			//TODO Replace by Touchinput
+			// Replace by Touchinput
 			if (Input.GetMouseButtonUp(0))
 			{
 				if (_grabbedObject != null)
