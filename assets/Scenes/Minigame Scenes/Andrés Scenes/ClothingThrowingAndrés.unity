@@ -1752,7 +1752,7 @@ Prefab:
     - target: {fileID: 11429132, guid: 7965022809c13e1498301ca31afc23d6, type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: f475b177e3a617b48ad5a45e77ba3276,
+      objectReference: {fileID: 21300000, guid: 0eeeab5ae2bac794ca308d2a4f318ceb,
         type: 3}
     - target: {fileID: 164642, guid: 7965022809c13e1498301ca31afc23d6, type: 2}
       propertyPath: m_StaticEditorFlags
@@ -1839,6 +1839,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 621e1d540f8302348a5cd43972c579e3,
         type: 3}
+    - target: {fileID: 162364, guid: 7965022809c13e1498301ca31afc23d6, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7965022809c13e1498301ca31afc23d6, type: 2}
   m_IsPrefabParent: 0

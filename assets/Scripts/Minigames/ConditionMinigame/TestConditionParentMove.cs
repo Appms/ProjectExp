@@ -21,7 +21,7 @@ public class TestConditionParentMove : ConditionParent
 	private Vector3 _startPosition;
 	private bool _despawning;
 
-	//TODO Make the animation move the wall to the left (later let it rotate around the camera)
+	// Make the animation move the wall to the left (later let it rotate around the camera)
 	public override void Despawn()
 	{
 		base.Despawn();

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MaingameManager : MonoBehaviour {
 	[SerializeField]
@@ -51,7 +52,8 @@ public class MaingameManager : MonoBehaviour {
 	private static MaingameManager _instance = null;
 
 	//The current score (playing minigames not included)
-	private int _score;
+	//private int _score;
+	private Dictionary<string, int> _score = new Dictionary<string, int>();
 
 	//The time the game ends
 	private float _endTime;
@@ -92,7 +94,7 @@ public class MaingameManager : MonoBehaviour {
 
 	private void Awake () {
 		Screen.SetResolution(960, 540, true);
-		//TODO Have to do some research about touch input
+		// Have to do some research about touch input
 		//Input.simulateMouseWithTouches = true;
 
 		_arguments = new Arguments();
@@ -106,7 +108,7 @@ public class MaingameManager : MonoBehaviour {
 	}
 
 	private void Start () {
-		//TODO Find out if getGameTime uses minutes or seconds
+		//Find out if getGameTime uses minutes or seconds
 		_endTime = _arguments.getGameTime() + Time.time;
 	}
 
@@ -118,7 +120,7 @@ public class MaingameManager : MonoBehaviour {
 		else
 			_gameTimer.text = Mathf.FloorToInt(_timer / 60) + ":" + Mathf.FloorToInt(_timer % 60);
 
-		//TODO Replace with touch Input
+		//Replace with touch Input
 		if (Input.anyKey /*|| Input.GetTouch()*/) {
 			_lastInputTime = Time.time;
 		}
@@ -133,14 +135,14 @@ public class MaingameManager : MonoBehaviour {
 					//}
 
 					_uploadedScore = true;
-					Application.Quit();
+					//Application.Quit();
 					//
-					//StartCoroutine(uploadScore());
+					StartCoroutine(uploadScore());
 				} else {
 					_endMessage.SetActive(true);
 				}
 			} else {
-				//TODO Display Help Message
+				//FIX Display Help Message
 			}
 		} else {
 			_endMessage.SetActive(false);
@@ -168,6 +170,14 @@ public class MaingameManager : MonoBehaviour {
 		_currentMinigameName = pName;
 	}
 
+	private int getScore() {
+		int result = 0;
+		foreach (KeyValuePair<string, int> s in _score) {
+			result += s.Value;
+		}
+		return result;
+	}
+
 	/// <summary>
 	/// Ends the current Minigame
 	/// </summary>
@@ -179,13 +189,18 @@ public class MaingameManager : MonoBehaviour {
 		_props.SetActive(true);
 		_lights.SetActive(true);
 		_currentMinigameName = "";
-		_score += pScore;
+
+		//TODO lol raplce this
+		//_score += pScore;
+		if (!_score.ContainsKey(_currentMinigameName) || _score[_currentMinigameName] < pScore) {
+			_score[_currentMinigameName] = pScore;
+		}
 
 		_starScript.DisplayStars(pStarCount);
 		_starScript = null;
 
 		_minigames[Mathf.Clamp(++_minigameUnlock, 0, _minigames.Length - 1)].interactable = true;
-		FindObjectOfType<ScoreAnimation>().UpdateScore(_score);
+		FindObjectOfType<ScoreAnimation>().UpdateScore(getScore());
 	}
 
 	/// <summary>
