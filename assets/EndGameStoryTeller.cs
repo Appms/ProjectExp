@@ -16,8 +16,16 @@ public class EndGameStoryTeller : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetMouseButtonDown(0)){
+
+			StartCoroutine(WaitSomeSecs(1));
+
 			rocket.enabled = true;
 			StoryScreen.gameObject.SetActive(false);
 		}
+	}
+
+	IEnumerator WaitSomeSecs(float time){
+		yield return new WaitForSeconds(time);
+		Debug.Log("Quitting");
 	}
 }
